@@ -10,14 +10,16 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Auto Excerpt for your post on home, search and archive. Easy to configure and have a lot of options.
 == Description ==
 
-Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. By using this plugin you don't need to excpert your post manualy, just active the plugin, configure the word lenght and you're good to go :)
+Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. By using this plugin you don't need to excpert your post manualy, just active the plugin, configure the word length and you're good to go :)
 
 **Features :**
 
-* Excerpt your post based on word lenght.
+* Excerpt your post based on word length.
 * Choose to excerpt your on your home, search or archive.
 * Align text (Justify,Right,Left, Center) your text based on your preference.
 * Easy to use.
+
+*if you have any questions,comment,customization request or suggestion please contact me via todi.adiatmo[at]yahoo.com or [visit plugin site](http://www.tonjoo.com/easy-custom-auto-excerpt/ "visit plugin site")*
 
 
 **Usage Instruction**
