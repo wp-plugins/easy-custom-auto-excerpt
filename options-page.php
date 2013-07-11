@@ -1,4 +1,3 @@
-
 <?php
 
 add_action( 'admin_init', 'tonjoo_ecae_options_init' );

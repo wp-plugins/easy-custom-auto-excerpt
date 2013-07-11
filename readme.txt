@@ -2,7 +2,7 @@
 Contributors: Todi.Adiatmo
 Tags: excerpt, home, search, archive, automatic, auto, justify
 Requires at least: 3.0.1
-Tested up to: 3.5.1
+Tested up to: 3.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,9 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 0.91 =
+* Bugfix on incorect header
 
 = 0.9 =
 * First Release
