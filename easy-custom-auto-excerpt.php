@@ -3,7 +3,7 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, search and archive.
-Version: 0.9
+Version: 0.91
 Author: Todi Adiyatmo Wijoyo
 Author URI:  http://todiadiyatmo.com
 */
