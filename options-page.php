@@ -168,6 +168,15 @@ function tonjoo_ecae_options_do_page() {
 		echo tj_print_select_option($archive_select);
 		echo tj_print_select_option($justify_select);	
 
+
+			$text_options = Array(
+			  	'label'=>'Read More Text',
+			  	'name'=>'tonjoo_ecae_options[read_more]',
+			  	'value'=>$options['read_more']
+		  	);
+			
+			tj_print_text_option($text_options);
+
 			?>
 			</table>
 			

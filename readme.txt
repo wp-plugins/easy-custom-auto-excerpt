@@ -18,6 +18,7 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 * Choose to excerpt your on your home, search or archive.
 * Align text (Justify,Right,Left, Center) your text based on your preference.
 * Easy to use.
+* Custom Read More text
 
 *if you have any questions,comment,customization request or suggestion please contact me via todi.adiatmo[at]yahoo.com or [visit plugin site](http://www.tonjoo.com/easy-custom-auto-excerpt/ "visit plugin site")*
 
@@ -44,6 +45,9 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 0.92 =
+* Custom Read More Text
 
 = 0.91 =
 * Bugfix on incorect header
