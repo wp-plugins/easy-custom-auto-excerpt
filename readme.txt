@@ -41,10 +41,13 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 
 == Screenshots ==
 
-1. Easy to configure, word lenght and where to do the excerpt.
+1. Easy to configure, word lenght and where to do the excerpt. Plus you can show or not to show image on excerpt !
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+= 1.00 =
+* Add option to keep / preserve the image
+* Excerpt now preserve word
 
 = 0.92 =
 * Custom Read More Text
