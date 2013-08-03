@@ -50,6 +50,7 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 = 1.00 =
 * Add option to keep / preserve the image
 * Excerpt now preserve word
+* Tested on WP 3.6 !
 
 = 0.92 =
 * Custom Read More Text
