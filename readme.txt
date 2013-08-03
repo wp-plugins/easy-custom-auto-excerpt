@@ -22,6 +22,8 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 
 *if you have any questions,comment,customization request or suggestion please contact me via todi.adiatmo[at]yahoo.com or [visit plugin site](http://www.tonjoo.com/easy-custom-auto-excerpt/ "visit plugin site")*
 
+Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :)
+
 
 **Usage Instruction**
 
