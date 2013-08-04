@@ -56,17 +56,17 @@ function tonjoo_ecae_excerpt($content, $width, $justify) {
 
 		
 		$hyperlink_image_replace = new eace_content_regex("|#","/<a[^>]+\>+<img[^>]+\>+\<\/a>/");
-		$image_replace = new eace_content_regex("|?","/<img[^>]+\>/");
+		$image_replace = new eace_content_regex("|#","/<img[^>]+\>/");
 		
 		//biggest -> lowest
 		$pre_replace = new eace_content_regex("+=","/<pre.*?\>([^`]*?)<\/pre>/");
-		$ul_replace = new eace_content_regex("+=","/<ul.*?\>([^`]*?)<\/ul>/");
-		$ol_replace = new eace_content_regex("+=","/<ol.*?\>([^`]*?)<\/ol>/");
-		$table_replace = new eace_content_regex("+=","/<table.*?\>([^`]*?)<\/table>/");
-		$blockquote_replace = new eace_content_regex("+=","/<blockquote.*?\>([^`]*?)<\/blockquote>/");
-		$hyperlink_replace = new eace_content_regex("=+","/<a.*?\>([^`]*?)<\/a>/");
-		$bold_replace = new eace_content_regex("=+","/<b.*?\>([^`]*?)<\/b>/");
-		$italic_replace = new eace_content_regex("=+","/<i.*?\>([^`]*?)<\/i>/");
+		$ul_replace = new eace_content_regex("=+","/<ul.*?\>([^`]*?)<\/ul>/");
+		$ol_replace = new eace_content_regex("/=","/<ol.*?\>([^`]*?)<\/ol>/");
+		$table_replace = new eace_content_regex("=/","/<table.*?\>([^`]*?)<\/table>/");
+		$blockquote_replace = new eace_content_regex("/+","/<blockquote.*?\>([^`]*?)<\/blockquote>/");
+		$hyperlink_replace = new eace_content_regex("+/","/<a.*?\>([^`]*?)<\/a>/");
+		$bold_replace = new eace_content_regex("?+","/<b.*?\>([^`]*?)<\/b>/");
+		$italic_replace = new eace_content_regex("+?","/<i.*?\>([^`]*?)<\/i>/");
 
 		// $div_replace = new eace_content_regex("+=","/<a.*?\>([^`]*?)<\/a>/");
 		
