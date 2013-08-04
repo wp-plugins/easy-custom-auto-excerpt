@@ -1,6 +1,6 @@
 <?php
 
-function tonjoo_ecae_load_default($options){
+function tonjoo_ecae_load_default(&$options){
 	if(!is_numeric($options['width'])){
 		$options['width']=500;		
 	}

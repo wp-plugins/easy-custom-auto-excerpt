@@ -2,7 +2,7 @@
 Contributors: Todi.Adiatmo
 Tags: excerpt, home, search, archive, automatic, auto, justify
 Requires at least: 3.0.1
-Tested up to: 3.5.2
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,6 +20,7 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 * Easy to use.
 * Custom Read More text
 * Preserve Image on Excerpt
+* Preserve real excerpt you wrote
 
 *if you have any questions,comment,customization request or suggestion please contact me via todi.adiatmo[at]yahoo.com or [visit plugin site](http://www.tonjoo.com/easy-custom-auto-excerpt/ "visit plugin site")*
 
@@ -40,7 +41,11 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 2. Activate the plugin
 
 == Frequently Asked Questions ==
+**Its broke my website !**
+The auto excerpt cannot on some element, if its broke. Please use post excerpt. It can be activated from screen option.
 
+**What happen if i wrote an excerpt for the post ? **
+It will used, instead of the automatically generated one.
 
 == Screenshots ==
 
@@ -48,7 +53,12 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
-= 1.00 =
+= 1.0.1
+* Improve regex handling, add rules for <img> and <a>
+* return real excerpt from the post if it is exist
+* Fix Compability with PHP 5.4
+
+= 1.0.0 =
 * Add option to keep / preserve the image
 * Excerpt now preserve word
 * Tested on WP 3.6 !

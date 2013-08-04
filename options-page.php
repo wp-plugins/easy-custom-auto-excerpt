@@ -84,7 +84,7 @@ function tonjoo_ecae_options_do_page() {
 
 		$options = get_option('tonjoo_ecae_options'); 
 
-		tonjoo_ecae_load_default(&$options);
+		tonjoo_ecae_load_default($options);
 
 		?>
 		<h2>Page Excerpt</h2>
