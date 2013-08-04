@@ -59,12 +59,15 @@ function tonjoo_ecae_excerpt($content, $width, $justify) {
 		$image_replace = new eace_content_regex("|?","/<img[^>]+\>/");
 		
 		//biggest -> lowest
-		$hyperlink_replace = new eace_content_regex("=+","/<a.*?\>([^`]*?)<\/a>/");
 		$pre_replace = new eace_content_regex("+=","/<pre.*?\>([^`]*?)<\/pre>/");
 		$ul_replace = new eace_content_regex("+=","/<ul.*?\>([^`]*?)<\/ul>/");
 		$ol_replace = new eace_content_regex("+=","/<ol.*?\>([^`]*?)<\/ol>/");
 		$table_replace = new eace_content_regex("+=","/<table.*?\>([^`]*?)<\/table>/");
 		$blockquote_replace = new eace_content_regex("+=","/<blockquote.*?\>([^`]*?)<\/blockquote>/");
+		$hyperlink_replace = new eace_content_regex("=+","/<a.*?\>([^`]*?)<\/a>/");
+		$bold_replace = new eace_content_regex("=+","/<b.*?\>([^`]*?)<\/b>/");
+		$italic_replace = new eace_content_regex("=+","/<i.*?\>([^`]*?)<\/i>/");
+
 		// $div_replace = new eace_content_regex("+=","/<a.*?\>([^`]*?)<\/a>/");
 		
 		//trim image
@@ -82,12 +85,15 @@ function tonjoo_ecae_excerpt($content, $width, $justify) {
 
 		//trim hyperlink
 	
-		$hyperlink_replace->replace($content,$width);
+		
 		$pre_replace->replace($content,$width);
 		$ul_replace->replace($content,$width);
 		$ol_replace->replace($content,$width);
 		$table_replace->replace($content,$width);
 		$blockquote_replace->replace($content,$width);
+		$hyperlink_replace->replace($content,$width);
+		$bold_replace->replace($content,$width);
+		$italic_replace->replace($content,$width);
 		
 
 		//find last space within length
@@ -98,12 +104,15 @@ function tonjoo_ecae_excerpt($content, $width, $justify) {
 			$hyperlink_image_replace->restore($content);
 			$image_replace->restore($content);
 		endif;
-		$hyperlink_replace->restore($content);
+		
 		$pre_replace->restore($content);
 		$ul_replace->restore($content);
 		$ol_replace->restore($content);
 		$table_replace->restore($content);
 		$blockquote_replace->restore($content);
+		$hyperlink_replace->restore($content);
+		$bold_replace->restore($content);
+		$italic_replace->restore($content);
 	
 
 	}
