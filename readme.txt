@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: Todi.Adiatmo
 Tags: excerpt, home, search, archive, automatic, auto, justify
-Requires at least: 3.0.1
+Requires at least: 3.0.2
 Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -34,6 +34,12 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 3. Insert the desired word to show and where to do excerpt.
 4. Save Options and check your result.
 
+Please have a time to understand how this plugin is generating excerpt :
+
+1. If the post have read more, than the read more will be used.
+2. If the post doesn't have read more , than post excerpt will be used.
+3. If the post doesn't have read more and excerpt than it will automagically generate excerpt.
+
 
 == Installation ==
 
@@ -42,7 +48,7 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 
 == Frequently Asked Questions ==
 **Its broke my website !**
-The auto excerpt cannot properly cut on some element, if its broke. Please use post excerpt. It can be activated from screen option.
+The auto excerpt cannot properly cut on some element, if its broke. Please use read more / post excerpt. It can be activated from screen option.
 
 **What happen if i wrote an excerpt for the post ? **
 It will used, instead of the automatically generated one.
@@ -53,6 +59,9 @@ It will used, instead of the automatically generated one.
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+= 1.0.2
+* Add strip element, for better excerpt
+
 = 1.0.1
 * Improve regex handling, add rules for <img> and <a>
 * return real excerpt from the post if it is exist
