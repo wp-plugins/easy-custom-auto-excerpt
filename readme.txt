@@ -42,7 +42,7 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 
 == Frequently Asked Questions ==
 **Its broke my website !**
-The auto excerpt cannot on some element, if its broke. Please use post excerpt. It can be activated from screen option.
+The auto excerpt cannot properly cut on some element, if its broke. Please use post excerpt. It can be activated from screen option.
 
 **What happen if i wrote an excerpt for the post ? **
 It will used, instead of the automatically generated one.
