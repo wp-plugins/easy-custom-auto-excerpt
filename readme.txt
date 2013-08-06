@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: Todi.Adiatmo
 Tags: excerpt, home, search, archive, automatic, auto, justify
-Requires at least: 3.0.2
+Requires at least: 3.0.3
 Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -59,6 +59,10 @@ It will used, instead of the automatically generated one.
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 1.0.3
+* Add better handling for image
+
 = 1.0.2
 * Add strip element, for better excerpt
 
