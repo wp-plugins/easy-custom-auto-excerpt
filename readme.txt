@@ -60,6 +60,9 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 1.0.4
+* Fix remove / add image in excerpt option
+
 = 1.0.3
 * Add better handling for image
 
