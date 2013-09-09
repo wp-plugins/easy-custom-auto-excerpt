@@ -4,33 +4,33 @@ function tonjoo_ecae_load_default(&$options){
 	if(!is_numeric($options['width'])){
 		$options['width']=500;		
 	}
-	if($options['excerpt_method']==''){
+	if(!isset($options['excerpt_method'])){
 		$options['excerpt_method']='word';		
 	}
-	if($options['show_image']==''){
+	if(!isset($options['show_image'])){
 		$options['show_image']='yes';		
 	}
-	if($options['home']==''){
+	if(!isset($options['home'])){
 		$options['home']='yes';		
 	}
-	if($options['home']==''){
+	if(!isset($options['home'])){
 		$options['home']='yes';		
 	}
-	if($options['search']==''){
+	if(!isset($options['search'])){
 		$options['search']='yes';		
 	}
-	if($options['archive']==''){
+	if(!isset($options['archive'])){
 		$options['archive']='yes';		
 	}
-	if($options['justify']==''){
-		$options['justify']='yes';		
+	if(!isset($options['justify'])){
+		$options['justify']='no';		
 	}
-	if($options['read_more']==''){
+	if(!isset($options['read_more'])){
 		$options['read_more']='read more';		
 	}
 
 	
-	if($options['show_image']==''){
+	if(!isset($options['show_image'])){
 		$options['show_image']='yes';		
 	}
 

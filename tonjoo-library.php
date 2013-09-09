@@ -14,7 +14,7 @@ function tj_print_select_option($options){
 			$r .= "<option value='" . esc_attr( $select['value'] ) . "'>$label</option>";
 	}
 	
-
+	$options['id'] = isset($options['id']) ? $options['id'] : '';
 
 
 	$print_select= "<tr valign='top' id='{$options['id']}'>
@@ -37,12 +37,12 @@ if ( ! function_exists( 'tj_print_text_option' ) ) :
 function tj_print_text_option($options){
 
 
+	$options['id'] = isset($options['id']) ? $options['id'] : '';
 
-
-	$print_select= "<tr valign='top' id='{$options[id]}'>
-						<th scope='row'>{$options[label]}</th>
+	$print_select= "<tr valign='top' id='{$options['id']}'>
+						<th scope='row'>{$options['label']}</th>
 						<td>
-							<input type='text' name='{$options[name]}' value='{$options['value']}'>		
+							<input type='text' name='{$options['name']}' value='{$options['value']}'>		
 						</td>
 					</tr>
 					";
@@ -64,10 +64,10 @@ function tj_print_text_area_option($options){
 
 	
 
-	$print_select= "<tr valign='top' id='{$options[id]}' >
-						<th scope='row'>{$options[label]}</th>
+	$print_select= "<tr valign='top' id='{$options['id']}' >
+						<th scope='row'>{$options['label']}</th>
 						<td>
-							<textarea  name='{$options[name]}' rows='{$options['row']}' cols='{$options['column']}'>{$options['value']}</textarea>		
+							<textarea  name='{$options['name']}' rows='{$options['row']}' cols='{$options['column']}'>{$options['value']}</textarea>		
 						</td>
 					</tr>
 					";
