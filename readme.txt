@@ -32,7 +32,7 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 1. Install the plugin.
 2. Go to Setting -> Excerpt Setting.
 3. Insert the desired word to show and where to do excerpt.
-4. Save Options and check your result.
+4. To remove readmore link fill the readmore options with "-" (without quote)
 
 Please have a time to understand how this plugin is generating excerpt :
 
