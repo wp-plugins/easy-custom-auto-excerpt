@@ -60,6 +60,9 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 1.0.5
+* Add options to disable readmore. 
+
 = 1.0.4
 * Fix remove / add image in excerpt option
 

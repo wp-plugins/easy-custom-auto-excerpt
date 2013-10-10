@@ -200,7 +200,7 @@ function tonjoo_ecae_options_do_page() {
 
 
 			$text_options = Array(
-				'label'=>'Read More Text',
+				'label'=>'Read More Text.If you do not want read more, fill with "-"',
 				'name'=>'tonjoo_ecae_options[read_more]',
 				'value'=>$options['read_more']
 				);

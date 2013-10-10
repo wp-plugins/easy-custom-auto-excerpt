@@ -3,7 +3,7 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, search and archive.
-Version: 1.0.4
+Version: 1.0.5
 Author: Todi Adiyatmo Wijoyo
 Author URI:  http://todiadiyatmo.com
 */
@@ -129,14 +129,16 @@ function tonjoo_ecae_excerpt($content, $width, $justify) {
 		$heading_replace->restore($content);
 		$italic_replace->restore($content);
 		
-
+		$link = get_permalink();
+		if(trim($options['read_more'])!='-'){
+			$content .= "<a href='$link'>{$options['read_more']}</a>";
+		}
 
 	}
 	
 
 
-	$link = get_permalink();
-	$content .= "<a href='$link'>{$options['read_more']}</a>";
+	
 	if($justify!="no") {
 		$content = "<div style='text-align:$justify'>" . $content . "</div>";
 	}
