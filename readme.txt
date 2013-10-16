@@ -60,6 +60,9 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 1.0.6
+* Minor bug fix
+
 = 1.0.5
 * Add options to disable readmore. 
 
