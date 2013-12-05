@@ -25,7 +25,7 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['justify'])){
 		$options['justify']='no';		
 	}
-	if(!isset($options['read_more'])){
+	if(!isset($options['read_more'])||$options['read_more']==''){
 		$options['read_more']='read more';		
 	}
 
