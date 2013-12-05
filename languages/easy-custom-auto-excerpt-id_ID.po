@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Custom Auto Excerpt\n"
+"POT-Creation-Date: 2013-11-23 17:12+0700\n"
+"PO-Revision-Date: 2013-11-23 17:13+0700\n"
+"Last-Translator: Todi Adiyatmo Wijoyo <todiadiyatmo@tonjoo.com>\n"
+"Language-Team: Tonjoo <Support @tonjoo.com>\n"
+"Language: Indonesia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_(\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: options-page.php:22
+msgid "Tonjoo Easy Custom Auto Excerpt Options Page"
+msgstr "Halaman Opsi Tonjoo Easy Custom Auto Excerpt"
+
+#: options-page.php:59
+msgid "Tonjoo Easy Custom Auto Excerpt Options"
+msgstr ""
+
+#: options-page.php:89
+msgid "Excerpt Size"
+msgstr "Panjang Excerpt"
+
+#: options-page.php:90
+msgid "Excerpt lenght, word will be preserved"
+msgstr ""
+
+#: options-page.php:100 options-page.php:151 options-page.php:172
+#: options-page.php:183
+msgid "No"
+msgstr ""
+
+#: options-page.php:104
+msgid "Show All Images"
+msgstr ""
+
+#: options-page.php:108
+msgid "Show only First Image"
+msgstr ""
+
+#: options-page.php:112
+msgid "Use Featured Image"
+msgstr ""
+
+#: options-page.php:119
+msgid "Display Image in excerpt"
+msgstr ""
+
+#: options-page.php:141
+msgid "Display featured image if post excerpt is set"
+msgstr ""
+
+#: options-page.php:155 options-page.php:176
+msgid "Yes"
+msgstr ""
+
+#: options-page.php:161
+msgid "If you select 'yes' any shortcode will be ommited from the excerpt"
+msgstr ""
+
+#: options-page.php:162
+msgid "Strip shortcode in excerpt"
+msgstr ""
+
+#: options-page.php:187
+msgid "Left"
+msgstr ""
+
+#: options-page.php:191
+msgid "Right"
+msgstr ""
+
+#: options-page.php:195
+msgid "Justify"
+msgstr ""
+
+#: options-page.php:199
+msgid "Center"
+msgstr ""
+
+#: options-page.php:207
+msgid "Home Excerpt"
+msgstr ""
+
+#: options-page.php:215
+msgid "Archive Excerpt"
+msgstr ""
+
+#: options-page.php:223
+msgid "Search Excerpt"
+msgstr ""
+
+#: options-page.php:230
+msgid "The plugin will try to align the text on the excerpt page"
+msgstr ""
+
+#: options-page.php:231
+msgid "Text Align"
+msgstr ""
+
+#: options-page.php:243
+msgid ""
+"Read More Text.If you do not want read more, fill with \"-\" (without quote)"
+msgstr ""

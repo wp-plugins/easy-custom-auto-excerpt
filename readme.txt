@@ -21,6 +21,7 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 * Custom Read More text
 * Preserve Image on Excerpt
 * Preserve real excerpt you wrote
+* Multilanguage : Spanish, Indonesian , English
 
 *if you have any questions,comment,customization request or suggestion please contact me via todi.adiatmo[at]yahoo.com or [visit plugin site](http://www.tonjoo.com/easy-custom-auto-excerpt/ "visit plugin site")*
 
@@ -39,6 +40,11 @@ Please have a time to understand how this plugin is generating excerpt :
 1. If the post have read more, than the read more will be used.
 2. If the post doesn't have read more , than post excerpt will be used.
 3. If the post doesn't have read more and excerpt than it will automagically generate excerpt.
+
+Translation :
+
+1. Bahasa Indonesia : Todi ~ @todiadiyatmo
+2. Spanish : Andrew Kurtis ~ webhostinghub.com
 
 
 == Installation ==
@@ -59,6 +65,10 @@ It will used, instead of the automatically generated one.
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 1.0.7
+* Add spanish translation , thanks to Andrew Kurtis ~ webhostinghub.com 
+* Better excerpt cropping algorithm
 
 = 1.0.6
 * Minor bug fix

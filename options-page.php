@@ -19,10 +19,10 @@ function tonjoo_ecae_options_page() {
 	// add_plugin_page( $page_title, $menu_title, $capability, $menu_slug, $function);
 	
 	add_options_page( 
-		"Tonjoo Easy Custom Auto Excerpt Options Page", 
-		'Excerpt Setting', 
+		__("Tonjoo Easy Custom Auto Excerpt Options Page"), 
+		'Excerpt', 
 		'edit_theme_options', 
-		'admin_menu', 
+		'tonjoo_excerpt', 
 		'tonjoo_ecae_options_do_page' );
 }
 
@@ -56,24 +56,17 @@ function tonjoo_ecae_options_do_page() {
 	</style>
 	<div class="wrap">
 		<?php screen_icon();
-		echo "<h2>Tonjoo Easy Custom Auto Excerpt Options</h2>";
-
-		/**
-		 * Freaking Hack :D
-		 */
+		echo "<h2>".__("Tonjoo Easy Custom Auto Excerpt Options")."</h2>";
 		?>
 
-		<?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
-		<div class="updated fade"><p><strong>Options Save</strong></p></div>
-	<?php endif; ?>
 
 	<br>
-	Easy Custom Auto Excerpt by <a href='http://www.tonjoo.com'>tonjoo</a> ~ 
-	<a href='http://www.tonjoo.com/easy-custom-auto-excerpt/'>Plugin Page</a> | 
-	<a href='http://wordpress.org/support/view/plugin-reviews/easy-custom-auto-excerpt?filter=5'>Please Rate :)</a> |
-	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/'>Comment</a> Or <a href='http://wordpress.org/support/plugin/easy-custom-auto-excerpt'>Bug Report</a> |
-	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/faq/'>FAQ</a> |
-	<a href='http://tonjoo.com/donate'>Donate Us :) </a> 
+	<?php _e("Easy Custom Auto Excerpt by") ?> <a href='http://www.tonjoo.com'>tonjoo</a> ~ 
+	<a href='http://www.tonjoo.com/easy-custom-auto-excerpt/'><?php _e("Plugin Page") ?></a> | 
+	<a href='http://wordpress.org/support/view/plugin-reviews/easy-custom-auto-excerpt?filter=5'><?php _e("Please Rate :)") ?></a> |
+	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/'><?php _e("Comment") ?></a> Or <a href='http://wordpress.org/support/plugin/easy-custom-auto-excerpt'>Bug Report</a> |
+	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/faq/'><?php _e("FAQ") ?></a> |
+	<a href='http://tonjoo.com/donate'><?php _e("Donate Us") ?></a> 
 	<br>
 	<br>
 
@@ -93,19 +86,45 @@ function tonjoo_ecae_options_do_page() {
 			<?php
 
 			$text_options = array(
-				'label'=>'Excerpt Size',
-				'description'=>'Excerpt lenght, word will be preserved ',
+				'label'=>__('Excerpt Size'),
+				'description'=>__('Excerpt lenght, word will be preserved'),
 				'name'=>'tonjoo_ecae_options[width]',
 				'value'=>$options['width']
 				);
 			
 			tj_print_text_option($text_options);
 
-
-
-
-
 			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'no',
+					'label' =>  __("No")
+					),
+				'1' => array(
+					'value' =>	'yes',
+					'label' =>  __("Show All Images")
+					),
+				'2' => array(
+					'value' =>	'first-image',
+					'label' =>  __('Show only First Image') 
+					),
+				'3' => array(
+					'value' =>	'featured-image',
+					'label' =>  __('Use Featured Image')
+					)
+				);
+
+			$image_select = array(
+				"name"=>"tonjoo_ecae_options[show_image]",
+				"description" => "",
+				"label" => __("Display Image in excerpt"),
+				"value" => $options['show_image'],
+				"select_array" => $yes_no_options,
+				);
+
+			echo tj_print_select_option($image_select);
+
+
+			$featured_image_excerpt = array(
 				'0' => array(
 					'value' =>	'no',
 					'label' =>  'No'
@@ -117,10 +136,31 @@ function tonjoo_ecae_options_do_page() {
 				);
 
 			$image_select = array(
-				"name"=>"tonjoo_ecae_options[show_image]",
+				"name"=>"tonjoo_ecae_options[featured_image_excerpt]",
 				"description" => "",
-				"label" => "Display Image in excerpt  ",
-				"value" => $options['show_image'],
+				"label" => __("Display featured image if post excerpt is set"),
+				"value" => $options['featured_image_excerpt'],
+				"select_array" => $featured_image_excerpt,
+				);
+
+			echo tj_print_select_option($image_select);
+
+			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'no',
+					'label' =>  __('No')
+					),
+				'1' => array(
+					'value' =>	'yes',
+					'label' =>  __('Yes') 
+					)
+				);
+
+			$image_select = array(
+				"name"=>"tonjoo_ecae_options[strip_shortcode]",
+				"description" => __("If you select 'yes' any shortcode will be ommited from the excerpt"),
+				"label" => __("Strip shortcode in excerpt"),
+				"value" => $options['strip_shortcode'],
 				"select_array" => $yes_no_options,
 				);
 
@@ -129,34 +169,34 @@ function tonjoo_ecae_options_do_page() {
 			$excerpt_yes_options = array(
 				'0' => array(
 					'value' =>	'no',
-					'label' =>  'No'
+					'label' =>  __('No')
 					),
 				'1' => array(
 					'value' =>	'yes',
-					'label' =>  'Yes' 
+					'label' =>  __('Yes') 
 					)
 				);
 
 			$justify_options = array(
 				'0' => array(
 					'value' =>	'no',
-					'label' =>  'No'
+					'label' =>  __('No')
 					),
 				'1' => array(
 					'value' =>	'left',
-					'label' =>  'Left' 
+					'label' =>  __('Left') 
 					),
 				'2' => array(
 					'value' =>	'right',
-					'label' =>  'Right' 
+					'label' =>  __('Right') 
 					),
 				'3' => array(
 					'value' =>	'justify',
-					'label' =>  'Justify' 
+					'label' =>  __('Justify') 
 					),
 				'4' => array(
 					'value' =>	'center',
-					'label' =>  'Center' 
+					'label' =>  __('Center') 
 					)
 				);
 
@@ -164,7 +204,7 @@ function tonjoo_ecae_options_do_page() {
 			$home_select = array(
 				"name"=>"tonjoo_ecae_options[home]",
 				"description" => "",
-				"label" => "Home Excerpt",
+				"label" => __("Home Excerpt"),
 				"value" => $options['home'],
 				"select_array" => $excerpt_yes_options,
 				);
@@ -172,7 +212,7 @@ function tonjoo_ecae_options_do_page() {
 			$archive_select = array(
 				"name"=>"tonjoo_ecae_options[archive]",
 				"description" => "",
-				"label" => "Archive Excerpt",
+				"label" => __("Archive Excerpt"),
 				"value" => $options['archive'],
 				"select_array" => $excerpt_yes_options,
 				);
@@ -180,15 +220,15 @@ function tonjoo_ecae_options_do_page() {
 			$search_select = array(
 				"name"=>"tonjoo_ecae_options[search]",
 				"description" => "",
-				"label" => "Search Excerpt",
+				"label" => __("Search Excerpt"),
 				"value" => $options['search'],
 				"select_array" => $excerpt_yes_options,
 				);
 
 			$justify_select = array(
 				"name"=>"tonjoo_ecae_options[justify]",
-				"description" => "The plugin will try to align the text on the excerpt page",
-				"label" => "Text Align",
+				"description" => __("The plugin will try to align the text on the excerpt page"),
+				"label" => __("Text Align"),
 				"value" => $options['justify'],
 				"select_array" => $justify_options,
 				);
@@ -200,7 +240,7 @@ function tonjoo_ecae_options_do_page() {
 
 
 			$text_options = Array(
-				'label'=>'Read More Text.If you do not want read more, fill with "-" (without quote)',
+				'label'=>__('Read More Text.If you do not want read more, fill with "-" (without quote)'),
 				'name'=>'tonjoo_ecae_options[read_more]',
 				'value'=>$options['read_more']
 				);
@@ -211,10 +251,10 @@ function tonjoo_ecae_options_do_page() {
 		</table>
 
 		<p class="submit">
-			<input type="submit" class="button-primary" value="Save Options" />
+			<input type="submit" class="button-primary" value=<?php  _e("Save Options") ?> />
 		</p>
 	</form>
-	<p>If you have any questions,comment or suggestion please contact us via support[at]tonjoo.com or <a href="http://www.tonjoo.com/easy-custom-auto-excerpt/">visit our plugin site</a></p>
+	<p><?php _e("If you have any questions,comment or suggestion please contact us via support[at]tonjoo.com or ") ?><a href="http://www.tonjoo.com/easy-custom-auto-excerpt/"><?php _e('visit our plugin site') ?></a></p>
 </div>
 <?php
 

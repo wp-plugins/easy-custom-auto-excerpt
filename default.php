@@ -29,6 +29,15 @@ function tonjoo_ecae_load_default(&$options){
 		$options['read_more']='read more';		
 	}
 
+	if(!isset($options['strip_shortcode'])){
+		$options['strip_shortcode']='yes';		
+	}
+
+	if(!isset($options['featured_image_excerpt'])){
+		$options['featured_image_excerpt']='yes';		
+	}
+
+
 	
 	if(!isset($options['show_image'])){
 		$options['show_image']='yes';		
