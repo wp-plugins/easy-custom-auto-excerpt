@@ -10,7 +10,7 @@ Author URI:  http://todiadiyatmo.com
 
 function tonjoo_ecae_plugin_init()
 {
-  define(TONJOO_ECAE,'easy-custom-auto-excerpt');
+  define("TONJOO_ECAE",'easy-custom-auto-excerpt');
 // Localization
  load_plugin_textdomain( TONJOO_ECAE, false,  dirname( plugin_basename( __FILE__ ) ).'/languages' ); 
 
