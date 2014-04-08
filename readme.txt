@@ -31,8 +31,8 @@ Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :
 **Usage Instruction**
 
 1. Install the plugin.
-2. Go to Setting -> Excerpt Setting.
-3. Insert the desired word to show and where to do excerpt.
+2. In the Admin Panel, Go to Setting -> Excerpt.
+3. Fill the setting according your need
 4. To remove readmore link fill the readmore options with "-" (without quote)
 
 Please have a time to understand how this plugin is generating excerpt :
@@ -65,6 +65,10 @@ It will used, instead of the automatically generated one.
 2. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 1.0.8
+* Improve excerpt algorithm
+* Add readmore option
 
 = 1.0.7
 * Add spanish translation , thanks to Andrew Kurtis ~ webhostinghub.com 

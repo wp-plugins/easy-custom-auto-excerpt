@@ -15,7 +15,7 @@ function tj_print_select_option($options){
 	}
 	
 	$options['id'] = isset($options['id']) ? $options['id'] : '';
-
+	$options['description'] = isset($options['description']) ? $options['description'] : '';
 
 	$print_select= "<tr valign='top' id='{$options['id']}'>
 						<th scope='row'>{$options['label']}</th>
@@ -38,11 +38,13 @@ function tj_print_text_option($options){
 
 
 	$options['id'] = isset($options['id']) ? $options['id'] : '';
+	$options['description'] = isset($options['description']) ? $options['description'] : '';
 
 	$print_select= "<tr valign='top' id='{$options['id']}'>
 						<th scope='row'>{$options['label']}</th>
 						<td>
-							<input type='text' name='{$options['name']}' value='{$options['value']}'>		
+							<input type='text' name='{$options['name']}' value='{$options['value']}'>	
+							<label class='description' >{$options['description']}</label>	
 						</td>
 					</tr>
 					";

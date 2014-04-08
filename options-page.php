@@ -87,7 +87,7 @@ function tonjoo_ecae_options_do_page() {
 
 			$text_options = array(
 				'label'=>__('Excerpt Size',TONJOO_ECAE),
-				'description'=>__('Excerpt lenght, word will be preserved'),
+				'description'=>__('Number of Character preserved, word will be preserved',TONJOO_ECAE),
 				'name'=>'tonjoo_ecae_options[width]',
 				'value'=>$options['width']
 				);
@@ -123,6 +123,27 @@ function tonjoo_ecae_options_do_page() {
 
 			echo tj_print_select_option($image_select);
 
+
+			$excerpt_method_ar = array(
+				'0' => array(
+					'value' =>	'paraghraph',
+					'label' =>  __('Paraghraph',TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'word',
+					'label' =>  __('Word',TONJOO_ECAE) 
+					)
+				);
+
+			$excerpt_method = array(
+				"name"=>"tonjoo_ecae_options[excerpt_method]",
+				"description" => "Paraghraph preserved styling, word does excerpt with excact word count",
+				"label" => __("Excerpt method",TONJOO_ECAE),
+				"value" => $options['excerpt_method'],
+				"select_array" => $excerpt_method_ar,
+				);
+
+			echo tj_print_select_option($excerpt_method);
 
 			$featured_image_excerpt = array(
 				'0' => array(
@@ -200,6 +221,21 @@ function tonjoo_ecae_options_do_page() {
 					)
 				);
 
+			$readmore_align_options = array(
+				'0' => array(
+					'value' =>	'left',
+					'label' =>  __('Left (default)',TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'center',
+					'label' =>  __('Center',TONJOO_ECAE) 
+					),
+				'2' => array(
+					'value' =>	'right',
+					'label' =>  __('Right',TONJOO_ECAE) 
+					)
+				);			
+
 
 			$home_select = array(
 				"name"=>"tonjoo_ecae_options[home]",
@@ -239,13 +275,46 @@ function tonjoo_ecae_options_do_page() {
 			echo tj_print_select_option($justify_select);	
 
 
-			$text_options = Array(
-				'label'=>__('Read More Text.If you do not want read more, fill with "-" (without quote)',TONJOO_ECAE),
+			$text_options = array(
+				'label'=>__('Read More Text.If you do not want to display it, fill with "-" (without quote)',TONJOO_ECAE),
 				'name'=>'tonjoo_ecae_options[read_more]',
 				'value'=>$options['read_more']
 				);
+
+			$extra_html_markup = array(
+				'label'=>__('Extra HTML Markup to save',TONJOO_ECAE),
+				'name'=>'tonjoo_ecae_options[extra_html_markup]',
+				'value'=>$options['extra_html_markup'],
+				'description'=>__('use | between markup',TONJOO_ECAE),
+				);	
+
+			$readmore_text_before_options = array(
+				'label'=>__('Text before read more link.',TONJOO_ECAE),
+				'name'=>'tonjoo_ecae_options[read_more_text_before]',
+				'value'=>$options['read_more_text_before']
+				);	
+
+			$readmore_new_line = array(
+				"name"=>"tonjoo_ecae_options[read_more_new_line]",
+				"description" => __("Select yes if you want the read more link in new line of text",TONJOO_ECAE),
+				"label" => __("Read more new line",TONJOO_ECAE),
+				"value" => $options['read_more_new_line'],
+				"select_array" => $excerpt_yes_options,
+				);			
+
+			$readmore_align_select = array(
+				"name"=>"tonjoo_ecae_options[read_more_align]",
+				"description" => __("Read more text's align. Leave it default if read more new line option is turned off.",TONJOO_ECAE),
+				"label" => __("Read more align",TONJOO_ECAE),
+				"value" => $options['read_more_align'],
+				"select_array" => $readmore_align_options,
+				);			
 			
+			tj_print_text_option($extra_html_markup);
 			tj_print_text_option($text_options);
+			tj_print_text_option($readmore_text_before_options);
+			tj_print_select_option($readmore_new_line);
+			tj_print_select_option($readmore_align_select);
 
 			?>
 		</table>
