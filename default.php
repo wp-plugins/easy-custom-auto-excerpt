@@ -13,8 +13,8 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['home'])){
 		$options['home']='yes';		
 	}
-	if(!isset($options['home'])){
-		$options['home']='yes';		
+	if(!isset($options['front_page'])){
+		$options['front_page']='yes';		
 	}
 	if(!isset($options['search'])){
 		$options['search']='yes';		
@@ -38,22 +38,31 @@ function tonjoo_ecae_load_default(&$options){
 	}
 
 	if(!isset($options['read_more_text_before'])){
-	$options['read_more_text_before']='';		
-	}
-
-	if(!isset($options['read_more_new_line'])){
-	$options['read_more_new_line']='no';		
+		$options['read_more_text_before']='';		
 	}
 
 	if(!isset($options['read_more_align'])){
-	$options['read_more_align']='left';		
+		$options['read_more_align']='left';		
 	}
+
 	if(!isset($options['extra_html_markup'])){
-	$options['extra_html_markup']='span';		
+		$options['extra_html_markup']='span';		
 	}
 	
 	if(!isset($options['show_image'])){
 		$options['show_image']='yes';		
+	}
+
+	if(!isset($options['custom_css'])){
+		$options['custom_css']=".ecae-button { font-size: 14px !important; }";
+	}
+
+	if(!isset($options['button_skin'])){
+		$options['button_skin']="none";
+	}
+
+	if(!isset($options['button_font'])){
+		$options['button_font']="Open Sans";
 	}
 
 	return $options;

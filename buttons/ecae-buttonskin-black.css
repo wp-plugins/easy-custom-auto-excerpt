@@ -1,0 +1,31 @@
+/* BUTTONS
+ ================================================== */
+.ecae-button.ecae-buttonskin-black {
+	padding-top: 10px;
+	padding-bottom: 13px;
+	font-size: 14px;
+}
+
+.ecae-button.ecae-buttonskin-black a {
+	text-decoration: none;
+	font-size: inherit;
+}
+
+.ecae-button.ecae-buttonskin-black a span {	
+	padding: 5px 10px;
+	border-width: 2px;
+	border-style: solid;
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+
+	color: #000;
+	border-color: #000;
+}
+
+.ecae-button.ecae-buttonskin-black a:hover span {	
+	color: #fff;
+	border-color: #000;
+	background-color: #000;
+}

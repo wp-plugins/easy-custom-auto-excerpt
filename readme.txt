@@ -7,10 +7,10 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Auto Excerpt for your post on home, search and archive. Easy to configure and have a lot of options.
+Auto Excerpt for your post on home, search and archive. Customize Read More button. Easy to configure and have a lot of options.
 == Description ==
 
-Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. By using this plugin you don't need to excpert your post manualy, just active the plugin, configure the word length and you're good to go :)
+Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and style. Just active the plugin, configure some options and you're good to go :)
 
 **Features :**
 
@@ -18,15 +18,17 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 * Choose to excerpt your on your home, search or archive.
 * Align text (Justify,Right,Left, Center) your text based on your preference.
 * Easy to use.
-* Custom Read More text
-* Preserve Image on Excerpt
-* Preserve real excerpt you wrote
-* Multilanguage : Spanish, Indonesian , English
+* Custom Read More text and Button.
+* 40 + Read More button themes.
+* Preserve Image on Excerpt.
+* Preserve real excerpt you wrote.
+* Partial Indonesia and Spanish translation.
 
-*if you have any questions,comment,customization request or suggestion please contact me via todi.adiatmo[at]yahoo.com or [visit plugin site](http://www.tonjoo.com/easy-custom-auto-excerpt/ "visit plugin site")*
+*if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoo.com/thread-category/easy-custom-auto-excerpt/)
+
+Find more detail on our official [plugin page](https://tonjoo.com/addons/easy-custom-auto-excerpt "visit plugin site")
 
 Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :)
-
 
 **Usage Instruction**
 
@@ -62,9 +64,18 @@ It will used, instead of the automatically generated one.
 == Screenshots ==
 
 1. Easy to configure, word lenght and where to do the excerpt. Plus you can show or not to show image on excerpt !
-2. Easy Custom Auto Excerpt on action.
+2. Style your readmore with 40+ button themes and customizable font type
+3. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 2.0.0
+* Updated admin UI, more easy and intuitive
+* Add select font option
+* Add select button theme option
+* Add custom css option
+* Add front page excerpt option
+* Fix known bugs
 
 = 1.0.8
 * Improve excerpt algorithm
@@ -107,5 +118,3 @@ It will used, instead of the automatically generated one.
 
 = 0.9 =
 * First Release
-
-

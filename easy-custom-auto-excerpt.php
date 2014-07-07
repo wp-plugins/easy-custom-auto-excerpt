@@ -2,21 +2,23 @@
 /*
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
-Description: Auto Excerpt for your post on home, search and archive.
-Version: 1.0.8
-Author: Todi Adiyatmo Wijoyo
-Author URI:  http://todiadiyatmo.com
+Description: Auto Excerpt for your post on home, front_page, search and archive.
+Version: 2.0.0
+Author: tonjoo
+Author URI: http://www.tonjoo.com/
+Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
- define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
+define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
+define("ECAE_VERSION", '2.0.0');
+define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
+
+require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
 
 function tonjoo_ecae_plugin_init()
 {
-   
     // Localization
     load_plugin_textdomain(TONJOO_ECAE, false, dirname(plugin_basename(__FILE__)) . '/languages');
-    
-    
 }
 
 add_action('plugins_loaded', 'tonjoo_ecae_plugin_init');
@@ -31,22 +33,189 @@ function tonjoo_ecae_donate($links)
     return $links;
 }
 
+
+/**
+ * admin_enqueue_scripts
+ */
+add_action('admin_enqueue_scripts', 'ecae_admin_enqueue_scripts', 100);
+
+function ecae_admin_enqueue_scripts()
+{
+    if(isset($_GET['page']) && $_GET['page'] == "tonjoo_excerpt")
+    {
+        //print script
+        echo "<script type='text/javascript'>";
+        echo "var ecae_dir_name = '".plugins_url( ECAE_DIR_NAME , dirname(__FILE__) )."';";
+        echo "var ecae_button_dir_name = '".plugins_url( ECAE_DIR_NAME.'/buttons/' , dirname(__FILE__) )."';";
+
+        if(function_exists('is_ecae_premium_exist')) {
+            echo "var ecae_premium_dir_name = '".plugins_url( ECAE_PREMIUM_DIR_NAME , dirname(__FILE__) )."';";
+            echo "var ecae_button_premium_dir_name = '".plugins_url( ECAE_PREMIUM_DIR_NAME.'/buttons/' , dirname(__FILE__) )."';";
+            echo "var ecae_premium_enable = true;";
+        }
+        else
+        {
+            echo "var ecae_button_premium_dir_name = '".plugins_url( ECAE_DIR_NAME.'/assets/premium-promo/' , dirname(__FILE__) )."';";
+            echo "var ecae_premium_enable = false;";
+        }
+        
+        echo "</script>";
+
+        // javascript
+        wp_enqueue_script('ace-js',plugin_dir_url( __FILE__ )."assets/ace-min-noconflict-css-monokai/ace.js",array(),ECAE_VERSION);
+        wp_enqueue_script('select2-js',plugin_dir_url( __FILE__ )."assets/select2/select2.js",array(),ECAE_VERSION);  
+
+        // css
+        wp_enqueue_style('select2-css',plugin_dir_url( __FILE__ )."assets/select2/select2.css",array(),ECAE_VERSION);
+
+        // admin script and style
+        wp_enqueue_script('ecae-admin-js',plugin_dir_url( __FILE__ )."assets/script.js",array(),ECAE_VERSION);
+        wp_enqueue_style('ecae-admin-css',plugin_dir_url( __FILE__ )."assets/style.css",array(),ECAE_VERSION);
+    }
+}
+
+
+/**
+ * wp_enqueue_scripts
+ */
+add_action('wp_enqueue_scripts', 'ecae_wp_enqueue_scripts', 100);
+
+function ecae_wp_enqueue_scripts()
+{
+    //ambil options dari db
+    $options = get_option('tonjoo_ecae_options');    
+    $options = tonjoo_ecae_load_default($options);
+
+    /**
+     * Font
+     */
+    echo "<style type='text/css'>";
+
+    switch ($options['button_font']) 
+    {
+        case "Open Sans":
+            echo "@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
+            break;
+        case "Lobster":
+            echo "@import url(http://fonts.googleapis.com/css?family=Lobster);"; //Lobster
+            break;
+        case "Lobster Two":
+            echo "@import url(http://fonts.googleapis.com/css?family=Lobster+Two:400,400italic,700,700italic);"; //Lobster Two
+            break;
+        case "Ubuntu":
+            echo "@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);"; //Ubuntu
+            break;
+        case "Ubuntu Mono":
+            echo "@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);"; //Ubuntu Mono
+            break;
+        case "Titillium Web":
+            echo "@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,700,300italic,400italic,700italic);"; //Titillium Web
+            break;
+        case "Grand Hotel":
+            echo "@import url(http://fonts.googleapis.com/css?family=Grand+Hotel);"; //Grand Hotel
+            break;
+        case "Pacifico":
+            echo "@import url(http://fonts.googleapis.com/css?family=Pacifico);"; //Pacifico
+            break;
+        case "Crafty Girls":
+            echo "@import url(http://fonts.googleapis.com/css?family=Crafty+Girls);"; //Crafty Girls
+            break;
+        case "Bevan":
+            echo "@import url(http://fonts.googleapis.com/css?family=Bevan);"; //Bevan
+            break;
+        default:
+            echo "@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
+    }
+
+    echo "p.ecae-button { font-family: '".$options['button_font']."', Helvetica, Arial, sans-serif; }";    
+    echo "</style>";
+
+
+    /**
+     * Button skin
+     */
+    $array_buttonskins = ecae_get_array_buttonskins();
+
+    if(! isset($options['button_skin']) || ! in_array($options['button_skin'], $array_buttonskins))
+    {
+        $options['button_skin'] = 'ecae-buttonskin-none';
+    }   
+
+    /* filter if premium */
+    $exp = explode('-PREMIUM', $options['button_skin']);
+    if(count($exp) > 1 AND $exp[1] == 'true')
+    {
+        wp_enqueue_style($exp[0],plugins_url(ECAE_PREMIUM_DIR_NAME."/buttons/{$exp[0]}.css"),array(),ECAE_VERSION);
+    }
+    else
+    {
+        wp_enqueue_style($exp[0],plugins_url(ECAE_DIR_NAME."/buttons/{$exp[0]}.css"),array(),ECAE_VERSION);
+    }
+}
+
+function ecae_get_array_buttonskins()
+{
+    $skins = scandir(dirname(__FILE__)."/buttons");
+
+    $button_skin =  array();
+
+    foreach ($skins as $key => $value) {
+
+        $extension = pathinfo($value, PATHINFO_EXTENSION); 
+        $filename = pathinfo($value, PATHINFO_FILENAME); 
+        $extension = strtolower($extension);
+        $the_value = strtolower($filename);
+
+        if($extension=='css')
+        {
+            array_push($button_skin,$the_value);
+        }
+    }
+
+    if(function_exists('is_ecae_premium_exist')) 
+    {
+        $skins = scandir(ABSPATH . 'wp-content/plugins/'.ECAE_PREMIUM_DIR_NAME.'/buttons');
+
+        foreach ($skins as $key => $value) {
+
+            $extension = pathinfo($value, PATHINFO_EXTENSION); 
+            $filename = pathinfo($value, PATHINFO_FILENAME); 
+            $extension = strtolower($extension);
+            $the_value = strtolower($filename);
+
+            if($extension=='css')
+            {
+                array_push($button_skin,$the_value.'-PREMIUMtrue');
+            }
+        }
+    }
+
+    return $button_skin;
+}
+
+
+/*
+ * Do Filter after this 
+ * add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
+ * So we can preserve shortcode
+ * 
+ */
 add_filter('the_content', 'tonjoo_ecae_execute', 10);
 
 function tonjoo_ecae_execute($content, $width = 400)
-{
-    
+{    
     //ambil options dari db
-    $options = get_option('tonjoo_ecae_options');
-    
+    $options = get_option('tonjoo_ecae_options');    
     $options = tonjoo_ecae_load_default($options);
 
-
     $width   = $options['width'];
-    $justify = $options['justify'];
+    $justify = $options['justify'];    
     
-    
-     if ($options['home'] == "yes" && is_home()) {
+    if ($options['home'] == "yes" && is_home()) {
+        return tonjoo_ecae_excerpt($content, $width, $justify);
+    }
+
+    if ($options['front_page'] == "yes" && is_front_page()) {
         return tonjoo_ecae_excerpt($content, $width, $justify);
     }
     
@@ -56,12 +225,10 @@ function tonjoo_ecae_execute($content, $width = 400)
     
     if ($options['search'] == "yes" && is_search()) {
         return tonjoo_ecae_excerpt($content, $width, $justify);
-    }
-    
+    }    
     else {
         return $content;
     }
-    
 }
 
 
@@ -73,30 +240,39 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     $options = get_option('tonjoo_ecae_options');
     $options = tonjoo_ecae_load_default($options);
     global $post;
-
-    //check shortcode optons
-
-    if ($options['strip_shortcode'] == 'yes') {
-        $content = strip_shortcodes($content);
-    }
     
-
     $pos = strpos($content, '<!--more-->');
     
     $array_replace_list = array();
     
     //if read more
     if ($pos) {
+
+        //check shortcode optons
+        if ($options['strip_shortcode'] == 'yes') {
+            $content = strip_shortcodes($content);
+        }
+    
+
         $content = substr($content, 0, $pos);
     } elseif ($post->post_excerpt != '') {
+
+        //check shortcode optons
+        if ($options['strip_shortcode'] == 'yes') {
+            $content = strip_shortcodes($content);
+        }
+    
+
         $content = $post->post_excerpt;
         
     } elseif ($width == 0) {
         $content = '';
     } elseif (!(strlen($content) <= (int) $width)) {
+
+        // Do caption shortcode
+        $content = ecae_convert_caption($content);
         
-        
-        
+        $figure_replace = new eace_content_regex("|:", "/<figure.*?\>([^`]*?)<\/figure>/",$options,true);
         $hyperlink_image_replace = new eace_content_regex("|#", "/<a[^>]*>(\n|\s)*(<img[^>]+>)(\n|\s)*<\/a>/",$options,true);
         $image_replace           = new eace_content_regex("|(", "/<img[^>]+\>/",$options,true );
         
@@ -114,11 +290,10 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         else
             $extra_markup = array();
 
-
-
         $extra_markup_tag=array('*=','(=',')=','_=','<=','>=','/=','\=',']=','[=','{=','}=','|=');
 
         //default order
+        $array_replace_list['pre']='=@'; // syntax highlighter like crayon
         $array_replace_list['video']='=}';
         $array_replace_list['table']='={';    
         $array_replace_list['p']='=!';
@@ -134,15 +309,9 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $array_replace_list['ul']='=#';
         $array_replace_list['ol']='=$';
         $array_replace_list['strong']='=(';
-        $array_replace_list['pre']='=@';
         $array_replace_list['blockquote']='=^';
-     
-
-
    
         foreach ($extra_markup as $markup) {
-
-     
 
             $counter = 0;
 
@@ -165,11 +334,12 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             array_push($html_replace, $push);
         }
 
+        $pattern = get_shortcode_regex();
 
+        if(!strpos('hana-flv-player', $pattern))
+            $pattern = str_replace('embed','caption|hana-flv-player',$pattern);
 
-      
-
-        $crayon_replace = new eace_content_regex("+*", "/<!-- Crayon.*?-->([^`]*?)-->/",$options);
+        $shortcode_replace = new eace_content_regex("+*", '/'.$pattern.'/s',$options);
         
         //trim image
         $option_image = $options['show_image'];
@@ -181,25 +351,31 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             if ($option_image == 'first-image')
                 $number = 1;
             
-            $hyperlink_image_replace->replace($content, $width, $number);
-            
+            $figure_replace->replace($content, $width, $number);            
+            $hyperlink_image_replace->replace($content, $width, $number);            
             $image_replace->replace($content, $width, $number);
+
         else:
+        
             //remove image , this is also done for featured-image option
+            $figure_replace->remove($content);
             $hyperlink_image_replace->remove($content);
             $image_replace->remove($content);
+        
         endif;
-      
-        foreach ($html_replace as $replace) {
 
-
-
-             $replace->replace($content, $width,false,$total_width);
+        // check shortcode optons
+        if ($options['strip_shortcode'] == 'yes') {
+            $content = strip_shortcodes($content);
         }
+    
 
-  
+        // Replace remaining tag
+        foreach ($html_replace as $replace) {
+             $replace->replace($content, $width,false,$total_width);
+        }  
        
-        $crayon_replace->replace($content, $width,false,$total_width);
+        $shortcode_replace->replace($content, $width,false,$total_width);
         
         //use wp kses to fix broken element problem
         $content = wp_kses($content, array());
@@ -212,9 +388,10 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
 
         //strip the text
         $content = substr($content, 0, strpos($content,'<!--STOP THE EXCERPT HERE-->'));
+      
 
         //do the restore 3 times, avoid nesting
-        $crayon_replace->restore($content);
+        $shortcode_replace->restore($content);
         foreach ($html_replace as $restore) {
              $restore->restore($content, $width);
         }
@@ -224,11 +401,12 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         foreach ($html_replace as $restore) {
              $restore->restore($content, $width);
         }
-        $crayon_replace->restore($content);
-        
+        $shortcode_replace->restore($content);
+
         
         if ($option_image == 'yes') {
             
+            $figure_replace->restore($content,false,true);
             $hyperlink_image_replace->restore($content,false,true);
             $image_replace->restore($content,false,true);
             
@@ -236,8 +414,8 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             
             
             //catch all of hyperlink and image on the content => '|#'  and '|('' 
-            preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#/', $content, $result, PREG_PATTERN_ORDER);
-           
+            preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#|\|\:[0-9]*\|\:/', $content, $result, PREG_PATTERN_ORDER);
+
              if (isset($result[0])) {
                 
                 $remaining = array_slice($result[0], 0, 1);
@@ -245,12 +423,15 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                 if(isset($remaining[0])){                
                     
                     //delete remaining image
+                    $content = preg_replace('/\|\:[0-9]*\|\:/', '', $content);
                     $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
                     $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
+
 
                     //restore first image found  
                     $content = "<div style='text-align:center'>" . $remaining[0] . "</div>" . $content;
 
+                    $figure_replace->restore($content, 1,true);
                     $hyperlink_image_replace->restore($content, 1,true);
                     $image_replace->restore($content, 1,true);
                 }
@@ -269,54 +450,44 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
 
 
         }
-
+ 
         //delete remaining image
         $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
         $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
+            
+        //delete remaining
+        $extra_markup_tag=array('*='.'(=',')=','_=','<=','>=','/=','\=',']=','[=','{=','}=','|=');
 
+        foreach ($extra_markup_tag as $value) 
+        {
+            $char = str_split($value);
 
-
+            $content = preg_replace("/"."\\"."{$char[0]}"."\\"."{$char[1]}"."[0-9]*"."\\"."{$char[0]}"."\\"."{$char[1]}"."/", '', $content);
+        }
         
-        
+
+        foreach($array_replace_list as $key=>$value) 
+        {
+            $char = str_split($value);
+
+            $content = preg_replace("/"."\\"."{$char[0]}"."\\"."{$char[1]}"."[0-9]*"."\\"."{$char[0]}"."\\"."{$char[1]}"."/", '', $content);
+        }        
     }
-
-    //delete remaining
-    $extra_markup_tag=array('*='.'(=',')=','_=','<=','>=','/=','\=',']=','[=','{=','}=','|=');
-
-    foreach ($extra_markup_tag as $value) {
-
-        $char = str_split($value);
-
-
-        $content = preg_replace("/"."\\"."{$char[0]}"."\\"."{$char[1]}"."[0-9]*"."\\"."{$char[0]}"."\\"."{$char[1]}"."/", '', $content);
-   
-    }
-    
-
-
-    foreach($array_replace_list as $key=>$value) {
-
-
-        $char = str_split($value);
-
-
-        $content = preg_replace("/"."\\"."{$char[0]}"."\\"."{$char[1]}"."[0-9]*"."\\"."{$char[0]}"."\\"."{$char[1]}"."/", '', $content);
-     }
-    
     
     $link = get_permalink();
-    
-    $block = '';
-    if ($options['read_more_new_line'] != 'no') {
-        $block = 'display:block;';
-    }
-    
-    if (trim($options['read_more']) != '-') {
-
+        
+    if (trim($options['read_more']) != '-') 
+    {
         //failsafe
         $options['read_more_text_before'] = isset($options['read_more_text_before'] )? $options['read_more_text_before']  : '...';
 
-        $readmore = $options['read_more_text_before'] . " <a class='ecae-link' style='text-align:" . $options['read_more_align'] . ";" . $block . "' href='$link'>{$options['read_more']}</a>";
+        $button_skin = explode('-PREMIUM', $options['button_skin']);
+        $trim_readmore_before = trim($options['read_more_text_before']);
+
+        $options['read_more_text_before'] = empty($trim_readmore_before) ? $options['read_more_text_before'] : $options['read_more_text_before']."&nbsp;&nbsp;";
+        
+        $readmore_link = " <a class='ecae-link' href='$link'><span>{$options['read_more']}</span></a>";
+        $readmore = "<p class='ecae-button {$button_skin[0]}' style='text-align:{$options['read_more_align']};' >{$options['read_more_text_before']} $readmore_link</p>";
 
         $content = str_replace('<!-- READ MORE TEXT -->',$readmore, $content);
     }
@@ -324,11 +495,13 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     if ($justify != "no") {
         $content = "<div class='ecae' style='text-align:$justify'>" . $content . "</div>";
     }
-
-
     
+    /**
+     * custom css
+     */
+    $style = "<style type='text/css'>{$options["custom_css"]}</style>";
     
-    return "<!-- Generated by Easy Custom Auto Excerpt -->$content<!-- Generated by Easy Custom Auto Excerpt -->";
+    return "<!-- Generated by Easy Custom Auto Excerpt -->$style $content<!-- Generated by Easy Custom Auto Excerpt -->";
 }
 
 
@@ -362,13 +535,8 @@ class eace_content_regex
         
 
         //only cut bellow the $number variabel treshold ( to limit the number of replacing)
-        if ($number)
-            array_slice($this->holder[0], 0, $number);
+        if($number) array_slice($this->holder[0], 0, $number);
         
-       
-
- 
-
         foreach ($this->holder[0] as $text) {   
         
              
@@ -388,8 +556,6 @@ class eace_content_regex
 
                     $content = str_replace($unique_key, "{$unique_key}<!--STOP THE EXCERPT HERE--><!--- SECRET END TOKEN ECAE --->",$content);
                     //exit loop
-
-
           
                     //if use word cut technique
                     if($this->options['excerpt_method']=='word'){
@@ -405,30 +571,25 @@ class eace_content_regex
 
                         $this->holder[0][$this->key]  = "<p>{$this->holder[0][$this->key]}<!-- READ MORE TEXT --></p>";  
                     }
+
                     //if use preserve paragraph technique
                     else{
                          $this->holder[0][$this->key]  = "{$this->holder[0][$this->key]}<!-- READ MORE TEXT -->";  
                     }         
 
-
-                     //strip the text
+                    //strip the text
                     $content = substr($content, 0, strpos($content,'<!--- SECRET END TOKEN ECAE --->'));
                     
-
                     break;
                 }    
             }
 
-             $this->key = $this->key + 1;
-            
-        }
- 
+            $this->key = $this->key + 1;
+        } 
     }
+
     function restore(&$content, $maximal = false)
     {
-
-     
-
         //maximal number to restore
         if (!$maximal)
             $maximal = $this->key;
@@ -436,24 +597,38 @@ class eace_content_regex
         //serves as counter, how many replace are made
         $i = 0;
 
-            
-
         for ($i; $i < $maximal; $i++) {
-
-
             if (isset($this->holder[0][$i]))
                 $content = str_replace("{$this->unique_char}{$i}{$this->unique_char}", $this->holder[0][$i], $content);
-
         }
-        
-
     }
     
     function remove(&$content)
-    {
-        
+    {        
         $content = preg_replace($this->regex, "", $content);
     }
+}
+
+function ecae_convert_caption($content)
+{   
+
+    $results[0] = array();
+
+    $pattern = '/\[(\[?)(caption)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)/s';
+
+    preg_match_all($pattern, $content, $results);
+
+    foreach ($results[0] as $result) {
+
+        $caption = do_shortcode($result);
+
+        $content = str_replace($result,$caption, $content);
+
+       }   
+
+
+    return $content;
+
 }
 
 
