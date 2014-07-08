@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.0
+Version: 2.0.1
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.0');
+define("ECAE_VERSION", '2.0.1');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -194,7 +194,7 @@ function ecae_get_array_buttonskins()
 }
 
 
-/*
+/**
  * Do Filter after this 
  * add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
  * So we can preserve shortcode
@@ -234,45 +234,56 @@ function tonjoo_ecae_execute($content, $width = 400)
 
 function tonjoo_ecae_excerpt($content, $width, $justify)
 {
+    global $post;
+
+    $postmeta = get_post_meta($post->ID, 'ecae_meta', true);
+
+    if(function_exists('is_ecae_premium_exist') && isset($postmeta['disable_excerpt']) && $postmeta['disable_excerpt'] == 'yes') 
+    {
+        return $content;
+
+        exit;
+    }
+
     //total excerpt current width
     $total_width=0;
 
     $options = get_option('tonjoo_ecae_options');
-    $options = tonjoo_ecae_load_default($options);
-    global $post;
+    $options = tonjoo_ecae_load_default($options);    
     
     $pos = strpos($content, '<!--more-->');
     
     $array_replace_list = array();
     
     //if read more
-    if ($pos) {
-
+    if ($pos) 
+    {
         //check shortcode optons
         if ($options['strip_shortcode'] == 'yes') {
             $content = strip_shortcodes($content);
         }
-    
 
         $content = substr($content, 0, $pos);
-    } elseif ($post->post_excerpt != '') {
-
+    } 
+    elseif ($post->post_excerpt != '') 
+    {
         //check shortcode optons
         if ($options['strip_shortcode'] == 'yes') {
             $content = strip_shortcodes($content);
         }
-    
 
-        $content = $post->post_excerpt;
-        
-    } elseif ($width == 0) {
+        $content = $post->post_excerpt;        
+    } 
+    elseif ($width == 0) 
+    {
         $content = '';
-    } elseif (!(strlen($content) <= (int) $width)) {
-
+    } 
+    elseif (!(strlen($content) <= (int) $width)) 
+    {
         // Do caption shortcode
         $content = ecae_convert_caption($content);
         
-        $figure_replace = new eace_content_regex("|:", "/<figure.*?\>([^`]*?)<\/figure>/",$options,true);
+        $figure_replace          = new eace_content_regex("|:", "/<figure.*?\>([^`]*?)<\/figure>/",$options,true);
         $hyperlink_image_replace = new eace_content_regex("|#", "/<a[^>]*>(\n|\s)*(<img[^>]+>)(\n|\s)*<\/a>/",$options,true);
         $image_replace           = new eace_content_regex("|(", "/<img[^>]+\>/",$options,true );
         
@@ -311,8 +322,8 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $array_replace_list['strong']='=(';
         $array_replace_list['blockquote']='=^';
    
-        foreach ($extra_markup as $markup) {
-
+        foreach ($extra_markup as $markup) 
+        {
             $counter = 0;
 
             if(!isset($array_replace_list[$markup]))
@@ -322,9 +333,8 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         }
 
         //push every markup into processor
-        foreach ($array_replace_list as $key=>$value) {
-
-
+        foreach ($array_replace_list as $key=>$value) 
+        {
             //use image processing algorithm for table and video
             if($key=='video'||$key=='table')
                 $push   = new eace_content_regex("{$value}", "/<{$key}.*?\>([^`]*?)<\/{$key}>/",$options,true);
@@ -342,10 +352,10 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $shortcode_replace = new eace_content_regex("+*", '/'.$pattern.'/s',$options);
         
         //trim image
-        $option_image = $options['show_image'];
+        $option_image = $options['show_image'];        
         
-        
-        if ($option_image == 'yes' || $option_image == 'first-image'):
+        if ($option_image == 'yes' || $option_image == 'first-image')
+        {
             $number = false;
             //limit the image excerpt
             if ($option_image == 'first-image')
@@ -354,21 +364,19 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             $figure_replace->replace($content, $width, $number);            
             $hyperlink_image_replace->replace($content, $width, $number);            
             $image_replace->replace($content, $width, $number);
-
-        else:
-        
+        }
+        else
+        {
             //remove image , this is also done for featured-image option
             $figure_replace->remove($content);
             $hyperlink_image_replace->remove($content);
             $image_replace->remove($content);
-        
-        endif;
+        }
 
         // check shortcode optons
         if ($options['strip_shortcode'] == 'yes') {
             $content = strip_shortcodes($content);
-        }
-    
+        }    
 
         // Replace remaining tag
         foreach ($html_replace as $replace) {
@@ -380,8 +388,8 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         //use wp kses to fix broken element problem
         $content = wp_kses($content, array());
 
-        if(strpos($content,'<!--STOP THE EXCERPT HERE-->')===false){
-
+        if(strpos($content,'<!--STOP THE EXCERPT HERE-->')===false)
+        {
             //give the stop mark so the plugin can stop
             $content=$content.'<!--STOP THE EXCERPT HERE-->';
         }
@@ -389,44 +397,36 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         //strip the text
         $content = substr($content, 0, strpos($content,'<!--STOP THE EXCERPT HERE-->'));
       
-
         //do the restore 3 times, avoid nesting
         $shortcode_replace->restore($content);
-        foreach ($html_replace as $restore) {
-             $restore->restore($content, $width);
-        }
-        foreach ($html_replace as $restore) {
-             $restore->restore($content, $width);
-        }
-        foreach ($html_replace as $restore) {
-             $restore->restore($content, $width);
-        }
-        $shortcode_replace->restore($content);
 
+        foreach ($html_replace as $restore) $restore->restore($content, $width);
+        foreach ($html_replace as $restore) $restore->restore($content, $width);
+        foreach ($html_replace as $restore) $restore->restore($content, $width);
+
+        $shortcode_replace->restore($content);
         
-        if ($option_image == 'yes') {
-            
+        if ($option_image == 'yes') 
+        {            
             $figure_replace->restore($content,false,true);
             $hyperlink_image_replace->restore($content,false,true);
-            $image_replace->restore($content,false,true);
-            
-        } elseif ($option_image == 'first-image') {
-            
-            
+            $image_replace->restore($content,false,true);            
+        } 
+        elseif ($option_image == 'first-image') 
+        {
             //catch all of hyperlink and image on the content => '|#'  and '|('' 
             preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#|\|\:[0-9]*\|\:/', $content, $result, PREG_PATTERN_ORDER);
 
-             if (isset($result[0])) {
-                
+            if (isset($result[0])) 
+            {
                 $remaining = array_slice($result[0], 0, 1);
                 
-                if(isset($remaining[0])){                
-                    
+                if(isset($remaining[0]))
+                {   
                     //delete remaining image
                     $content = preg_replace('/\|\:[0-9]*\|\:/', '', $content);
                     $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
                     $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
-
 
                     //restore first image found  
                     $content = "<div style='text-align:center'>" . $remaining[0] . "</div>" . $content;
@@ -436,19 +436,17 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                     $image_replace->restore($content, 1,true);
                 }
             }
-        } elseif ($option_image == 'featured-image') {
+        } 
+        elseif ($option_image == 'featured-image') 
+        {
             //check featured image;
             $featured_image = has_post_thumbnail(get_the_ID());
             $image = false;
 
-            if ($featured_image)
-                $image = get_the_post_thumbnail(get_the_ID());
+            if($featured_image) $image = get_the_post_thumbnail(get_the_ID());
             
             // only put image if there is image :p
-            if($image)
-                $content = "<div style='text-align:center'>" . $image . "</div>" . $content;
-
-
+            if($image) $content = "<div style='text-align:center'>" . $image . "</div>" . $content;
         }
  
         //delete remaining image
@@ -463,8 +461,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             $char = str_split($value);
 
             $content = preg_replace("/"."\\"."{$char[0]}"."\\"."{$char[1]}"."[0-9]*"."\\"."{$char[0]}"."\\"."{$char[1]}"."/", '', $content);
-        }
-        
+        }        
 
         foreach($array_replace_list as $key=>$value) 
         {
@@ -515,15 +512,12 @@ class eace_content_regex
     var $options;
     
     public function __construct($unique_char, $regex,$options,$image=false)
-    {
-        
+    {        
         $this->regex       = $regex;
         $this->unique_char = $unique_char;
 
         $this->image = $image;
         $this->options = $options;
-
-
     }
     
     public function replace(&$content, &$width, $number = false, &$total_width=0)
@@ -531,34 +525,30 @@ class eace_content_regex
         //get all image in the content    
         preg_match_all($this->regex, $content, $this->holder, PREG_PATTERN_ORDER);
         
-        $this->key = 0;
-        
+        $this->key = 0;        
 
         //only cut bellow the $number variabel treshold ( to limit the number of replacing)
         if($number) array_slice($this->holder[0], 0, $number);
         
-        foreach ($this->holder[0] as $text) {   
-        
-             
+        foreach ($this->holder[0] as $text) 
+        {
             $unique_key = "{$this->unique_char}{$this->key}{$this->unique_char}";
             
             $content   = str_replace($text, $unique_key, $content);
 
+            if(!$this->image&&strpos($content,'<!--STOP THE EXCERPT HERE-->')===false)
+            {
+                $total_width = $total_width + strlen(wp_kses($text,array()));         
 
-            if(!$this->image&&strpos($content,'<!--STOP THE EXCERPT HERE-->')===false){
-
-            
-                $total_width = $total_width + strlen(wp_kses($text,array()));
-         
-
-                if($total_width>$width){
+                if($total_width>$width)
+                {
                     //tell plugin to stop at this point
-
                     $content = str_replace($unique_key, "{$unique_key}<!--STOP THE EXCERPT HERE--><!--- SECRET END TOKEN ECAE --->",$content);
                     //exit loop
-          
-                    //if use word cut technique
-                    if($this->options['excerpt_method']=='word'){
+                              
+                    if($this->options['excerpt_method'] == 'word')
+                    {
+                        //if use word cut technique
                         $overflow = $total_width - $width;
 
                         $current_lenght =  strlen(wp_kses($text,array()));
@@ -570,11 +560,11 @@ class eace_content_regex
                         $this->holder[0][$this->key] = wp_kses($this->holder[0][$this->key],array()); 
 
                         $this->holder[0][$this->key]  = "<p>{$this->holder[0][$this->key]}<!-- READ MORE TEXT --></p>";  
-                    }
-
-                    //if use preserve paragraph technique
-                    else{
-                         $this->holder[0][$this->key]  = "{$this->holder[0][$this->key]}<!-- READ MORE TEXT -->";  
+                    }                    
+                    else
+                    {
+                        //if use preserve paragraph technique
+                        $this->holder[0][$this->key]  = "{$this->holder[0][$this->key]}<!-- READ MORE TEXT -->";  
                     }         
 
                     //strip the text
@@ -591,8 +581,7 @@ class eace_content_regex
     function restore(&$content, $maximal = false)
     {
         //maximal number to restore
-        if (!$maximal)
-            $maximal = $this->key;
+        if (!$maximal) $maximal = $this->key;
         
         //serves as counter, how many replace are made
         $i = 0;
@@ -610,29 +599,22 @@ class eace_content_regex
 }
 
 function ecae_convert_caption($content)
-{   
-
+{
     $results[0] = array();
 
     $pattern = '/\[(\[?)(caption)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)/s';
 
     preg_match_all($pattern, $content, $results);
 
-    foreach ($results[0] as $result) {
-
+    foreach ($results[0] as $result) 
+    {
         $caption = do_shortcode($result);
-
         $content = str_replace($result,$caption, $content);
-
-       }   
-
+    }   
 
     return $content;
-
 }
-
 
 require_once(plugin_dir_path(__FILE__) . 'tonjoo-library.php');
 require_once(plugin_dir_path(__FILE__) . 'default.php');
-//load option page
 require_once(plugin_dir_path(__FILE__) . 'options-page.php');

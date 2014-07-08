@@ -69,6 +69,10 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.1
+* Add option to disable excerpt in every single post
+* Fix known bugs
+
 = 2.0.0
 * Updated admin UI, more easy and intuitive
 * Add select font option
