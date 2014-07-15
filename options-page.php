@@ -21,7 +21,7 @@ function tonjoo_ecae_options_page() {
 	add_options_page( 
 		__("Tonjoo Easy Custom Auto Excerpt Options Page",TONJOO_ECAE), 
 		'Excerpt', 
-		'edit_theme_options', 
+		'moderate_comments', 
 		'tonjoo_excerpt', 
 		'tonjoo_ecae_options_do_page' );
 }
@@ -31,14 +31,28 @@ function tonjoo_ecae_options_page() {
  */
 function tonjoo_ecae_options_do_page() 
 {
-	if (!current_user_can('manage_options')) {  
-		wp_die('You do not have sufficient permissions to access this page.');  
-	} 
-
 	global $select_options, $radio_options;
 
-	if ( ! isset( $_REQUEST['settings-updated'] ) )
+	if(!isset( $_REQUEST['settings-updated'])) {		
 		$_REQUEST['settings-updated'] = false;
+	}
+
+	/**
+	 * save options
+	 */
+	if($_POST)
+	{
+		update_option('tonjoo_ecae_options', $_POST['tonjoo_ecae_options']);
+		
+		$location = admin_url("options-general.php?page=tonjoo_excerpt") . '&settings-updated=true';
+		echo "<meta http-equiv='refresh' content='0;url=$location' />";
+		echo "<h2>Loading...</h2>";
+		exit();
+	}
+
+	if (!current_user_can('moderate_comments')) {  
+		wp_die('You do not have sufficient permissions to access this page.');  
+	} 
 
 	?>
 	
@@ -77,7 +91,7 @@ function tonjoo_ecae_options_do_page()
 	    </div>
 	<?php } ?>
 
-	<form method="post" action="options.php">
+	<form method="post" action="">
 		<?php settings_fields('tonjoo_options'); ?>
 		<?php 
 
@@ -135,33 +149,9 @@ function tonjoo_ecae_options_do_page()
 		<table class="form-table">
 
 		<?php
-			$text_options = array(
-				'label'=>__('Excerpt size',TONJOO_ECAE),
-				'description'=>__('Number of Character preserved, word will be preserved',TONJOO_ECAE),
-				'name'=>'tonjoo_ecae_options[width]',
-				'value'=>$options['width']
-				);
-			
-			tj_print_text_option($text_options);
-
-			$yes_no_options = array(
-				'0' => array(
-					'value' =>	'no',
-					'label' =>  __("No",TONJOO_ECAE)
-					),
-				'1' => array(
-					'value' =>	'yes',
-					'label' =>  __("Show All Images",TONJOO_ECAE)
-					),
-				'2' => array(
-					'value' =>	'first-image',
-					'label' =>  __('Show only First Image',TONJOO_ECAE) 
-					),
-				'3' => array(
-					'value' =>	'featured-image',
-					'label' =>  __('Use Featured Image',TONJOO_ECAE)
-					)
-				);
+			if(! function_exists('is_ecae_premium_exist') && strpos($options['excerpt_method'],'-paragraph')) {
+	        	$options['excerpt_method'] = 'paragraph';
+	        }
 
 			$excerpt_method_ar = array(
 				'0' => array(
@@ -171,6 +161,18 @@ function tonjoo_ecae_options_do_page()
 				'1' => array(
 					'value' =>	'word',
 					'label' =>  __('Word',TONJOO_ECAE) 
+					),
+				'2' => array(
+					'value' =>	'1st-paragraph',
+					'label' =>  __('Show First Paragraph',TONJOO_ECAE) 
+					),
+				'3' => array(
+					'value' =>	'2nd-paragraph',
+					'label' =>  __('Show 1st - 2nd Paragraph',TONJOO_ECAE) 
+					),
+				'4' => array(
+					'value' =>	'3rd-paragraph',
+					'label' =>  __('Show 1st - 3rd Paragraph',TONJOO_ECAE)
 					)
 				);
 
@@ -184,6 +186,15 @@ function tonjoo_ecae_options_do_page()
 
 
 			echo tj_print_select_option($excerpt_method);
+
+			$text_options = array(
+				'label'=>__('Excerpt size',TONJOO_ECAE),
+				'description'=>__('Number of Character preserved, word will be preserved',TONJOO_ECAE),
+				'name'=>'tonjoo_ecae_options[width]',
+				'value'=>$options['width']
+				);
+			
+			tj_print_text_option($text_options);
 
 			$yes_no_options = array(
 				'0' => array(
@@ -334,6 +345,25 @@ function tonjoo_ecae_options_do_page()
 
 			echo '<tr><td colspan=3><h3 class="meta-subtitle">Display Image Options</h3></td></tr>';
 
+			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'no',
+					'label' =>  __("No",TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'yes',
+					'label' =>  __("Show All Images",TONJOO_ECAE)
+					),
+				'2' => array(
+					'value' =>	'first-image',
+					'label' =>  __('Show only First Image',TONJOO_ECAE) 
+					),
+				'3' => array(
+					'value' =>	'featured-image',
+					'label' =>  __('Use Featured Image',TONJOO_ECAE)
+					)
+				);
+
 			$image_select = array(
 				"name"=>"tonjoo_ecae_options[show_image]",
 				"description" => "",
@@ -345,27 +375,27 @@ function tonjoo_ecae_options_do_page()
 
 			echo tj_print_select_option($image_select);
 
-			$featured_image_excerpt = array(
-				'0' => array(
-					'value' =>	'no',
-					'label' =>  __('No',TONJOO_ECAE)
-					),
-				'1' => array(
-					'value' =>	'yes',
-					'label' =>  __('Yes',TONJOO_ECAE) 
-					)
-				);
+			// $featured_image_excerpt = array(
+			// 	'0' => array(
+			// 		'value' =>	'no',
+			// 		'label' =>  __('No',TONJOO_ECAE)
+			// 		),
+			// 	'1' => array(
+			// 		'value' =>	'yes',
+			// 		'label' =>  __('Yes',TONJOO_ECAE) 
+			// 		)
+			// 	);
 
-			$image_select = array(
-				"name"=>"tonjoo_ecae_options[featured_image_excerpt]",
-				"description" => "",
-				"label" => __("Featured image",TONJOO_ECAE),
-				"value" => $options['featured_image_excerpt'],
-				"select_array" => $featured_image_excerpt,
-				"description" => __("Display featured image if post excerpt is set",TONJOO_ECAE) 
-				);
+			// $image_select = array(
+			// 	"name"=>"tonjoo_ecae_options[featured_image_excerpt]",
+			// 	"description" => "",
+			// 	"label" => __("Featured image",TONJOO_ECAE),
+			// 	"value" => $options['featured_image_excerpt'],
+			// 	"select_array" => $featured_image_excerpt,
+			// 	"description" => __("Display featured image if post excerpt is set",TONJOO_ECAE) 
+			// 	);
 
-			echo tj_print_select_option($image_select);
+			// echo tj_print_select_option($image_select);
 
 			echo '<tr><td colspan=3><h3 class="meta-subtitle">Content Options</h3></td></tr>';
 
@@ -442,85 +472,96 @@ function tonjoo_ecae_options_do_page()
 				);
 
 			echo tj_print_select_option($button_font);
-		?>
 
-			<?php 
-	            $dir =  dirname(__FILE__)."/buttons";
-	            $skins = scandir($dir);
-	            $button_skin =  array();
-	            $button_skin_val = $options['button_skin'];
+			if(! function_exists('is_ecae_premium_exist')) {
+	        	$options['button_font_size'] = '14';
+	        }
 
-	            array_push($button_skin, array("label"=>"None","value"=>"ecae-buttonskin-none"));
-	            array_push($button_skin, array("label"=>"Black","value"=>"ecae-buttonskin-black"));
-	            array_push($button_skin, array("label"=>"White","value"=>"ecae-buttonskin-white"));
+			$text_options = array(
+				'label'=>__('Button Font Size',TONJOO_ECAE),
+				'name'=>'tonjoo_ecae_options[button_font_size]',
+				'value'=>$options['button_font_size'],
+				'description'=>""
+				);
 
-	            if(function_exists('is_ecae_premium_exist')) 
-	            {                
-	                $dir =  ABSPATH . 'wp-content/plugins/'.ECAE_PREMIUM_DIR_NAME.'/buttons';
+			tj_print_text_option($text_options);		
 
-	                $skins = scandir($dir);
+            $dir =  dirname(__FILE__)."/buttons";
+            $skins = scandir($dir);
+            $button_skin =  array();
+            $button_skin_val = $options['button_skin'];
 
-	                foreach ($skins as $key => $value) {
+            array_push($button_skin, array("label"=>"None","value"=>"ecae-buttonskin-none"));
+            array_push($button_skin, array("label"=>"Black","value"=>"ecae-buttonskin-black"));
+            array_push($button_skin, array("label"=>"White","value"=>"ecae-buttonskin-white"));
 
-	                    $extension = pathinfo($value, PATHINFO_EXTENSION); 
-	                    $filename = pathinfo($value, PATHINFO_FILENAME); 
-	                    $extension = strtolower($extension);
-	                    $the_value = strtolower($filename);
-	                    $filename_ucwords = str_replace('-', ' ', $filename);
-	                    $filename_ucwords = ucwords($filename_ucwords);
-	                    $filename_ucwords = str_replace('Ecae Buttonskin ', '', ucwords($filename_ucwords));
+            if(function_exists('is_ecae_premium_exist')) 
+            {                
+                $dir =  ABSPATH . 'wp-content/plugins/'.ECAE_PREMIUM_DIR_NAME.'/buttons';
 
-	                    if($extension=='css'){
-	                        $data = array(
-		                                "label"=>"$filename_ucwords (Premium)",
-		                                "value"=>"$the_value-PREMIUMtrue"
-		                            );
+                $skins = scandir($dir);
 
-	                        array_push($button_skin,$data);
-	                    }
-	                }
-	            }
-	            else
-			    {
-			        $skins = scandir(ABSPATH . 'wp-content/plugins/'.ECAE_DIR_NAME.'/assets/premium-promo');
+                foreach ($skins as $key => $value) {
 
-	                foreach ($skins as $key => $value) {
+                    $extension = pathinfo($value, PATHINFO_EXTENSION); 
+                    $filename = pathinfo($value, PATHINFO_FILENAME); 
+                    $extension = strtolower($extension);
+                    $the_value = strtolower($filename);
+                    $filename_ucwords = str_replace('-', ' ', $filename);
+                    $filename_ucwords = ucwords($filename_ucwords);
+                    $filename_ucwords = str_replace('Ecae Buttonskin ', '', ucwords($filename_ucwords));
 
-	                    $extension = pathinfo($value, PATHINFO_EXTENSION); 
-	                    $filename = pathinfo($value, PATHINFO_FILENAME); 
-	                    $extension = strtolower($extension);
-	                    $the_value = strtolower($filename);
-	                    $filename_ucwords = str_replace('-', ' ', $filename);
-	                    $filename_ucwords = ucwords($filename_ucwords);
-	                    $filename_ucwords = str_replace('Ecae Buttonskin ', '', ucwords($filename_ucwords));
+                    if($extension=='css'){
+                        $data = array(
+	                                "label"=>"$filename_ucwords (Premium)",
+	                                "value"=>"$the_value-PREMIUMtrue"
+	                            );
 
-	                    if($extension=='png'){
-	                        $data = array(
-		                                "label"=>"$filename_ucwords (Premium)",
-		                                "value"=>"$the_value-PREMIUMtrue"
-		                            );
+                        array_push($button_skin,$data);
+                    }
+                }
+            }
+            else
+		    {
+		        $skins = scandir(ABSPATH . 'wp-content/plugins/'.ECAE_DIR_NAME.'/assets/premium-promo');
 
-	                        array_push($button_skin,$data);
-	                    }
-	                }
+                foreach ($skins as $key => $value) {
 
-	                if(substr($button_skin_val, -12) == "-PREMIUMtrue")
-	                {
-	                	$button_skin_val = "ecae-buttonskin-none";
-	                }
-			    }
+                    $extension = pathinfo($value, PATHINFO_EXTENSION); 
+                    $filename = pathinfo($value, PATHINFO_FILENAME); 
+                    $extension = strtolower($extension);
+                    $the_value = strtolower($filename);
+                    $filename_ucwords = str_replace('-', ' ', $filename);
+                    $filename_ucwords = ucwords($filename_ucwords);
+                    $filename_ucwords = str_replace('Ecae Buttonskin ', '', ucwords($filename_ucwords));
 
-	            $option_select = array(
-	                            "name"=>"tonjoo_ecae_options[button_skin]",
-	                            "description" => "",
-	                            "label" => "Button Skin",
-	                            "value" => $button_skin_val,
-	                            "select_array" => $button_skin,
-	                            "id"=>"tonjoo-ecae-button_skin"
-	                        );
-	            
-	            tj_print_select_option($option_select);
-	        ?>
+                    if($extension=='png'){
+                        $data = array(
+	                                "label"=>"$filename_ucwords (Premium)",
+	                                "value"=>"$the_value-PREMIUMtrue"
+	                            );
+
+                        array_push($button_skin,$data);
+                    }
+                }
+
+                if(substr($button_skin_val, -12) == "-PREMIUMtrue")
+                {
+                	$button_skin_val = "ecae-buttonskin-none";
+                }
+		    }
+
+            $option_select = array(
+                            "name"=>"tonjoo_ecae_options[button_skin]",
+                            "description" => "",
+                            "label" => "Button Skin",
+                            "value" => $button_skin_val,
+                            "select_array" => $button_skin,
+                            "id"=>"tonjoo-ecae-button_skin"
+                        );
+            
+            tj_print_select_option($option_select);
+        ?>
 
 	        <tr><td colspan=3><h3 class="meta-subtitle">Read More Live Preview</h3></td></tr>
 	        <tr>

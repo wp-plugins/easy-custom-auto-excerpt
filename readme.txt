@@ -1,8 +1,8 @@
-=== Plugin Name ===
-Contributors: Todi.Adiatmo
+=== Easy Custom Auto Excerpt ===
+Contributors: Todi.Adiatmo, haristonjoo
 Tags: excerpt, home, search, archive, automatic, auto, justify
 Requires at least: 3.0.3
-Tested up to: 3.6
+Tested up to: 3.9.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -23,6 +23,12 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 * Preserve Image on Excerpt.
 * Preserve real excerpt you wrote.
 * Partial Indonesia and Spanish translation.
+
+**Plugin Demo**
+You can try the plugin on this url: http://coba.tonjoo.com/ecae/
+
+*username: ecae
+*password: 123456
 
 *if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoo.com/thread-category/easy-custom-auto-excerpt/)
 
@@ -69,14 +75,20 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.2
+* Add new excerpt method: show 1st, 1st - 2nd and 1st - 3rd paragraph (premium edition)
+* Add option to change font size (premium edition)
+* Updated display image options
+* Fix known bugs
+
 = 2.0.1
-* Add option to disable excerpt in every single post
+* Add option to disable excerpt in every single post (premium edition)
 * Fix known bugs
 
 = 2.0.0
 * Updated admin UI, more easy and intuitive
-* Add select font option
-* Add select button theme option
+* Add select font option (premium edition)
+* Add select button theme option (premium edition)
 * Add custom css option
 * Add front page excerpt option
 * Fix known bugs

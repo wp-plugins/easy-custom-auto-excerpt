@@ -55,12 +55,30 @@ jQuery(document).ready(function($){
     $("select[name='tonjoo_ecae_options[button_font]']").on('change',function(){
         if(ecae_premium_enable == false)
         {
-            alert('Please purcase the premium edition to enable this feature');
+            alert('Please purchase the premium edition to enable this feature');
             $("select[name='tonjoo_ecae_options[button_font]']").val('Open Sans');
         }
         else
         {
             preview_button(); 
+        }
+    })
+    $("input[name='tonjoo_ecae_options[button_font_size]']").on('keyup',function(){
+        if(ecae_premium_enable == false)
+        {
+            alert('Please purchase the premium edition to enable this feature');
+            $("input[name='tonjoo_ecae_options[button_font_size]']").val('14');
+        }
+        else
+        {
+            preview_button(); 
+        }
+    })
+    $("select[name='tonjoo_ecae_options[excerpt_method]']").on('change',function(){
+        if(ecae_premium_enable == false && $(this).val() != 'paragraph' && $(this).val() != 'word')
+        {
+            alert('The excerpt method below is only enable in premium edition. Please purchase the premium edition to enable this feature \n\n+ Show First Paragraph \n+ Show 1st - 2nd Paragraph \n+ Show 1st - 3rd');
+            $("select[name='tonjoo_ecae_options[excerpt_method]']").val('paragraph');
         }
     })
 
@@ -71,7 +89,7 @@ jQuery(document).ready(function($){
 
         if(ecae_premium_enable == false && lasSubstring == "-PREMIUMtrue")
         {
-            alert('Please purcase the premium edition to enable this feature');
+            alert('Please purchase the premium edition to enable this feature');
             $("select[name='tonjoo_ecae_options[button_skin]']").select2("val", "ecae-buttonskin-none");
 
             button_skin = "ecae-buttonskin-none";
@@ -83,6 +101,7 @@ jQuery(document).ready(function($){
             read_more_text_before: $("input[name='tonjoo_ecae_options[read_more_text_before]']").val(),
             read_more_align: $("select[name='tonjoo_ecae_options[read_more_align]']").val(),
             button_font: $("select[name='tonjoo_ecae_options[button_font]']").val(),
+            button_font_size: $("input[name='tonjoo_ecae_options[button_font_size]']").val(),
             button_skin: button_skin,
             custom_css: editor.getSession().getValue()
         }

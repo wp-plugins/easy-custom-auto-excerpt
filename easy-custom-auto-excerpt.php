@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.1
+Version: 2.0.2
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.1');
+define("ECAE_VERSION", '2.0.2');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -28,8 +28,15 @@ add_filter("plugin_action_links_$plugin", 'tonjoo_ecae_donate');
 
 function tonjoo_ecae_donate($links)
 {
-    $donate_link = '<a href="http://tonjoo.com/donate/">Donate</a>';
-    array_unshift($links, $donate_link);
+    $donate_link = '<a href="http://tonjoo.com/donate/" target="_blank" >Donate</a>';    
+    array_push($links, $donate_link);
+
+    if(! function_exists('is_ecae_premium_exist'))
+    {
+        $premium_link = '<a href="http://tonjoo.com/addons/easy-custom-auto-excerpt-premium/" target="_blank" >Upgrade to premium</a>';
+        array_push($links, $premium_link);
+    }
+
     return $links;
 }
 
@@ -83,6 +90,8 @@ add_action('wp_enqueue_scripts', 'ecae_wp_enqueue_scripts', 100);
 function ecae_wp_enqueue_scripts()
 {
     //ambil options dari db
+    global $options;
+
     $options = get_option('tonjoo_ecae_options');    
     $options = tonjoo_ecae_load_default($options);
 
@@ -203,13 +212,39 @@ function ecae_get_array_buttonskins()
 add_filter('the_content', 'tonjoo_ecae_execute', 10);
 
 function tonjoo_ecae_execute($content, $width = 400)
-{    
+{
+    global $content_pure;
+
+    $content_pure = $content;
+
+    //if not post type FRS
+    if('pjc_slideshow' == get_post_type())
+    {
+        return $content;
+
+        exit;
+    }
+
     //ambil options dari db
-    $options = get_option('tonjoo_ecae_options');    
-    $options = tonjoo_ecae_load_default($options);
+    global $options;    
 
     $width   = $options['width'];
     $justify = $options['justify'];    
+
+    /**
+     * no limit number if 1st-paragraph mode
+     */
+    if(strpos($options['excerpt_method'],'-paragraph'))
+    {
+        if(function_exists("is_ecae_premium_exist"))
+        {
+            $width = 2147483647; //max integer in 32-bit system
+        }
+        else
+        {
+            $options['excerpt_method'] = 'paragraph';
+        }
+    }
     
     if ($options['home'] == "yes" && is_home()) {
         return tonjoo_ecae_excerpt($content, $width, $justify);
@@ -235,6 +270,7 @@ function tonjoo_ecae_execute($content, $width = 400)
 function tonjoo_ecae_excerpt($content, $width, $justify)
 {
     global $post;
+    global $options;
 
     $postmeta = get_post_meta($post->ID, 'ecae_meta', true);
 
@@ -245,14 +281,8 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         exit;
     }
 
-    //total excerpt current width
-    $total_width=0;
-
-    $options = get_option('tonjoo_ecae_options');
-    $options = tonjoo_ecae_load_default($options);    
-    
+    $total_width = 0;
     $pos = strpos($content, '<!--more-->');
-    
     $array_replace_list = array();
     
     //if read more
@@ -396,7 +426,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
 
         //strip the text
         $content = substr($content, 0, strpos($content,'<!--STOP THE EXCERPT HERE-->'));
-      
+
         //do the restore 3 times, avoid nesting
         $shortcode_replace->restore($content);
 
@@ -422,7 +452,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                 $remaining = array_slice($result[0], 0, 1);
                 
                 if(isset($remaining[0]))
-                {   
+                {
                     //delete remaining image
                     $content = preg_replace('/\|\:[0-9]*\|\:/', '', $content);
                     $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
@@ -472,6 +502,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     }
     
     $link = get_permalink();
+    $readmore = "";
         
     if (trim($options['read_more']) != '-') 
     {
@@ -481,10 +512,10 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $button_skin = explode('-PREMIUM', $options['button_skin']);
         $trim_readmore_before = trim($options['read_more_text_before']);
 
-        $options['read_more_text_before'] = empty($trim_readmore_before) ? $options['read_more_text_before'] : $options['read_more_text_before']."&nbsp;&nbsp;";
+        $read_more_text_before = empty($trim_readmore_before) ? $options['read_more_text_before'] : $options['read_more_text_before']."&nbsp;&nbsp;";
         
         $readmore_link = " <a class='ecae-link' href='$link'><span>{$options['read_more']}</span></a>";
-        $readmore = "<p class='ecae-button {$button_skin[0]}' style='text-align:{$options['read_more_align']};' >{$options['read_more_text_before']} $readmore_link</p>";
+        $readmore = "<p class='ecae-button {$button_skin[0]}' style='text-align:{$options['read_more_align']};' >$read_more_text_before $readmore_link</p>";
 
         $content = str_replace('<!-- READ MORE TEXT -->',$readmore, $content);
     }
@@ -494,13 +525,34 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     }
     
     /**
+     * filter if 1st-paragraph mode 
+     */
+    if(strpos($options['excerpt_method'],'-paragraph'))
+    {
+        $num_paragraph = substr($options['excerpt_method'], 0, 1);
+        $content = get_per_paragraph(intval($num_paragraph), $content);
+
+        global $content_pure;
+
+        $len_content = strlen(wp_kses($content,array())) + 1;  // 1 is a difference between them
+        $len_content_pure = strlen(wp_kses($content_pure,array()));
+
+        if($len_content < $len_content_pure)
+        {
+            $content = $content . $readmore;
+        }    
+    }
+    
+    /**
      * custom css
      */
-    $style = "<style type='text/css'>{$options["custom_css"]}</style>";
+    if(! function_exists('is_ecae_premium_exist')) {
+        $options['button_font_size'] = '14';
+    }
+    $style = "<style type='text/css'>{$options["custom_css"]} .ecae-button { font-size: {$options["button_font_size"]}px !important; }</style>";
     
     return "<!-- Generated by Easy Custom Auto Excerpt -->$style $content<!-- Generated by Easy Custom Auto Excerpt -->";
 }
-
 
 class eace_content_regex
 {
@@ -512,8 +564,8 @@ class eace_content_regex
     var $options;
     
     public function __construct($unique_char, $regex,$options,$image=false)
-    {        
-        $this->regex       = $regex;
+    {
+        $this->regex = $regex;
         $this->unique_char = $unique_char;
 
         $this->image = $image;
@@ -540,7 +592,7 @@ class eace_content_regex
             {
                 $total_width = $total_width + strlen(wp_kses($text,array()));         
 
-                if($total_width>$width)
+                if($total_width > $width)
                 {
                     //tell plugin to stop at this point
                     $content = str_replace($unique_key, "{$unique_key}<!--STOP THE EXCERPT HERE--><!--- SECRET END TOKEN ECAE --->",$content);
@@ -560,7 +612,7 @@ class eace_content_regex
                         $this->holder[0][$this->key] = wp_kses($this->holder[0][$this->key],array()); 
 
                         $this->holder[0][$this->key]  = "<p>{$this->holder[0][$this->key]}<!-- READ MORE TEXT --></p>";  
-                    }                    
+                    }
                     else
                     {
                         //if use preserve paragraph technique
@@ -571,7 +623,7 @@ class eace_content_regex
                     $content = substr($content, 0, strpos($content,'<!--- SECRET END TOKEN ECAE --->'));
                     
                     break;
-                }    
+                }
             }
 
             $this->key = $this->key + 1;

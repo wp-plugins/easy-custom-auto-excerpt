@@ -33,9 +33,9 @@ function tonjoo_ecae_load_default(&$options){
 		$options['strip_shortcode']='yes';		
 	}
 
-	if(!isset($options['featured_image_excerpt'])){
-		$options['featured_image_excerpt']='yes';		
-	}
+	// if(!isset($options['featured_image_excerpt'])){
+	// 	$options['featured_image_excerpt']='yes';		
+	// }
 
 	if(!isset($options['read_more_text_before'])){
 		$options['read_more_text_before']='';		
@@ -54,7 +54,7 @@ function tonjoo_ecae_load_default(&$options){
 	}
 
 	if(!isset($options['custom_css'])){
-		$options['custom_css']=".ecae-button { font-size: 14px !important; }";
+		$options['custom_css']="";
 	}
 
 	if(!isset($options['button_skin'])){
@@ -63,6 +63,10 @@ function tonjoo_ecae_load_default(&$options){
 
 	if(!isset($options['button_font'])){
 		$options['button_font']="Open Sans";
+	}
+
+	if(!isset($options['button_font_size'])){
+		$options['button_font_size']="14";
 	}
 
 	return $options;
