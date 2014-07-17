@@ -67,7 +67,17 @@ function ecae_preview_button() {
     /**
      * custom css
      */
-    echo "<style type='text/css'> .ecae-button { font-size: {$_POST["button_font_size"]}px !important; } {$_POST["custom_css"]}</style>";
+    $style = "<style type='text/css'>";
+    $style.= $_POST["custom_css"];
+
+    if(function_exists('is_ecae_premium_exist') && isset($_POST["button_font_size"]))
+    {
+        $style.= '.ecae-button { font-size: '.$_POST["button_font_size"].'px !important; }';
+    }
+    
+    $style.= "</style>";
+
+    echo $style;
 
     /**
      * print button

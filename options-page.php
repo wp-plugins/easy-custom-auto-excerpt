@@ -51,7 +51,7 @@ function tonjoo_ecae_options_do_page()
 	}
 
 	if (!current_user_can('moderate_comments')) {  
-		wp_die('You do not have sufficient permissions to access this page.');  
+		wp_die('You do not have sufficient permissions to access this page.');
 	} 
 
 	?>

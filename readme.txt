@@ -27,10 +27,10 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 **Plugin Demo**
 You can try the plugin on this url: http://coba.tonjoo.com/ecae/
 
-* username: ecae
-* password: 123456
+*username: ecae
+*password: 123456
 
-if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoo.com/thread-category/easy-custom-auto-excerpt/)
+*if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoo.com/thread-category/easy-custom-auto-excerpt/)
 
 Find more detail on our official [plugin page](https://tonjoo.com/addons/easy-custom-auto-excerpt "visit plugin site")
 
@@ -74,6 +74,10 @@ It will used, instead of the automatically generated one.
 3. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 2.0.3
+* Decrease file size
+* Fix known bugs
 
 = 2.0.2
 * Add new excerpt method: show 1st, 1st - 2nd and 1st - 3rd paragraph (premium edition)

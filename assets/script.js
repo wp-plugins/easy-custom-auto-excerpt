@@ -106,7 +106,7 @@ jQuery(document).ready(function($){
             custom_css: editor.getSession().getValue()
         }
 
-        $('#ecae_ajax_preview_button').html("<center><img src='" + ecae_dir_name + "/assets/loading.gif'></center>");
+        // $('#ecae_ajax_preview_button').html("<img src='" + ecae_dir_name + "/assets/loading.gif'>");
 
         $.post(ajaxurl, data,function(response){
             $('#ecae_ajax_preview_button').html(response);
