@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.3
+Version: 2.0.4
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.3');
+define("ECAE_VERSION", '2.0.4');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -202,12 +202,85 @@ function ecae_get_array_buttonskins()
     return $button_skin;
 }
 
+/** 
+ * Display a notice that can be dismissed 
+ */
+add_action('admin_notices', 'ecae_premium_notice');
+function ecae_premium_notice() {
+    global $current_user ;
+
+    $user_id = $current_user->ID;
+    $ignore_notice = get_user_meta($user_id, 'ecae_premium_ignore_notice', true);
+    $ignore_count_notice = get_user_meta($user_id, 'ecae_premium_ignore_count_notice', true);
+    $max_count_notice = 15;
+
+    // if usermeta(ignore_count_notice) is not exist
+    if($ignore_count_notice == "")
+    {
+        add_user_meta($user_id, 'ecae_premium_ignore_count_notice', $max_count_notice, true);
+
+        $ignore_count_notice = 0;
+    }
+
+    // display the notice or not
+    if($ignore_notice == 'forever')
+    {
+        $is_ignore_notice = true;
+    }
+    else if($ignore_notice == 'later' && $ignore_count_notice < $max_count_notice)
+    {
+        $is_ignore_notice = true;
+
+        update_user_meta($user_id, 'ecae_premium_ignore_count_notice', intval($ignore_count_notice) + 1);
+    }
+    else
+    {
+        $is_ignore_notice = false;
+    }
+
+    /* Check that the user hasn't already clicked to ignore the message & if premium not installed */
+    if (! $is_ignore_notice  && ! function_exists("is_ecae_premium_exist")) 
+    {
+        echo '<div class="updated"><p>';
+        printf(__('Get 40+ read more button style, <a href="%1$s" target="_blank">Get Easy Custom Auto Excerpt Premium !</a> <span style="float:right;"><a href="%2$s" style="color:#a00;">Don\'t bug me again</a> <a href="%3$s" class="button button-primary" style="margin:-5px -5px 0 5px;vertical-align:baseline;">Not Now</a></span>'), 'https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/', '?ecae_premium_nag_ignore=forever', '?ecae_premium_nag_ignore=later');
+        echo "</p></div>";
+    }
+}
+
+add_action('admin_init', 'ecae_premium_nag_ignore');
+function ecae_premium_nag_ignore() 
+{
+    global $current_user;
+    $user_id = $current_user->ID;
+
+    // If user clicks to ignore the notice, add that to their user meta
+    if (isset($_GET['ecae_premium_nag_ignore']) && $_GET['ecae_premium_nag_ignore'] == 'forever') 
+    {
+         update_user_meta($user_id, 'ecae_premium_ignore_notice', 'forever');
+    }
+    else if (isset($_GET['ecae_premium_nag_ignore']) && $_GET['ecae_premium_nag_ignore'] == 'later') 
+    {
+        update_user_meta($user_id, 'ecae_premium_ignore_notice', 'later');
+        update_user_meta($user_id, 'ecae_premium_ignore_count_notice', 0);
+    }
+}
+
+/**
+ * activate hook
+ */
+register_activation_hook( __FILE__, 'ecae_activate' );
+function ecae_activate() 
+{
+    global $current_user;
+    $user_id = $current_user->ID;
+
+    update_user_meta($user_id, 'ecae_premium_ignore_notice', 'always show');
+}
 
 /**
  * Do Filter after this 
  * add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
  * So we can preserve shortcode
- * 
  */
 add_filter('the_content', 'tonjoo_ecae_execute', 10);
 

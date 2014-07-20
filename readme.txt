@@ -75,6 +75,9 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.4
+* Fix known bugs
+
 = 2.0.3
 * Decrease file size
 * Fix known bugs

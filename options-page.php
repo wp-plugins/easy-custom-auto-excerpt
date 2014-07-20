@@ -19,7 +19,7 @@ function tonjoo_ecae_options_page() {
 	// add_plugin_page( $page_title, $menu_title, $capability, $menu_slug, $function);
 	
 	add_options_page( 
-		__("Tonjoo Easy Custom Auto Excerpt Options Page",TONJOO_ECAE), 
+		__("Easy Custom Auto Excerpt Options Page",TONJOO_ECAE), 
 		'Excerpt', 
 		'moderate_comments', 
 		'tonjoo_excerpt', 
@@ -64,14 +64,10 @@ function tonjoo_ecae_options_do_page()
 		.form-table input{
 			width: 275px;
 		}
-
-		#setting-error-settings_updated {
-			display: none;
-		}
 	</style>
 
 	<div class="wrap">
-	<?php echo "<h2>".__("Tonjoo Easy Custom Auto Excerpt Options")."</h2>"; ?>
+	<?php echo "<h2>".__("Easy Custom Auto Excerpt Options")."</h2>"; ?>
 
 	<br>
 	<?php _e("Easy Custom Auto Excerpt by",TONJOO_ECAE) ?> 
