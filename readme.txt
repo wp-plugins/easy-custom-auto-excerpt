@@ -75,6 +75,11 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.5
+* Add image position method: left, right, center, float left, float right (premium edition)
+* Add image width and image margin options
+* Fix known bugs
+
 = 2.0.4
 * Fix known bugs
 

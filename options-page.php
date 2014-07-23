@@ -55,16 +55,6 @@ function tonjoo_ecae_options_do_page()
 	} 
 
 	?>
-	
-	<style>
-		label{
-			vertical-align: top
-		}
-
-		.form-table input{
-			width: 275px;
-		}
-	</style>
 
 	<div class="wrap">
 	<?php echo "<h2>".__("Easy Custom Auto Excerpt Options")."</h2>"; ?>
@@ -113,7 +103,7 @@ function tonjoo_ecae_options_do_page()
 				width: 150px
 			}
 
-			.form-table input,.form-table select {
+			.form-table input[type=text], .form-table input[type=number], .form-table select {
 
 				width: 200px;
 				margin-right: 10px;
@@ -139,6 +129,10 @@ function tonjoo_ecae_options_do_page()
 				    .meta-subtitle {
 				      margin-left: -12px !important;
 				    }
+			}
+
+			label{
+				vertical-align: top
 			}
 		</style>
 
@@ -183,14 +177,15 @@ function tonjoo_ecae_options_do_page()
 
 			echo tj_print_select_option($excerpt_method);
 
-			$text_options = array(
-				'label'=>__('Excerpt size',TONJOO_ECAE),
-				'description'=>__('Number of Character preserved, word will be preserved',TONJOO_ECAE),
-				'name'=>'tonjoo_ecae_options[width]',
-				'value'=>$options['width']
-				);
-			
-			tj_print_text_option($text_options);
+			?>
+
+			<tr valign="top">
+				<th>Excerpt size</th>
+				<td><input type="number" name="tonjoo_ecae_options[width]" value="<?php echo $options['width'] ?>"></td>
+				<td>Number of Character preserved, word will be preserved</td>
+			</tr>
+
+			<?php
 
 			$yes_no_options = array(
 				'0' => array(
@@ -371,6 +366,107 @@ function tonjoo_ecae_options_do_page()
 
 			echo tj_print_select_option($image_select);
 
+			// premium anouncement
+			if(! function_exists('is_ecae_premium_exist'))
+			{			
+				echo "<tr><td colspan=3><h3 class='meta-subtitle'>Purchase the <a href='https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/' target='_blank'>Premium Edition</a> to enable all display image options</h3></td></tr>";
+			}
+			
+			echo "<tr><th colspan=3><i>Image options below is only work for Content Image: Show Only First Image and Use Featured Image </i></th></tr>";
+			
+
+			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'left',
+					'label' =>  __("Left",TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'right',
+					'label' =>  __("Right",TONJOO_ECAE)
+					),
+				'2' => array(
+					'value' =>	'center',
+					'label' =>  __('Center',TONJOO_ECAE) 
+					),
+				'3' => array(
+					'value' =>	'float-left',
+					'label' =>  __('Float Left',TONJOO_ECAE)
+					),
+				'4' => array(
+					'value' =>	'float-right',
+					'label' =>  __('Float Right',TONJOO_ECAE)
+					)
+				);
+
+			$image_select = array(
+				"name"=>"tonjoo_ecae_options[image_position]",
+				"description" => "",
+				"label" => __("Image position",TONJOO_ECAE),
+				"value" => $options['image_position'],
+				"select_array" => $yes_no_options,
+				"description" => __("Image position option",TONJOO_ECAE) 
+				);
+
+			echo tj_print_select_option($image_select);
+
+			?>
+
+			<tr valign="top">
+				<th>Image width</th>
+				<td>
+					<input type="radio" name="tonjoo_ecae_options[image_width_type]" value="auto" <?php if($options['image_width_type'] == 'auto') echo 'checked' ?> >
+					Width 100 %
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<tr valign="top">
+				<th>&nbsp;</th>
+				<td>
+					<input type="radio" name="tonjoo_ecae_options[image_width_type]" value="manual" <?php if($options['image_width_type'] == 'manual') echo 'checked' ?> >
+					<input type="number" name="tonjoo_ecae_options[image_width]" value="<?php echo $options['image_width'] ?>" style="float: right;width: 175px;margin-top: -5px;">
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<tr valign="top">
+				<th>Image margin</th>
+				<td>
+					<p style="padding-top:0px;float:left;">Top</p>
+					<input type="number" name="tonjoo_ecae_options[image_margin_top]" value="<?php echo $options['image_margin_top'] ?>" style="float: right;width: 100px;" >
+				</td>
+				<td>px</td>
+			</tr>
+
+			<tr valign="top">
+				<th>&nbsp;</th>
+				<td>
+					<p style="padding-top:0px;float:left;">Right</p>
+					<input type="number" name="tonjoo_ecae_options[image_margin_right]" value="<?php echo $options['image_margin_right'] ?>" style="float: right;width: 100px;" >
+				</td>
+				<td>px</td>
+			</tr>
+
+			<tr valign="top">
+				<th>&nbsp;</th>
+				<td>
+					<p style="padding-top:0px;float:left;">Bottom</p>
+					<input type="number" name="tonjoo_ecae_options[image_margin_bottom]" value="<?php echo $options['image_margin_bottom'] ?>" style="float: right;width: 100px;" >
+				</td>
+				<td>px</td>
+			</tr>
+
+			<tr valign="top">
+				<th>&nbsp;</th>
+				<td>
+					<p style="padding-top:0px;float:left;">Left</p>
+					<input type="number" name="tonjoo_ecae_options[image_margin_left]" value="<?php echo $options['image_margin_left'] ?>" style="float: right;width: 100px;" >
+				</td>
+				<td>px</td>
+			</tr>
+
+			<?php
+
 			// $featured_image_excerpt = array(
 			// 	'0' => array(
 			// 		'value' =>	'no',
@@ -407,7 +503,7 @@ function tonjoo_ecae_options_do_page()
 			// premium anouncement
 			if(! function_exists('is_ecae_premium_exist'))
 			{			
-				echo "<tr><td colspan=3><h3 class='meta-subtitle'>Purcase the <a href='https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/' target='_blank'>Premium Edition</a> to enable all button font and the premium button skins</h3></td></tr>";
+				echo "<tr><td colspan=3><h3 class='meta-subtitle'>Purchase the <a href='https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/' target='_blank'>Premium Edition</a> to enable all button font and the premium button skins</h3></td></tr>";
 			}
 
 			$button_font_array = array(
@@ -473,14 +569,15 @@ function tonjoo_ecae_options_do_page()
 	        	$options['button_font_size'] = '14';
 	        }
 
-			$text_options = array(
-				'label'=>__('Button Font Size',TONJOO_ECAE),
-				'name'=>'tonjoo_ecae_options[button_font_size]',
-				'value'=>$options['button_font_size'],
-				'description'=>""
-				);
+			?>
 
-			tj_print_text_option($text_options);		
+			<tr valign="top">
+				<th>Button Font Size</th>
+				<td><input type="number" name="tonjoo_ecae_options[button_font_size]" value="<?php echo $options['button_font_size'] ?>"></td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<?php	
 
             $dir =  dirname(__FILE__)."/buttons";
             $skins = scandir($dir);

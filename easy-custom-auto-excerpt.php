@@ -3,20 +3,25 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.4
+Version: 2.0.5
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.4');
+define("ECAE_VERSION", '2.0.5');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
 
 function tonjoo_ecae_plugin_init()
 {
+    // modify post object here
+    global $is_main_query_ecae;
+
+    $is_main_query_ecae=true;
+
     // Localization
     load_plugin_textdomain(TONJOO_ECAE, false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
@@ -75,7 +80,7 @@ function ecae_admin_enqueue_scripts()
         // css
         wp_enqueue_style('select2-css',plugin_dir_url( __FILE__ )."assets/select2/select2.css",array(),ECAE_VERSION);
 
-        // admin script and style
+        // admin script and stylel
         wp_enqueue_script('ecae-admin-js',plugin_dir_url( __FILE__ )."assets/script.js",array(),ECAE_VERSION);
         wp_enqueue_style('ecae-admin-css',plugin_dir_url( __FILE__ )."assets/style.css",array(),ECAE_VERSION);
     }
@@ -278,6 +283,24 @@ function ecae_activate()
 }
 
 /**
+ * Main Query Check
+ */
+
+
+function tonjoo_ecae_loop_end( $query ) {
+    // modify post object here
+    global $is_main_query_ecae;
+
+    $is_main_query_ecae=false;
+
+    if($query->is_main_query()){
+        $is_main_query_ecae=true;
+    }
+}
+
+add_action( 'loop_end', 'tonjoo_ecae_loop_end' );
+
+/**
  * Do Filter after this 
  * add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
  * So we can preserve shortcode
@@ -286,6 +309,11 @@ add_filter('the_content', 'tonjoo_ecae_execute', 10);
 
 function tonjoo_ecae_execute($content, $width = 400)
 {
+    global $is_main_query_ecae;
+    
+    if(!$is_main_query_ecae) 
+        return $content;
+
     global $content_pure;
 
     $content_pure = $content;
@@ -508,9 +536,47 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         foreach ($html_replace as $restore) $restore->restore($content, $width);
 
         $shortcode_replace->restore($content);
+
+        /**
+         * image position
+         */
+        switch ($options['image_position']) {
+            case 'right':
+                $img_position = "margin-left:auto !important;";
+                break;
+
+            case 'left':
+                $img_position = "margin-right:auto !important;";
+                break;
+
+            case 'center':
+                $img_position = "margin-left:auto !important; margin-right:auto !important;";
+                break;
+
+            case 'float-left':
+                $img_position = "float:left;";
+                break;
+
+            case 'float-right':
+                $img_position = "float:right;";
+                break;
+            
+            default:
+                $img_position = "text-align:right;";
+                break;
+        }
+
+        $img_added_css = $img_position;
+
+        if($options['image_width_type'] == 'manual')
+        {
+            $img_added_css.= "width:{$options['image_width']}px;";
+        }
         
-        if ($option_image == 'yes') 
-        {            
+        $img_added_css.= "margin:{$options['image_margin_top']}px {$options['image_margin_right']}px {$options['image_margin_bottom']}px {$options['image_margin_left']}px;";
+                
+        if ($option_image == 'yes')
+        {
             $figure_replace->restore($content,false,true);
             $hyperlink_image_replace->restore($content,false,true);
             $image_replace->restore($content,false,true);            
@@ -532,7 +598,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                     $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
 
                     //restore first image found  
-                    $content = "<div style='text-align:center'>" . $remaining[0] . "</div>" . $content;
+                    $content = "<div style='$img_added_css'>" . $remaining[0] . "</div>" . $content;
 
                     $figure_replace->restore($content, 1,true);
                     $hyperlink_image_replace->restore($content, 1,true);
@@ -549,7 +615,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             if($featured_image) $image = get_the_post_thumbnail(get_the_ID());
             
             // only put image if there is image :p
-            if($image) $content = "<div style='text-align:center'>" . $image . "</div>" . $content;
+            if($image) $content = "<div style='$img_added_css'>" . $image . "</div>" . $content;
         }
  
         //delete remaining image
@@ -574,6 +640,10 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         }        
     }
     
+
+    /**
+     * readmore text
+     */
     $link = get_permalink();
     $readmore = "";
         
@@ -654,7 +724,7 @@ class eace_content_regex
     {
         //get all image in the content    
         preg_match_all($this->regex, $content, $this->holder, PREG_PATTERN_ORDER);
-        
+    
         $this->key = 0;        
 
         //only cut bellow the $number variabel treshold ( to limit the number of replacing)
@@ -718,7 +788,9 @@ class eace_content_regex
 
         for ($i; $i < $maximal; $i++) {
             if (isset($this->holder[0][$i]))
+            {
                 $content = str_replace("{$this->unique_char}{$i}{$this->unique_char}", $this->holder[0][$i], $content);
+            }
         }
     }
     

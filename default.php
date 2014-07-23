@@ -10,11 +10,32 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['show_image'])){
 		$options['show_image']='yes';		
 	}
+	if(!isset($options['image_position']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_position']='left';
+	}
+	if(!isset($options['image_width_type']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_width_type']='auto';
+	}
+	if(!isset($options['image_width']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_width']='300';
+	}
+	if(!isset($options['image_margin_top']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_margin_top']='5';
+	}
+	if(!isset($options['image_margin_right']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_margin_right']='5';
+	}
+	if(!isset($options['image_margin_bottom']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_margin_bottom']='5';
+	}
+	if(!isset($options['image_margin_left']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_margin_left']='5';
+	}
 	if(!isset($options['home'])){
 		$options['home']='yes';		
 	}
 	if(!isset($options['front_page'])){
-		$options['front_page']='yes';		
+		$options['front_page']='yes';
 	}
 	if(!isset($options['search'])){
 		$options['search']='yes';		

@@ -63,7 +63,7 @@ jQuery(document).ready(function($){
             preview_button(); 
         }
     })
-    $("input[name='tonjoo_ecae_options[button_font_size]']").on('keyup',function(){
+    $("input[name='tonjoo_ecae_options[button_font_size]']").on('keyup mouseup',function(){
         if(ecae_premium_enable == false)
         {
             alert('Please purchase the premium edition to enable this feature');
