@@ -100,11 +100,10 @@ function tonjoo_ecae_options_do_page()
 			}
 
 			.form-table th {
-				width: 150px
+				width: 175px;
 			}
 
 			.form-table input[type=text], .form-table input[type=number], .form-table select {
-
 				width: 200px;
 				margin-right: 10px;
 			}
@@ -126,9 +125,9 @@ function tonjoo_ecae_options_do_page()
 			}
 
 			@media (max-width: 767px) {
-				    .meta-subtitle {
-				      margin-left: -12px !important;
-				    }
+			    .meta-subtitle {
+			      margin-left: -12px !important;
+			    }
 			}
 
 			label{
@@ -207,7 +206,52 @@ function tonjoo_ecae_options_do_page()
 				);
 
 			echo tj_print_select_option($image_select);
+
+
+			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'no',
+					'label' =>  __('No',TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'yes',
+					'label' =>  __('Yes',TONJOO_ECAE) 
+					)
+				);
+
+			$image_select = array(
+				"name"=>"tonjoo_ecae_options[strip_empty_tags]",
+				"description" => __("If you select 'yes' any empty HTML tags will be ommited from the excerpt",TONJOO_ECAE),
+				"label" => __("Strip empty HTML tags",TONJOO_ECAE),
+				"value" => $options['strip_empty_tags'],
+				"select_array" => $yes_no_options,
+				);
+
+			echo tj_print_select_option($image_select);
+
+
+			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'no',
+					'label' =>  __('No',TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'yes',
+					'label' =>  __('Yes',TONJOO_ECAE) 
+					)
+				);
+
+			$image_select = array(
+				"name"=>"tonjoo_ecae_options[special_method]",
+				"description" => __("Use this method only if there are any problem with the excerpt",TONJOO_ECAE),
+				"label" => __("Special method",TONJOO_ECAE),
+				"value" => $options['special_method'],
+				"select_array" => $yes_no_options,
+				);
+
+			echo tj_print_select_option($image_select);
 			
+
 			$excerpt_yes_options = array(
 				'0' => array(
 					'value' =>	'no',
@@ -415,7 +459,7 @@ function tonjoo_ecae_options_do_page()
 				<th>Image width</th>
 				<td>
 					<input type="radio" name="tonjoo_ecae_options[image_width_type]" value="auto" <?php if($options['image_width_type'] == 'auto') echo 'checked' ?> >
-					Width 100 %
+					Auto
 				</td>
 				<td>&nbsp;</td>
 			</tr>
@@ -433,7 +477,7 @@ function tonjoo_ecae_options_do_page()
 				<th>Image margin</th>
 				<td>
 					<p style="padding-top:0px;float:left;">Top</p>
-					<input type="number" name="tonjoo_ecae_options[image_margin_top]" value="<?php echo $options['image_margin_top'] ?>" style="float: right;width: 100px;" >
+					<input type="number" name="tonjoo_ecae_options[image_padding_top]" value="<?php echo $options['image_padding_top'] ?>" style="float: right;width: 100px;" >
 				</td>
 				<td>px</td>
 			</tr>
@@ -442,7 +486,7 @@ function tonjoo_ecae_options_do_page()
 				<th>&nbsp;</th>
 				<td>
 					<p style="padding-top:0px;float:left;">Right</p>
-					<input type="number" name="tonjoo_ecae_options[image_margin_right]" value="<?php echo $options['image_margin_right'] ?>" style="float: right;width: 100px;" >
+					<input type="number" name="tonjoo_ecae_options[image_padding_right]" value="<?php echo $options['image_padding_right'] ?>" style="float: right;width: 100px;" >
 				</td>
 				<td>px</td>
 			</tr>
@@ -451,7 +495,7 @@ function tonjoo_ecae_options_do_page()
 				<th>&nbsp;</th>
 				<td>
 					<p style="padding-top:0px;float:left;">Bottom</p>
-					<input type="number" name="tonjoo_ecae_options[image_margin_bottom]" value="<?php echo $options['image_margin_bottom'] ?>" style="float: right;width: 100px;" >
+					<input type="number" name="tonjoo_ecae_options[image_padding_bottom]" value="<?php echo $options['image_padding_bottom'] ?>" style="float: right;width: 100px;" >
 				</td>
 				<td>px</td>
 			</tr>
@@ -460,7 +504,7 @@ function tonjoo_ecae_options_do_page()
 				<th>&nbsp;</th>
 				<td>
 					<p style="padding-top:0px;float:left;">Left</p>
-					<input type="number" name="tonjoo_ecae_options[image_margin_left]" value="<?php echo $options['image_margin_left'] ?>" style="float: right;width: 100px;" >
+					<input type="number" name="tonjoo_ecae_options[image_padding_left]" value="<?php echo $options['image_padding_left'] ?>" style="float: right;width: 100px;" >
 				</td>
 				<td>px</td>
 			</tr>

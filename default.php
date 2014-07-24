@@ -19,17 +19,17 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['image_width']) || !function_exists('is_ecae_premium_exist')){
 		$options['image_width']='300';
 	}
-	if(!isset($options['image_margin_top']) || !function_exists('is_ecae_premium_exist')){
-		$options['image_margin_top']='5';
+	if(!isset($options['image_padding_top']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_padding_top']='5';
 	}
-	if(!isset($options['image_margin_right']) || !function_exists('is_ecae_premium_exist')){
-		$options['image_margin_right']='5';
+	if(!isset($options['image_padding_right']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_padding_right']='5';
 	}
-	if(!isset($options['image_margin_bottom']) || !function_exists('is_ecae_premium_exist')){
-		$options['image_margin_bottom']='5';
+	if(!isset($options['image_padding_bottom']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_padding_bottom']='5';
 	}
-	if(!isset($options['image_margin_left']) || !function_exists('is_ecae_premium_exist')){
-		$options['image_margin_left']='5';
+	if(!isset($options['image_padding_left']) || !function_exists('is_ecae_premium_exist')){
+		$options['image_padding_left']='5';
 	}
 	if(!isset($options['home'])){
 		$options['home']='yes';		
@@ -52,6 +52,12 @@ function tonjoo_ecae_load_default(&$options){
 
 	if(!isset($options['strip_shortcode'])){
 		$options['strip_shortcode']='yes';		
+	}
+	if(!isset($options['strip_empty_tags'])){
+		$options['strip_empty_tags']='yes';		
+	}
+	if(!isset($options['special_method'])){
+		$options['special_method']='no';
 	}
 
 	// if(!isset($options['featured_image_excerpt'])){

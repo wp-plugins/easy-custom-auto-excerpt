@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.5
+Version: 2.0.6
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.5');
+define("ECAE_VERSION", '2.0.6');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -165,6 +165,9 @@ function ecae_wp_enqueue_scripts()
     {
         wp_enqueue_style($exp[0],plugins_url(ECAE_DIR_NAME."/buttons/{$exp[0]}.css"),array(),ECAE_VERSION);
     }
+
+    // frontend style
+    wp_enqueue_style('ecae-frontend-css',plugin_dir_url( __FILE__ )."assets/style-frontend.css",array(),ECAE_VERSION);
 }
 
 function ecae_get_array_buttonskins()
@@ -309,12 +312,16 @@ add_filter('the_content', 'tonjoo_ecae_execute', 10);
 
 function tonjoo_ecae_execute($content, $width = 400)
 {
-    global $is_main_query_ecae;
-    
-    if(!$is_main_query_ecae) 
-        return $content;
-
+    global $options;
     global $content_pure;
+
+    if($options['special_method'] == 'yes')
+    {
+        global $is_main_query_ecae;
+    
+        if(!$is_main_query_ecae) 
+            return $content;
+    }
 
     $content_pure = $content;
 
@@ -325,10 +332,7 @@ function tonjoo_ecae_execute($content, $width = 400)
 
         exit;
     }
-
-    //ambil options dari db
-    global $options;    
-
+    
     $width   = $options['width'];
     $justify = $options['justify'];    
 
@@ -542,11 +546,11 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
          */
         switch ($options['image_position']) {
             case 'right':
-                $img_position = "margin-left:auto !important;";
+                $img_position = "";
                 break;
 
             case 'left':
-                $img_position = "margin-right:auto !important;";
+                $img_position = "";
                 break;
 
             case 'center':
@@ -573,7 +577,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             $img_added_css.= "width:{$options['image_width']}px;";
         }
         
-        $img_added_css.= "margin:{$options['image_margin_top']}px {$options['image_margin_right']}px {$options['image_margin_bottom']}px {$options['image_margin_left']}px;";
+        $img_added_css.= "padding:{$options['image_padding_top']}px {$options['image_padding_right']}px {$options['image_padding_bottom']}px {$options['image_padding_left']}px;";
                 
         if ($option_image == 'yes')
         {
@@ -597,8 +601,19 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                     $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
                     $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
 
-                    //restore first image found  
-                    $content = "<div style='$img_added_css'>" . $remaining[0] . "</div>" . $content;
+                    
+                    if($options['image_position'] == 'left')
+                    {
+                        $content = "<div class='ecae-image ecae-table-left'><div class='ecae-table-cell' style='$img_added_css'>" . $remaining[0] . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+                    }
+                    else if($options['image_position'] == 'right')
+                    {
+                        $content = "<div class='ecae-image ecae-table-right'><div class='ecae-table-cell' style='$img_added_css'>" . $remaining[0] . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+                    }
+                    else
+                    {
+                        $content = "<div class='ecae-image' style='$img_added_css'>" . $remaining[0] . "</div>" . $content;
+                    }
 
                     $figure_replace->restore($content, 1,true);
                     $hyperlink_image_replace->restore($content, 1,true);
@@ -615,7 +630,9 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             if($featured_image) $image = get_the_post_thumbnail(get_the_ID());
             
             // only put image if there is image :p
-            if($image) $content = "<div style='$img_added_css'>" . $image . "</div>" . $content;
+            // if($image) $content = "<div style='$img_added_css'>" . $image . "</div>" . $content_before . $content . $content_after;
+        
+
         }
  
         //delete remaining image
@@ -698,6 +715,12 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     }
     
     $style.= "</style>";
+
+    // remove empty html tags
+    if($options["strip_empty_tags"] == 'yes')
+    {
+        $content = strip_empty_tags($content);
+    }    
     
     return "<!-- Generated by Easy Custom Auto Excerpt -->$style $content<!-- Generated by Easy Custom Auto Excerpt -->";
 }
@@ -815,6 +838,27 @@ function ecae_convert_caption($content)
     }   
 
     return $content;
+}
+
+function strip_empty_tags ($str, $repto = NULL)
+{
+    //** Return if string not given or empty.
+    if (!is_string ($str)
+        || trim ($str) == '')
+            return $str;
+
+    //** Recursive empty HTML tags.
+    return preg_replace (
+
+        //** Pattern written by Junaid Atari.
+        '/<([^<\/>]*)>([\s]*?|(?R))<\/\1>/imsU',
+
+        //** Replace with nothing if string empty.
+        !is_string ($repto) ? '' : $repto,
+
+        //** Source string
+        $str
+    );
 }
 
 require_once(plugin_dir_path(__FILE__) . 'tonjoo-library.php');
