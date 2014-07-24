@@ -630,9 +630,21 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             if($featured_image) $image = get_the_post_thumbnail(get_the_ID());
             
             // only put image if there is image :p
-            // if($image) $content = "<div style='$img_added_css'>" . $image . "</div>" . $content_before . $content . $content_after;
-        
-
+            if($image)
+            {
+                if($options['image_position'] == 'left')
+                {
+                    $content = "<div class='ecae-image ecae-table-left'><div class='ecae-table-cell' style='$img_added_css'>" . $image . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+                }
+                else if($options['image_position'] == 'right')
+                {
+                    $content = "<div class='ecae-image ecae-table-right'><div class='ecae-table-cell' style='$img_added_css'>" . $image . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+                }
+                else
+                {
+                    $content = "<div class='ecae-image' style='$img_added_css'>" . $image . "</div>" . $content;
+                }
+            }
         }
  
         //delete remaining image
