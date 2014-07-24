@@ -7,17 +7,17 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Auto Excerpt for your post on home, search and archive. Customize Read More button. Easy to configure and have a lot of options.
+Auto Excerpt for your post on home, search and archive. Customize Read More button and thumbnail image. Easy to configure and have a lot of options.
 == Description ==
 
-Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and style. Just active the plugin, configure some options and you're good to go :)
+Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :)
 
 **Features :**
 
 * Excerpt your post based on word length.
 * Choose to excerpt your on your home, search or archive.
 * Align text (Justify,Right,Left, Center) your text based on your preference.
-* Easy to use.
+* Change thumbnail position (left/right/center)
 * Custom Read More text and Button.
 * 40 + Read More button themes.
 * Preserve Image on Excerpt.
