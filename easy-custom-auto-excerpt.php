@@ -214,7 +214,8 @@ function ecae_get_array_buttonskins()
  * Display a notice that can be dismissed 
  */
 add_action('admin_notices', 'ecae_premium_notice');
-function ecae_premium_notice() {
+function ecae_premium_notice() 
+{
     global $current_user ;
 
     $user_id = $current_user->ID;
@@ -264,33 +265,43 @@ function ecae_premium_nag_ignore()
     // If user clicks to ignore the notice, add that to their user meta
     if (isset($_GET['ecae_premium_nag_ignore']) && $_GET['ecae_premium_nag_ignore'] == 'forever') 
     {
-         update_user_meta($user_id, 'ecae_premium_ignore_notice', 'forever');
+        update_user_meta($user_id, 'ecae_premium_ignore_notice', 'forever');
     }
     else if (isset($_GET['ecae_premium_nag_ignore']) && $_GET['ecae_premium_nag_ignore'] == 'later') 
     {
         update_user_meta($user_id, 'ecae_premium_ignore_notice', 'later');
         update_user_meta($user_id, 'ecae_premium_ignore_count_notice', 0);
+
+        $total_ignore_notice = get_user_meta($user_id, 'ecae_premium_ignore_count_notice_total', true); 
+
+        if($total_ignore_notice == '') $total_ignore_notice = 0;
+
+        update_user_meta($user_id, 'ecae_premium_ignore_count_notice_total', intval($total_ignore_notice) + 1);
+
+        if(intval($total_ignore_notice) >= 5)
+        {
+            update_user_meta($user_id, 'ecae_premium_ignore_notice', 'forever');
+        }
     }
 }
 
 /**
  * activate hook
  */
-register_activation_hook( __FILE__, 'ecae_activate' );
-function ecae_activate() 
-{
-    global $current_user;
-    $user_id = $current_user->ID;
-
-    update_user_meta($user_id, 'ecae_premium_ignore_notice', 'always show');
-}
+// register_activation_hook( __FILE__, 'ecae_activate' );
+// function ecae_activate() 
+// {
+//     global $current_user;
+//     $user_id = $current_user->ID;
+//     update_user_meta($user_id, 'ecae_premium_ignore_notice', 'always show');
+// }
 
 /**
  * Main Query Check
  */
-
-
-function tonjoo_ecae_loop_end( $query ) {
+add_action( 'loop_end', 'tonjoo_ecae_loop_end' );
+function tonjoo_ecae_loop_end( $query ) 
+{
     // modify post object here
     global $is_main_query_ecae;
 
@@ -300,8 +311,6 @@ function tonjoo_ecae_loop_end( $query ) {
         $is_main_query_ecae=true;
     }
 }
-
-add_action( 'loop_end', 'tonjoo_ecae_loop_end' );
 
 /**
  * Do Filter after this 
