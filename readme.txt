@@ -83,6 +83,9 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.8 =
+* Fix known bugs
+
 = 2.0.7 =
 * Add option to always show "read more" link
 * Change behaviour for premium promo notification

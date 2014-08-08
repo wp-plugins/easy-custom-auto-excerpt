@@ -443,22 +443,26 @@ function tonjoo_ecae_options_do_page()
 
 			$yes_no_options = array(
 				'0' => array(
+					'value' =>	'none',
+					'label' =>  __("None",TONJOO_ECAE)
+					),
+				'1' => array(
 					'value' =>	'left',
 					'label' =>  __("Left",TONJOO_ECAE)
 					),
-				'1' => array(
+				'2' => array(
 					'value' =>	'right',
 					'label' =>  __("Right",TONJOO_ECAE)
 					),
-				'2' => array(
+				'3' => array(
 					'value' =>	'center',
 					'label' =>  __('Center',TONJOO_ECAE) 
 					),
-				'3' => array(
+				'4' => array(
 					'value' =>	'float-left',
 					'label' =>  __('Float Left',TONJOO_ECAE)
 					),
-				'4' => array(
+				'5' => array(
 					'value' =>	'float-right',
 					'label' =>  __('Float Right',TONJOO_ECAE)
 					)

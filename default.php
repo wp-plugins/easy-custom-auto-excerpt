@@ -11,10 +11,10 @@ function tonjoo_ecae_load_default(&$options){
 		$options['show_image']='yes';		
 	}
 	if(!isset($options['image_position']) || !function_exists('is_ecae_premium_exist')){
-		$options['image_position']='left';
+		$options['image_position']='none';
 	}
 	if(!isset($options['image_width_type']) || !function_exists('is_ecae_premium_exist')){
-		$options['image_width_type']='auto';
+		$options['image_width_type']='manual';
 	}
 	if(!isset($options['image_width']) || !function_exists('is_ecae_premium_exist')){
 		$options['image_width']='300';
