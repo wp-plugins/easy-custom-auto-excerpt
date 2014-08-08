@@ -83,40 +83,40 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
-= 2.0.7
+= 2.0.7 =
 * Add option to always show "read more" link
 * Change behaviour for premium promo notification
 * Fix known bugs
 
-= 2.0.6
+= 2.0.6 =
 * Add option to strip empty HTML tags
 * Add option to change special method (change between yes and no to if there is a fatal error)
 * Change behaviour for position method left and right (premium edition)
 * Fix known bugs
 
-= 2.0.5
+= 2.0.5 =
 * Add image position method: left, right, center, float left, float right (premium edition)
 * Add image width and image margin options
 * Fix known bugs
 
-= 2.0.4
+= 2.0.4 =
 * Fix known bugs
 
-= 2.0.3
+= 2.0.3 =
 * Decrease file size
 * Fix known bugs
 
-= 2.0.2
+= 2.0.2 =
 * Add new excerpt method: show 1st, 1st - 2nd and 1st - 3rd paragraph (premium edition)
 * Add option to change font size (premium edition)
 * Updated display image options
 * Fix known bugs
 
-= 2.0.1
+= 2.0.1 =
 * Add option to disable excerpt in every single post (premium edition)
 * Fix known bugs
 
-= 2.0.0
+= 2.0.0 =
 * Updated admin UI, more easy and intuitive
 * Add select font option (premium edition)
 * Add select button theme option (premium edition)
@@ -124,30 +124,30 @@ It will used, instead of the automatically generated one.
 * Add front page excerpt option
 * Fix known bugs
 
-= 1.0.8
+= 1.0.8 =
 * Improve excerpt algorithm
 * Add readmore option
 
-= 1.0.7
+= 1.0.7 =
 * Add spanish translation , thanks to Andrew Kurtis ~ webhostinghub.com 
 * Better excerpt cropping algorithm
 
-= 1.0.6
+= 1.0.6 =
 * Minor bug fix
 
-= 1.0.5
+= 1.0.5 =
 * Add options to disable readmore. 
 
-= 1.0.4
+= 1.0.4 =
 * Fix remove / add image in excerpt option
 
-= 1.0.3
+= 1.0.3 =
 * Add better handling for image
 
-= 1.0.2
+= 1.0.2 =
 * Add strip element, for better excerpt
 
-= 1.0.1
+= 1.0.1 =
 * Improve regex handling, add rules for <img> and <a>
 * return real excerpt from the post if it is exist
 * Fix Compability with PHP 5.4
