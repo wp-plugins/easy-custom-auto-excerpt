@@ -14,8 +14,8 @@ function tonjoo_ecae_options_init(){
 /**
  * Load up the menu page
  */
-function tonjoo_ecae_options_page() {
-	
+function tonjoo_ecae_options_page() 
+{	
 	// add_plugin_page( $page_title, $menu_title, $capability, $menu_slug, $function);
 	
 	add_options_page( 
@@ -246,6 +246,28 @@ function tonjoo_ecae_options_do_page()
 				"description" => __("Use this method only if there are any problem with the excerpt",TONJOO_ECAE),
 				"label" => __("Special method",TONJOO_ECAE),
 				"value" => $options['special_method'],
+				"select_array" => $yes_no_options,
+				);
+
+			echo tj_print_select_option($image_select);
+
+
+			$yes_no_options = array(
+				'0' => array(
+					'value' =>	'no',
+					'label' =>  __('No',TONJOO_ECAE)
+					),
+				'1' => array(
+					'value' =>	'yes',
+					'label' =>  __('Yes',TONJOO_ECAE) 
+					)
+				);
+
+			$image_select = array(
+				"name"=>"tonjoo_ecae_options[always_show_read_more]",
+				"description" => __("If you select 'yes', readmore link will always show",TONJOO_ECAE),
+				"label" => __("Always show read more",TONJOO_ECAE),
+				"value" => $options['always_show_read_more'],
 				"select_array" => $yes_no_options,
 				);
 

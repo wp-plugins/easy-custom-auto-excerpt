@@ -53,11 +53,17 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['strip_shortcode'])){
 		$options['strip_shortcode']='yes';		
 	}
+	
 	if(!isset($options['strip_empty_tags'])){
 		$options['strip_empty_tags']='yes';		
 	}
+	
 	if(!isset($options['special_method'])){
 		$options['special_method']='no';
+	}
+
+	if(!isset($options['always_show_read_more'])){
+		$options['always_show_read_more']='no';
 	}
 
 	// if(!isset($options['featured_image_excerpt'])){

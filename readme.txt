@@ -83,6 +83,11 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.7
+* Add option to always show "read more" link
+* Change behaviour for premium promo notification
+* Fix known bugs
+
 = 2.0.6
 * Add option to strip empty HTML tags
 * Add option to change special method (change between yes and no to if there is a fatal error)

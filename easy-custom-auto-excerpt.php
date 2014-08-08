@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.6
+Version: 2.0.7
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.6');
+define("ECAE_VERSION", '2.0.7');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -550,112 +550,6 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
 
         $shortcode_replace->restore($content);
 
-        /**
-         * image position
-         */
-        switch ($options['image_position']) {
-            case 'right':
-                $img_position = "";
-                break;
-
-            case 'left':
-                $img_position = "";
-                break;
-
-            case 'center':
-                $img_position = "margin-left:auto !important; margin-right:auto !important;";
-                break;
-
-            case 'float-left':
-                $img_position = "float:left;";
-                break;
-
-            case 'float-right':
-                $img_position = "float:right;";
-                break;
-            
-            default:
-                $img_position = "text-align:right;";
-                break;
-        }
-
-        $img_added_css = $img_position;
-
-        if($options['image_width_type'] == 'manual')
-        {
-            $img_added_css.= "width:{$options['image_width']}px;";
-        }
-        
-        $img_added_css.= "padding:{$options['image_padding_top']}px {$options['image_padding_right']}px {$options['image_padding_bottom']}px {$options['image_padding_left']}px;";
-                
-        if ($option_image == 'yes')
-        {
-            $figure_replace->restore($content,false,true);
-            $hyperlink_image_replace->restore($content,false,true);
-            $image_replace->restore($content,false,true);            
-        } 
-        elseif ($option_image == 'first-image') 
-        {
-            //catch all of hyperlink and image on the content => '|#'  and '|('' 
-            preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#|\|\:[0-9]*\|\:/', $content, $result, PREG_PATTERN_ORDER);
-
-            if (isset($result[0])) 
-            {
-                $remaining = array_slice($result[0], 0, 1);
-                
-                if(isset($remaining[0]))
-                {
-                    //delete remaining image
-                    $content = preg_replace('/\|\:[0-9]*\|\:/', '', $content);
-                    $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
-                    $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
-
-                    
-                    if($options['image_position'] == 'left')
-                    {
-                        $content = "<div class='ecae-image ecae-table-left'><div class='ecae-table-cell' style='$img_added_css'>" . $remaining[0] . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
-                    }
-                    else if($options['image_position'] == 'right')
-                    {
-                        $content = "<div class='ecae-image ecae-table-right'><div class='ecae-table-cell' style='$img_added_css'>" . $remaining[0] . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
-                    }
-                    else
-                    {
-                        $content = "<div class='ecae-image' style='$img_added_css'>" . $remaining[0] . "</div>" . $content;
-                    }
-
-                    $figure_replace->restore($content, 1,true);
-                    $hyperlink_image_replace->restore($content, 1,true);
-                    $image_replace->restore($content, 1,true);
-                }
-            }
-        } 
-        elseif ($option_image == 'featured-image') 
-        {
-            //check featured image;
-            $featured_image = has_post_thumbnail(get_the_ID());
-            $image = false;
-
-            if($featured_image) $image = get_the_post_thumbnail(get_the_ID());
-            
-            // only put image if there is image :p
-            if($image)
-            {
-                if($options['image_position'] == 'left')
-                {
-                    $content = "<div class='ecae-image ecae-table-left'><div class='ecae-table-cell' style='$img_added_css'>" . $image . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
-                }
-                else if($options['image_position'] == 'right')
-                {
-                    $content = "<div class='ecae-image ecae-table-right'><div class='ecae-table-cell' style='$img_added_css'>" . $image . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
-                }
-                else
-                {
-                    $content = "<div class='ecae-image' style='$img_added_css'>" . $image . "</div>" . $content;
-                }
-            }
-        }
- 
         //delete remaining image
         $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
         $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
@@ -698,7 +592,16 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $readmore_link = " <a class='ecae-link' href='$link'><span>{$options['read_more']}</span></a>";
         $readmore = "<p class='ecae-button {$button_skin[0]}' style='text-align:{$options['read_more_align']};' >$read_more_text_before $readmore_link</p>";
 
-        $content = str_replace('<!-- READ MORE TEXT -->',$readmore, $content);
+        // always_show_read_more
+        if($options['always_show_read_more'] == 'yes')
+        {
+            $content = str_replace('<!-- READ MORE TEXT -->', '', $content);
+            $content = $content . $readmore;
+        }
+        else
+        {
+            $content = str_replace('<!-- READ MORE TEXT -->', $readmore, $content);
+        }
     }
     
     if ($justify != "no") {
@@ -718,10 +621,126 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $len_content = strlen(wp_kses($content,array())) + 1;  // 1 is a difference between them
         $len_content_pure = strlen(wp_kses($content_pure,array()));
 
-        if($len_content < $len_content_pure)
+        // always_show_read_more
+        if($options['always_show_read_more'] == 'yes')
         {
             $content = $content . $readmore;
-        }    
+        }
+        else 
+        {
+            if($len_content < $len_content_pure)
+            {
+                $content = $content . $readmore;
+            }    
+        }
+    }
+
+    /**
+     * image position
+     */
+    $option_image = $options['show_image'];        
+
+    switch ($options['image_position']) {
+        case 'right':
+            $img_position = "";
+            break;
+
+        case 'left':
+            $img_position = "";
+            break;
+
+        case 'center':
+            $img_position = "margin-left:auto !important; margin-right:auto !important;";
+            break;
+
+        case 'float-left':
+            $img_position = "float:left;";
+            break;
+
+        case 'float-right':
+            $img_position = "float:right;";
+            break;
+        
+        default:
+            $img_position = "text-align:right;";
+            break;
+    }
+
+    $img_added_css = $img_position;
+
+    if($options['image_width_type'] == 'manual')
+    {
+        $img_added_css.= "width:{$options['image_width']}px;";
+    }
+    
+    $img_added_css.= "padding:{$options['image_padding_top']}px {$options['image_padding_right']}px {$options['image_padding_bottom']}px {$options['image_padding_left']}px;";
+            
+    if ($option_image == 'yes')
+    {
+        $figure_replace->restore($content,false,true);
+        $hyperlink_image_replace->restore($content,false,true);
+        $image_replace->restore($content,false,true);            
+    } 
+    elseif ($option_image == 'first-image') 
+    {
+        //catch all of hyperlink and image on the content => '|#'  and '|('' 
+        preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#|\|\:[0-9]*\|\:/', $content, $result, PREG_PATTERN_ORDER);
+
+        if (isset($result[0])) 
+        {
+            $remaining = array_slice($result[0], 0, 1);
+            
+            if(isset($remaining[0]))
+            {
+                //delete remaining image
+                $content = preg_replace('/\|\:[0-9]*\|\:/', '', $content);
+                $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
+                $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
+
+                
+                if($options['image_position'] == 'left')
+                {
+                    $content = "<div class='ecae-image ecae-table-left'><div class='ecae-table-cell' style='$img_added_css'>" . $remaining[0] . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+                }
+                else if($options['image_position'] == 'right')
+                {
+                    $content = "<div class='ecae-image ecae-table-right'><div class='ecae-table-cell' style='$img_added_css'>" . $remaining[0] . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+                }
+                else
+                {
+                    $content = "<div class='ecae-image' style='$img_added_css'>" . $remaining[0] . "</div>" . $content;
+                }
+
+                $figure_replace->restore($content, 1,true);
+                $hyperlink_image_replace->restore($content, 1,true);
+                $image_replace->restore($content, 1,true);
+            }
+        }
+    } 
+    elseif ($option_image == 'featured-image') 
+    {
+        //check featured image;
+        $featured_image = has_post_thumbnail(get_the_ID());
+        $image = false;
+
+        if($featured_image) $image = get_the_post_thumbnail(get_the_ID());
+        
+        // only put image if there is image :p
+        if($image)
+        {
+            if($options['image_position'] == 'left')
+            {
+                $content = "<div class='ecae-image ecae-table-left'><div class='ecae-table-cell' style='$img_added_css'>" . $image . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+            }
+            else if($options['image_position'] == 'right')
+            {
+                $content = "<div class='ecae-image ecae-table-right'><div class='ecae-table-cell' style='$img_added_css'>" . $image . "</div>" . "<div class='ecae-table-cell'>" . $content . '</div>' ;
+            }
+            else
+            {
+                $content = "<div class='ecae-image' style='$img_added_css'>" . $image . "</div>" . $content;
+            }
+        }
     }
     
     /**
