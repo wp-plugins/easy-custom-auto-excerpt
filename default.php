@@ -43,6 +43,9 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['archive'])){
 		$options['archive']='yes';		
 	}
+	if(!isset($options['excerpt_in_page'])){
+		$options['excerpt_in_page']='';		
+	}
 	if(!isset($options['justify'])){
 		$options['justify']='no';		
 	}

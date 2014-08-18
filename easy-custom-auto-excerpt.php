@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.8
+Version: 2.0.9
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.8');
+define("ECAE_VERSION", '2.0.9');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -371,7 +371,32 @@ function tonjoo_ecae_execute($content, $width = 400)
     if ($options['archive'] == "yes" && is_archive()) {
         return tonjoo_ecae_excerpt($content, $width, $justify);
     }
+
+    /** 
+     * excerpt in pages 
+     */
+    $excerpt_in_page = $options['excerpt_in_page'];
+    $excerpt_in_page = trim($excerpt_in_page);
+
+    //prevent white space explode
+    if($excerpt_in_page!='')
+    {
+        $excerpt_in_page = explode('|',$excerpt_in_page);
+    }
+    else
+    {
+        $excerpt_in_page = array();
+    }
+
+    foreach ($excerpt_in_page as $key => $value)
+    {
+        if(is_page($value)) return tonjoo_ecae_excerpt($content, $width, $justify);
+    }
     
+
+    /**
+     * last location check
+     */
     if ($options['search'] == "yes" && is_search()) {
         return tonjoo_ecae_excerpt($content, $width, $justify);
     }    

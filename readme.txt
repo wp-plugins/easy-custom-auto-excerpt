@@ -83,6 +83,11 @@ It will used, instead of the automatically generated one.
 
 == Changelog ==
 
+= 2.0.9 =
+* Add option to do excerpt in the pages
+* Redesign free button style
+* Fix known bugs
+
 = 2.0.8 =
 * Fix known bugs
 

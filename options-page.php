@@ -348,6 +348,13 @@ function tonjoo_ecae_options_do_page()
 				"select_array" => $excerpt_yes_options,
 				);
 
+			$excerpt_in_page = array(
+				'label'=>__('Excerpt in page',TONJOO_ECAE),
+				'name'=>'tonjoo_ecae_options[excerpt_in_page]',
+				'value'=>$options['excerpt_in_page'],
+				'description'=>__('The value is page ID or page slug. For multiple pages, use "|" (without quote) between them',TONJOO_ECAE),
+				);
+
 			$search_select = array(
 				"name"=>"tonjoo_ecae_options[search]",
 				"description" => "",
@@ -399,6 +406,7 @@ function tonjoo_ecae_options_do_page()
 			echo tj_print_select_option($front_page_select);
 			echo tj_print_select_option($search_select);
 			echo tj_print_select_option($archive_select);
+			echo tj_print_text_option($excerpt_in_page);
 
 			echo '<tr><td colspan=3><h3 class="meta-subtitle">Display Image Options</h3></td></tr>';
 
