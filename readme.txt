@@ -2,7 +2,7 @@
 Contributors: Todi.Adiatmo, haristonjoo
 Tags: excerpt, home, search, archive, automatic, auto, justify
 Requires at least: 3.0.3
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,11 @@ It will used, instead of the automatically generated one.
 3. Easy Custom Auto Excerpt on action.
 
 == Changelog ==
+
+= 2.1.0 =
+* Fix word preserved for word excerpt method
+* Tested up to WordPress 4.0
+* Fix known bugs
 
 = 2.0.9 =
 * Add option to do excerpt in the pages

@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.0.9
+Version: 2.1.0
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.0.9');
+define("ECAE_VERSION", '2.1.0');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -857,11 +857,18 @@ class eace_content_regex
 
                         $overflow = $current_lenght-$overflow;
 
-                        $this->holder[0][$this->key] = substr($text,0,$overflow);
+                        // $pos = get cut position based on fixed position ($overflow), but without break last word
+                        $pos = strpos($text, ' ', $overflow);
+                        $holder_str = substr($text,0,$pos);
 
-                        $this->holder[0][$this->key] = wp_kses($this->holder[0][$this->key],array()); 
+                        // delete last non alphanumeric character
+                        $holder_str = preg_replace("/[^A-Za-z0-9 ]$/", '', $holder_str);
+                        
+                        $holder_str = wp_kses($holder_str,array()); 
 
-                        $this->holder[0][$this->key]  = "<p>{$this->holder[0][$this->key]}<!-- READ MORE TEXT --></p>";  
+                        $holder_str  = "<p>{$holder_str}<!-- READ MORE TEXT --></p>";  
+                    
+                        $this->holder[0][$this->key] = $holder_str;
                     }
                     else
                     {

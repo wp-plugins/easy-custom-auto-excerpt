@@ -776,24 +776,95 @@ function tonjoo_ecae_options_do_page()
 				</div>
 			</div>
 
-			<div class="postbox">
+			
+			<!-- ADS -->
+			<div class="postbox">			
 				<script type="text/javascript">
 					jQuery(function(){
-						var url = 'http://tonjoo.com/about/?ecae-jsonp=promo';
+						var url = 'http://tonjoo.com/about/?promo=get';
+						var pluginName = "ecae";
+						var promoFirst = new Array();
+						var promoSecond = new Array();
+
+						// strpos function
+						function strpos(haystack, needle, offset) {
+							var i = (haystack + '')
+								.indexOf(needle, (offset || 0));
+							return i === -1 ? false : i;
+						}
 
 						jQuery.ajax({url: url, dataType:'jsonp'}).done(function(data){
-							//promo_1
-							if(typeof data =='object'){
-								jQuery("#promo_1 a").attr("href",data.permalink_promo_1);
-								jQuery("#promo_1 img").attr("src",data.img_promo_1);
+							
+							if(typeof data =='object')
+							{
+								var fristImg, fristUrl;
+
+							    // looping jsonp object
+								jQuery.each(data, function(index, value){
+
+									<?php if(! function_exists('is_ecae_premium_exist')): ?>
+
+									fristImg = pluginName + '-premium-img';
+									fristUrl = pluginName + '-premium-url';
+
+									// promoFirst
+									if(index == fristImg)
+								    {
+								    	promoFirst['img'] = value;
+								    }
+
+								    if(index == fristUrl)
+								    {
+								    	promoFirst['url'] = value;
+								    }
+
+								    <?php else: ?>
+
+								    if(! fristImg)
+								    {
+								    	// promoFirst
+										if(strpos(index, "-img"))
+									    {
+									    	promoFirst['img'] = value;
+
+									    	fristImg = index;
+									    }
+
+									    if(strpos(index, "-url"))
+									    {
+									    	promoFirst['url'] = value;
+
+									    	fristUrl = index;
+									    }
+								    }
+
+								    <?php endif; ?>
+
+									// promoSecond
+									if(strpos(index, "-img") && index != fristImg)
+								    {
+								    	promoSecond['img'] = value;
+								    }
+
+								    if(strpos(index, "-url") && index != fristUrl)
+								    {
+								    	promoSecond['url'] = value;
+								    }
+								});
+
+								//promo_1
+								jQuery("#promo_1 img").attr("src",promoFirst['img']);
+								jQuery("#promo_1 a").attr("href",promoFirst['url']);
 
 								//promo_2
-								jQuery("#promo_2 a").attr("href",data.permalink_promo_2);
-								jQuery("#promo_2 img").attr("src",data.img_promo_2);
+								jQuery("#promo_2 img").attr("src",promoSecond['img']);
+								jQuery("#promo_2 a").attr("href",promoSecond['url']);
 							}
 						});
 					});
 				</script>
+
+				
 
 				<!-- <h3 class="hndle"><span>This may interest you</span></h3> -->
 				<div class="inside" style="margin: 23px 10px 6px 10px;">
