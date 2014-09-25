@@ -77,9 +77,8 @@ It will used, instead of the automatically generated one.
 
 == Screenshots ==
 
-1. Easy to configure, word lenght and where to do the excerpt. Plus you can show or not to show image on excerpt !
-2. Style your readmore with 40+ button themes and customizable font type
-3. Easy Custom Auto Excerpt on action.
+1. Easy Custom Auto Excerpt on action.
+2. Complete setting options (with premium feature installed). Easy to configure.
 
 == Changelog ==
 
