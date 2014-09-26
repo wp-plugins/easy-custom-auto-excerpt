@@ -29,8 +29,9 @@ The free version is come with everything you need to auto excerpt your content.
 And if you like our plugin and want to do more customization we offer the premium version with some added feature :
 
 * Excerpt method by 1st paragraph, 2nd paragraph, and 3rd paragraph
-* Change image position (left, right, center, float left and float right)
-* Change image width and margin
+* Adjust Image Excerpt Position (left, right, center, float left and float right)
+* Adjust Image width and margin
+* Disable excerpt on specific post
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
