@@ -12,12 +12,14 @@ Auto Excerpt for your post on home, search and archive. Customize Read More butt
 
 Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :) 
 
+
+
 The free version is come with everything you need to auto excerpt your content.
 
 **Features :**
 
 * Excerpt your post based on word length.
-* Choose to excerpt your on your home, search or archive.
+* Choose to excerpt your on your home, search, archive, or on your custom archive page.
 * Align text (Justify,Right,Left, Center) your text based on your preference.
 * Custom Read More text and Button.
 * Preserve Image on Excerpt.
@@ -26,7 +28,10 @@ The free version is come with everything you need to auto excerpt your content.
 
 And if you like our plugin and want to do more customization we offer the premium version with some added feature :
 
-* Change thumbnail position (left/right/center)
+* Excerpt method by 1st paragraph, 2nd paragraph, and 3rd paragraph
+* Change image position (left, right, center, float left and float right)
+* Change image width and margin
+* 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
 Get the premium version on [premium version](https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/ "premium version")
