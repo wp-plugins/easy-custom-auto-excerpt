@@ -1,5 +1,58 @@
 jQuery(document).ready(function($){
-	/**
+	
+    /**
+     * Tabs
+     */
+    if ( $('.nav-tab-wrapper').length > 0 ) {
+        js_tabs();
+    }
+
+    function js_tabs() {
+
+        var group = $('.group'),
+            navtabs = $('.nav-tab-wrapper a'),
+            active_tab = '';
+
+        /* Hide all group on start */
+        group.hide();
+
+        /* Find if a selected tab is saved in localStorage */
+        if ( typeof(localStorage) != 'undefined' ) {
+            active_tab = localStorage.getItem('active_tab');
+        }
+
+        /* If active tab is saved and exists, load it's .group */
+        if ( active_tab != '' && $(active_tab).length ) {
+            $(active_tab).fadeIn();
+            $(active_tab + '-tab').addClass('nav-tab-active');
+        } else {
+            $('.group:first').fadeIn();
+            $('.nav-tab-wrapper a:first').addClass('nav-tab-active');
+            active_tab = $('.nav-tab-wrapper a:first');
+        }
+
+        /* Bind tabs clicks */
+        navtabs.click(function(e) {
+
+            e.preventDefault();
+
+            /* Remove active class from all tabs */
+            navtabs.removeClass('nav-tab-active');
+
+            $(this).addClass('nav-tab-active').blur();
+
+            if (typeof(localStorage) != 'undefined' ) {
+                localStorage.setItem('active_tab', $(this).attr('href') );
+            }
+
+            var selected = $(this).attr('href');
+
+            group.hide();
+            $(selected).fadeIn();
+        });
+    }
+
+    /**
 	 * Ace editor
 	 */
 	var editor = ace.edit("ace-editor");
@@ -13,7 +66,7 @@ jQuery(document).ready(function($){
 	});
 
     /**
-     * Select2
+     * Select2 Button
      */
 	function format(state) {
         if (!state.id) return state.text; // optgroup
@@ -39,6 +92,11 @@ jQuery(document).ready(function($){
     }).on("change", function(e) {
             preview_button(); 
     });
+
+    /**
+     * Select2 Dropdown Page
+     */
+    $('.excerpt-in-select2').select2();
 
     /**
      * Readmore preview in options
@@ -112,6 +170,141 @@ jQuery(document).ready(function($){
             $('#ecae_ajax_preview_button').html(response);
         });
     }
+
+    /**
+     * location_settings_type
+     */
+    var location_settings_type = $('input[name="tonjoo_ecae_options[location_settings_type]"]').val();
+    $('#' + location_settings_type).addClass('button-primary');
+
+    $('.location-settings-btn').click(function(){
+        var id = $(this).attr('id');
+
+        $('.location-settings-form').hide();
+        $('#' + id + '-form').fadeIn();
+        $('.location-settings-btn').removeClass('button-primary');
+        $(this).addClass('button-primary');
+        $('input[name="tonjoo_ecae_options[location_settings_type]"]').val(id);
+    });
+
+    /**
+     * CloneYa
+     */ 
+    $("#page-excerpt-clone .ordinary-select-2").children("select").select2();
+
+    var number = 0;
+
+    if($("#page-excerpt-clone .toclone").length > 0)
+    {
+        number = $("#page-excerpt-clone .toclone").length;
+    }
+
+    $('#page-excerpt-clone').cloneya()
+    .on('clone_before_clone', function(event, toclone, newclone) {
+        $("#page-excerpt-clone .ordinary-select-2")
+            .children("select")
+            .select2("destroy")
+            .end();
+    })
+    .on('clone_after_append', function(event, toclone, newclone) {
+        $("#page-excerpt-clone .ordinary-select-2").children("select").select2();
+
+        $(newclone).find("select[class='page_category_select']").attr('name', 'page_category['+ number +'][]');
+        $(newclone).find("select[class='page_post_type_select']").attr('name', 'page_post_type['+ number +'][]');
+
+        number++;
+    });
+
+    /**
+     * Toogle display advanced options
+     */
+    $('select[name = "tonjoo_ecae_options[advanced_home]"]').on('change', function(){
+        if($(this).val() == 'selection')
+        {
+            $('.advanced_home').show();
+            $('.advanced_home_width').show();
+        }
+        else if($(this).val() == 'all')
+        {
+            $('.advanced_home').hide();
+            $('.advanced_home_width').show();
+        }
+        else
+        {
+            $('.advanced_home').hide();
+            $('.advanced_home_width').hide();
+        }
+    })
+
+    $('select[name = "tonjoo_ecae_options[advanced_frontpage]"]').on('change', function(){
+        if($(this).val() == 'selection')
+        {
+            $('.advanced_frontpage').show();
+        }
+        else if($(this).val() == 'all')
+        {
+            $('.advanced_frontpage').hide();
+            $('.advanced_frontpage_width').show();
+        }
+        else
+        {
+            $('.advanced_frontpage').hide();
+            $('.advanced_frontpage_width').hide();
+        }
+    })
+
+    $('select[name = "tonjoo_ecae_options[advanced_archive]"]').on('change', function(){
+        if($(this).val() == 'selection')
+        {
+            $('.advanced_archive').show();
+        }
+        else if($(this).val() == 'all')
+        {
+            $('.advanced_archive').hide();
+            $('.advanced_archive_width').show();
+        }
+        else
+        {
+            $('.advanced_archive').hide();
+            $('.advanced_archive_width').hide();
+        }
+    })
+
+    $('select[name = "tonjoo_ecae_options[advanced_search]"]').on('change', function(){
+        if($(this).val() == 'selection')
+        {
+            $('.advanced_search').show();
+        }
+        else if($(this).val() == 'all')
+        {
+            $('.advanced_search').hide();
+            $('.advanced_search_width').show();
+        }
+        else
+        {
+            $('.advanced_search').hide();
+            $('.advanced_search_width').hide();
+        }
+    })
+
+    $('select[name = "tonjoo_ecae_options[advanced_page_main]"]').on('change', function(){
+        if($(this).val() == 'all')
+        {
+            $('.page_all').show();
+            $('.page_selection').hide();
+        }
+        else if($(this).val() == 'selection')
+        {
+            $('.page_all').show();
+            $('.page_selection').show();
+        }
+        else
+        {
+            $('.page_all').hide();
+            $('.page_selection').hide();
+        }
+    })
+
 
     /**
      * Run on start

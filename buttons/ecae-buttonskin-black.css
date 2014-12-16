@@ -6,12 +6,12 @@
 	font-size: 14px;
 }
 
-.ecae-button.ecae-buttonskin-black a {
+.ecae-button.ecae-buttonskin-black a.ecae-link {
 	text-decoration: none;
 	font-size: inherit;
 }
 
-.ecae-button.ecae-buttonskin-black a {	
+.ecae-button.ecae-buttonskin-black a.ecae-link {	
 	padding: 7px 12px;
 	border-width: 2px;
 	border-style: solid;
@@ -25,7 +25,7 @@
 	background: #222;
 }
 
-.ecae-button.ecae-buttonskin-black a:hover {	
+.ecae-button.ecae-buttonskin-black a.ecae-link:hover {	
 	color: #fff;
 	border-color: #333;
 	background-color: #333;

@@ -12,3 +12,16 @@
 #ace_editor_value {
 	display: none;
 }
+
+h2 .nav-tab {
+	font-weight: 600;
+}
+
+.ordinary-select-2 .select2-container {
+	width: 300px;
+}
+
+#opt-location select,
+#opt-location input {
+	width: 300px;
+}

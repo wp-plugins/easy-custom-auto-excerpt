@@ -84,9 +84,17 @@ It will used, instead of the automatically generated one.
 == Screenshots ==
 
 1. Easy Custom Auto Excerpt on action.
-2. Complete setting options (with premium feature installed). Easy to configure.
+2. General Options.
+3. Advanced Excerpt Location Options.
+4. Read More Button Options.
 
 == Changelog ==
+
+= 2.1.5 =
+* Add new advanced excerpt location options
+* Add new excerpt size options in each location
+* Improved translation
+* Fix known bugs
 
 = 2.1.0 =
 * Fix word preserved for word excerpt method

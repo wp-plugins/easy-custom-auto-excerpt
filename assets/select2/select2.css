@@ -363,6 +363,13 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
     display: list-item;
     background-image: none;
     border: 1px solid #FFF;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+
+.select2-results li.select2-result-with-children {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .select2-results li.select2-result-with-children > .select2-result-label {
@@ -383,7 +390,7 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
               user-select: none;
               
      /* frs */
-    height: 60px;
+    /* height: 60px; */
     width: 400px;
     vertical-align: middle;
     display: table-cell;
@@ -407,9 +414,9 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
 }
 
 .select2-results .select2-highlighted {
-    /*background: #3875d7;*/
+    /* background: #eaeaea; */
     /*color: #fff;*/
-    border: 1px solid #666;
+    border: 1px solid #DDDDDD;
 }
 
 .select2-results li em {
@@ -494,6 +501,7 @@ disabled look for disabled choices in the results dropdown
     border: 1px solid #aaa;
     cursor: text;
     overflow: hidden;
+    padding-right: 5px;
 
     background-color: #fff;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eee), color-stop(15%, #fff));
@@ -630,7 +638,6 @@ disabled look for disabled choices in the results dropdown
 }
 /* end multiselect */
 
-
 .select2-result-selectable .select2-match,
 .select2-result-unselectable .select2-match {
     text-decoration: underline;
@@ -665,12 +672,12 @@ disabled look for disabled choices in the results dropdown
 /* Retina-ize icons */
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)  {
-  .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
-      background-image: url('select2x2.png') !important;
-      background-repeat: no-repeat !important;
-      background-size: 60px 40px !important;
-  }
-  .select2-search input {
-      background-position: 100% -21px !important;
-  }
+    .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
+        background-image: url('select2x2.png') !important;
+        background-repeat: no-repeat !important;
+        background-size: 60px 40px !important;
+    }
+    .select2-search input {
+        background-position: 100% -21px !important;
+    }
 }

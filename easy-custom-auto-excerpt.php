@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.1.0
+Version: 2.1.5
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.1.0');
+define("ECAE_VERSION", '2.1.5');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -47,9 +47,12 @@ function tonjoo_ecae_donate($links)
 
 
 /**
- * admin_enqueue_scripts
+ * admin_enqueue_scripts - equeue on plugin page only
  */
-add_action('admin_enqueue_scripts', 'ecae_admin_enqueue_scripts', 100);
+if (strpos($_SERVER['REQUEST_URI'], "tonjoo_excerpt") !== false)
+{
+    add_action('admin_enqueue_scripts', 'ecae_admin_enqueue_scripts');
+}
 
 function ecae_admin_enqueue_scripts()
 {
@@ -76,6 +79,7 @@ function ecae_admin_enqueue_scripts()
         // javascript
         wp_enqueue_script('ace-js',plugin_dir_url( __FILE__ )."assets/ace-min-noconflict-css-monokai/ace.js",array(),ECAE_VERSION);
         wp_enqueue_script('select2-js',plugin_dir_url( __FILE__ )."assets/select2/select2.js",array(),ECAE_VERSION);  
+        wp_enqueue_script('cloneya-js',plugin_dir_url( __FILE__ )."assets/jquery-cloneya.min.js",array(),ECAE_VERSION);  
 
         // css
         wp_enqueue_style('select2-css',plugin_dir_url( __FILE__ )."assets/select2/select2.css",array(),ECAE_VERSION);
@@ -251,7 +255,13 @@ function ecae_premium_notice()
     if (! $is_ignore_notice  && ! function_exists("is_ecae_premium_exist")) 
     {
         echo '<div class="updated"><p>';
-        printf(__('Get 40+ read more button style, <a href="%1$s" target="_blank">Get Easy Custom Auto Excerpt Premium !</a> <span style="float:right;"><a href="%2$s" style="color:#a00;">Don\'t bug me again</a> <a href="%3$s" class="button button-primary" style="margin:-5px -5px 0 5px;vertical-align:baseline;">Not Now</a></span>'), 'https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/', '?ecae_premium_nag_ignore=forever', '?ecae_premium_nag_ignore=later');
+
+        printf(__('Get 40+ read more button style, %1$s Get Easy Custom Auto Excerpt Premium ! %2$s Do not bug me again %3$s Not Now %4$s',TONJOO_ECAE), 
+            '<a href="https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/" target="_blank">', 
+            '</a><span style="float:right;"><a href="?ecae_premium_nag_ignore=forever" style="color:#a00;">', 
+            '</a> <a href="?ecae_premium_nag_ignore=later" class="button button-primary" style="margin:-5px -5px 0 5px;vertical-align:baseline;">',
+            '</a></span>');
+        
         echo "</p></div>";
     }
 }
@@ -266,6 +276,14 @@ function ecae_premium_nag_ignore()
     if (isset($_GET['ecae_premium_nag_ignore']) && $_GET['ecae_premium_nag_ignore'] == 'forever') 
     {
         update_user_meta($user_id, 'ecae_premium_ignore_notice', 'forever');
+
+        /**
+         * Redirect
+         */
+        $location = admin_url("options-general.php?page=tonjoo_excerpt") . '&settings-updated=true';
+        echo "<meta http-equiv='refresh' content='0;url=$location' />";
+        echo "<h2>Loading...</h2>";
+        exit();
     }
     else if (isset($_GET['ecae_premium_nag_ignore']) && $_GET['ecae_premium_nag_ignore'] == 'later') 
     {
@@ -282,6 +300,14 @@ function ecae_premium_nag_ignore()
         {
             update_user_meta($user_id, 'ecae_premium_ignore_notice', 'forever');
         }
+
+        /**
+         * Redirect
+         */
+        $location = admin_url("options-general.php?page=tonjoo_excerpt") . '&settings-updated=true';
+        echo "<meta http-equiv='refresh' content='0;url=$location' />";
+        echo "<h2>Loading...</h2>";
+        exit();
     }
 }
 
@@ -360,51 +386,247 @@ function tonjoo_ecae_execute($content, $width = 400)
         }
     }
     
-    if ($options['home'] == "yes" && is_home()) {
-        return tonjoo_ecae_excerpt($content, $width, $justify);
-    }
-
-    if ($options['front_page'] == "yes" && is_front_page()) {
-        return tonjoo_ecae_excerpt($content, $width, $justify);
-    }
-    
-    if ($options['archive'] == "yes" && is_archive()) {
-        return tonjoo_ecae_excerpt($content, $width, $justify);
-    }
-
-    /** 
-     * excerpt in pages 
-     */
-    $excerpt_in_page = $options['excerpt_in_page'];
-    $excerpt_in_page = trim($excerpt_in_page);
-
-    //prevent white space explode
-    if($excerpt_in_page!='')
+    if($options['location_settings_type'] == 'basic')
     {
-        $excerpt_in_page = explode('|',$excerpt_in_page);
+        if ($options['home'] == "yes" && is_home()) {
+            return tonjoo_ecae_excerpt($content, $width, $justify);
+        }
+
+        if ($options['front_page'] == "yes" && is_front_page()) {
+            return tonjoo_ecae_excerpt($content, $width, $justify);
+        }
+
+        if ($options['search'] == "yes" && is_search()) {
+            return tonjoo_ecae_excerpt($content, $width, $justify);
+        }
+        
+        if ($options['archive'] == "yes" && is_archive()) {
+            return tonjoo_ecae_excerpt($content, $width, $justify);
+        }
+
+        /** 
+         * excerpt in pages 
+         */
+        $excerpt_in_page = $options['excerpt_in_page'];
+        $excerpt_in_page = trim($excerpt_in_page);
+
+        if($excerpt_in_page!='')
+        {
+            $excerpt_in_page = explode('|',$excerpt_in_page);
+        }
+        else
+        {
+            $excerpt_in_page = array();
+        }
+
+        foreach ($excerpt_in_page as $key => $value)
+        {
+            if(is_page($value))
+            {
+                return tonjoo_ecae_excerpt($content, $width, $justify);
+
+                break;
+            }
+        }
     }
     else
     {
-        $excerpt_in_page = array();
-    }
+        $advExcLoc = new advExcLoc($options,$content,$width,$justify);
 
-    foreach ($excerpt_in_page as $key => $value)
-    {
-        if(is_page($value)) return tonjoo_ecae_excerpt($content, $width, $justify);
+        if(is_home()){ 
+            $options['excerpt_method'] = $advExcLoc->get_excerpt_method('advanced_home');
+            return $advExcLoc->do_excerpt('advanced_home','home_post_type','home_category');
+        }
+
+        if(is_front_page()){ 
+            $options['excerpt_method'] = $advExcLoc->get_excerpt_method('advanced_frontpage');
+            return $advExcLoc->do_excerpt('advanced_frontpage','frontpage_post_type','frontpage_category');
+        }
+
+        if(is_archive()){
+            $options['excerpt_method'] = $advExcLoc->get_excerpt_method('advanced_archive');
+            return $advExcLoc->do_excerpt('advanced_archive','archive_post_type','archive_category');
+        }
+
+        if(is_search()){
+            $options['excerpt_method'] = $advExcLoc->get_excerpt_method('advanced_search');
+            return $advExcLoc->do_excerpt('advanced_search','search_post_type','search_category');
+        }
+
+        // Page Excerpt
+        if($options['advanced_page_main'] != 'disable')
+        {
+            $type = 'advanced_page_main';
+            $excerpt_in_page = $options['excerpt_in_page_advanced'];
+            $options['excerpt_method'] = $advExcLoc->get_excerpt_method($type);
+
+            // excerpt size
+            if(isset($options[$type . '_width']) && $options[$type . '_width'] > 0)
+            {
+                $width = $options[$type . '_width'];
+            }
+
+            if(is_array($excerpt_in_page))
+            {
+                foreach ($excerpt_in_page as $key => $value)
+                {
+                    if(is_page($value))
+                    {
+                        return tonjoo_ecae_excerpt($content, $width, $justify);
+
+                        break;
+                    }
+                }
+            }            
+
+            if($options['advanced_page_main'] == 'selection')
+            {
+                $advanced_page = $options['advanced_page'];
+                $page_post_type = $options['page_post_type'];
+                $page_category = $options['page_category'];
+
+                if(count($advanced_page) > 0)
+                {
+                    foreach ($advanced_page as $key => $value) 
+                    {
+                        if(is_page($value))
+                        {
+                            $return['data'] = $content;
+                            $return['excerpt'] = false;
+
+                            if(isset($page_post_type[$key]))
+                                $return = $advExcLoc->excerpt_in_post_type($page_post_type[$key],$width);
+                    
+                            if($return['excerpt'] == false)
+                            {
+                                if(isset($page_category[$key]))
+                                    $return = $advExcLoc->excerpt_in_category($page_category[$key],$width);
+                                
+                                return $return['data'];
+                            }
+                            else return $return['data'];
+                        }
+                    }
+                }
+            }            
+            // end advanced_page_main
+        }
+        // end location_settings_type
     }
     
-
     /**
-     * last location check
+     * else
      */
-    if ($options['search'] == "yes" && is_search()) {
-        return tonjoo_ecae_excerpt($content, $width, $justify);
-    }    
-    else {
-        return $content;
-    }
+    return $content;
 }
 
+/**
+ * Class advanced excerpt location
+ */
+class advExcLoc
+{ 
+    function __construct($options,$content,$width,$justify)
+    {
+        $this->options = $options;
+        $this->content = $content;
+        $this->width = $width;
+        $this->justify = $justify;
+    }
+
+    function do_excerpt($type,$post_type,$category)
+    {
+        // excerpt size
+        $width = $this->width;
+
+        if(isset($this->options[$type . '_width']) && $this->options[$type . '_width'] > 0)
+        {
+            $width = $this->options[$type . '_width'];
+        }
+
+        // excerpt
+        switch ($this->options[$type]) {
+            case 'all':
+                return tonjoo_ecae_excerpt($this->content,$width,$this->justify);
+                break;
+
+            case 'selection':
+                $return = $this->excerpt_in_post_type($this->options[$post_type],$width);
+         
+                if($return['excerpt'] == false)
+                {
+                    $return = $this->excerpt_in_category($this->options[$category],$width);
+                    return $return['data'];
+                }
+                else return $return['data'];
+            
+            default:
+                return $this->content;
+                break;
+        }
+    }
+
+    function get_excerpt_method($type)
+    {
+        if(isset($this->options[$type . '_width']) && $this->options[$type . '_width'] > 0)
+        {
+            return 'word';
+        }
+        else return $this->options['excerpt_method'];
+    }
+
+    function excerpt_in_post_type($opt_post_type,$width)
+    {
+        /**
+         * excerpt in post type
+         */
+        $return['data'] = $this->content;
+        $return['excerpt'] = false;
+
+        $current_post_type = get_post_type(get_the_ID());
+
+        $excerpt_in_post_type = $opt_post_type;
+
+        if(is_array($excerpt_in_post_type) && in_array($current_post_type, $excerpt_in_post_type))
+        {
+            $return['data'] = tonjoo_ecae_excerpt($this->content, $width, $this->justify);
+            $return['excerpt'] = true;
+        }
+
+        return $return;
+    }
+
+    function excerpt_in_category($opt_category,$width)
+    {
+        /**
+         * excerpt in category
+         */
+        $return['data'] = $this->content;
+        $return['excerpt'] = false;
+
+        $taxonomies = get_the_taxonomies(get_the_ID());
+
+        foreach ($taxonomies as $key => $value) 
+        {
+            $taxonomy = $key;
+            $category = wp_get_post_terms(get_the_ID(),$taxonomy);
+
+            foreach ($category as $n) {
+                $current_category = $n->term_id;
+                $excerpt_in_category = $opt_category;
+
+                if(is_array($excerpt_in_category) && in_array($current_category, $excerpt_in_category))
+                {
+                    $return['data'] = tonjoo_ecae_excerpt($this->content, $width, $this->justify);
+                    $return['excerpt'] = true;
+
+                    break 2;
+                }
+            }        
+        }
+
+        return $return;
+    }
+}
 
 function tonjoo_ecae_excerpt($content, $width, $justify)
 {
@@ -730,13 +952,17 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $readmore_link = " <a class='ecae-link' href='$link'><span>{$options['read_more']}</span></a>";
         $readmore = "<p class='ecae-button {$button_skin[0]}' style='text-align:{$options['read_more_align']};' >$read_more_text_before $readmore_link</p>";
 
-        // always_show_read_more
+        // button_display_option
         if(! strpos($options['excerpt_method'],'-paragraph'))
         {
-            if($options['always_show_read_more'] == 'yes')
+            if($options['button_display_option'] == 'always_show')
             {
                 $content = str_replace('<!-- READ MORE TEXT -->', '', $content);
                 $content = $content . $readmore;
+            }
+            else if($options['button_display_option'] == 'always_hide')
+            {
+                $content = str_replace('<!-- READ MORE TEXT -->', '', $content);
             }
             else
             {
@@ -762,10 +988,14 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $len_content = strlen(wp_kses($content,array())) + 1;  // 1 is a difference between them
         $len_content_pure = strlen(wp_kses($content_pure,array()));
 
-        // always_show_read_more
-        if($options['always_show_read_more'] == 'yes')
+        // button_display_option
+        if($options['button_display_option'] == 'always_show')
         {
             $content = $content . $readmore;
+        }
+        else if($options['button_display_option'] == 'always_hide')
+        {
+            $content = $content;
         }
         else 
         {
@@ -861,8 +1091,8 @@ class eace_content_regex
                         $pos = strpos($text, ' ', $overflow);
                         $holder_str = substr($text,0,$pos);
 
-                        // delete last non alphanumeric character
-                        $holder_str = preg_replace("/[^A-Za-z0-9 ]$/", '', $holder_str);
+                        // delete last non alphanumeric character (save the ">", because it's html end markup)
+                        $holder_str = preg_replace('/[`!@#$%^&*()_+=\-\[\]\';,.\/{}|":<?~\\\\]$/', '', $holder_str);
                         
                         $holder_str = wp_kses($holder_str,array()); 
 

@@ -1,7 +1,7 @@
 <?php
 
 function tonjoo_ecae_load_default(&$options){
-	if(!is_numeric($options['width'])){
+	if(!isset($options['width']) || !is_numeric($options['width'])){
 		$options['width']=500;		
 	}
 	if(!isset($options['excerpt_method'])){
@@ -46,6 +46,12 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['excerpt_in_page'])){
 		$options['excerpt_in_page']='';		
 	}
+	if(!isset($options['excerpt_in_post_type']) || !function_exists('is_ecae_premium_exist')){
+		$options['excerpt_in_post_type']='';		
+	}
+	if(!isset($options['excerpt_in_cat']) || !function_exists('is_ecae_premium_exist')){
+		$options['excerpt_in_cat']='';		
+	}
 	if(!isset($options['justify'])){
 		$options['justify']='no';		
 	}
@@ -65,13 +71,16 @@ function tonjoo_ecae_load_default(&$options){
 		$options['special_method']='no';
 	}
 
-	if(!isset($options['always_show_read_more'])){
-		$options['always_show_read_more']='no';
-	}
+	if(!isset($options['button_display_option'])){
+		$button_display_option = 'normal';
+		
+		if(isset($options['always_show_read_more']) && $options['always_show_read_more'] == 'yes')
+		{
+			$button_display_option = 'always_show';
+		}
 
-	// if(!isset($options['featured_image_excerpt'])){
-	// 	$options['featured_image_excerpt']='yes';		
-	// }
+		$options['button_display_option'] = $button_display_option;
+	}
 
 	if(!isset($options['read_more_text_before'])){
 		$options['read_more_text_before']='';		
@@ -103,6 +112,166 @@ function tonjoo_ecae_load_default(&$options){
 
 	if(!isset($options['button_font_size'])){
 		$options['button_font_size']="14";
+	}
+
+	if(!isset($options['location_settings_type'])){
+		$options['location_settings_type']="basic";
+	}
+
+	/**
+	 * Home Page Excerpt
+	 */
+	if(!isset($options['advanced_home'])){
+		$options['advanced_home']="all";
+	}
+	if(!isset($options['advanced_home_width']) || !is_numeric($options['advanced_home_width'])){
+		$options['advanced_home_width']=0;		
+	}
+	if(!isset($options['home_post_type'])){
+		$options['home_post_type']=array();
+	}
+	else
+	{
+		$options['home_post_type']=unserialize($options['home_post_type']);
+	}
+	if(!isset($options['home_category'])){
+		$options['home_category']=array();
+	}
+	else
+	{
+		$options['home_category']=unserialize($options['home_category']);
+	}
+
+	/**
+	 * Front Page Excerpt
+	 */
+	if(!isset($options['advanced_frontpage'])){
+		$options['advanced_frontpage']="all";
+	}
+	if(!isset($options['advanced_frontpage_width']) || !is_numeric($options['advanced_frontpage_width'])){
+		$options['advanced_frontpage_width']=0;		
+	}
+	if(!isset($options['frontpage_post_type'])){
+		$options['frontpage_post_type']=array();
+	}
+	else
+	{
+		$options['frontpage_post_type']=unserialize($options['frontpage_post_type']);
+	}
+	if(!isset($options['frontpage_category'])){
+		$options['frontpage_category']=array();
+	}
+	else
+	{
+		$options['frontpage_category']=unserialize($options['frontpage_category']);
+	}
+
+	/**
+	 * Archive Page Excerpt
+	 */
+	if(!isset($options['advanced_archive'])){
+		$options['advanced_archive']="all";
+	}
+	if(!isset($options['advanced_archive_width']) || !is_numeric($options['advanced_archive_width'])){
+		$options['advanced_archive_width']=0;		
+	}
+	if(!isset($options['archive_post_type'])){
+		$options['archive_post_type']=array();
+	}
+	else
+	{
+		$options['archive_post_type']=unserialize($options['archive_post_type']);
+	}
+	if(!isset($options['archive_category'])){
+		$options['archive_category']=array();
+	}
+	else
+	{
+		$options['archive_category']=unserialize($options['archive_category']);
+	}
+
+	/**
+	 * Search Page Excerpt
+	 */
+	if(!isset($options['advanced_search'])){
+		$options['advanced_search']="all";
+	}
+	if(!isset($options['advanced_search_width']) || !is_numeric($options['advanced_search_width'])){
+		$options['advanced_search_width']=0;		
+	}
+	if(!isset($options['search_post_type'])){
+		$options['search_post_type']=array();
+	}
+	else
+	{
+		$options['search_post_type']=unserialize($options['search_post_type']);
+	}
+	if(!isset($options['search_category'])){
+		$options['search_category']=array();
+	}
+	else
+	{
+		$options['search_category']=unserialize($options['search_category']);
+	}
+
+	/**
+	 * Page Excerpt
+	 */
+	$page_post_type = unserialize($options['page_post_type']);
+	
+	if(!isset($options['advanced_page_main'])){
+		$options['advanced_page_main']="disable";
+	}
+	if(!isset($options['advanced_page_main_width']) || !is_numeric($options['advanced_page_main_width'])){
+		$options['advanced_page_main_width']=0;		
+	}
+	if(!isset($options['excerpt_in_page_advanced'])){
+		$options['excerpt_in_page_advanced']=array();
+	}
+	else
+	{
+		$options['excerpt_in_page_advanced']=unserialize($options['excerpt_in_page_advanced']);
+	}
+	if(!isset($options['advanced_page'])){
+		$options['advanced_page']=array();
+	}
+	else
+	{
+		$options['advanced_page']=unserialize($options['advanced_page']);
+	}
+	if(!isset($options['page_post_type'])){
+		$options['page_post_type']=array();
+	}
+	else
+	{
+		$page_post_type = unserialize($options['page_post_type']);
+		
+		if(is_array($page_post_type))
+		{
+			$options['page_post_type'] = array();
+
+			$i = 0;
+			foreach ($page_post_type as $key => $value) {
+				$options['page_post_type'][$i++] = $value;
+			}
+		}
+	}
+	if(!isset($options['page_category'])){
+		$options['page_category']=array();
+	}
+	else
+	{
+		$page_category = unserialize($options['page_category']);
+
+		if(is_array($page_category))
+		{
+			$options['page_category'] = array();
+
+			$i = 0;
+			foreach ($page_category as $key => $value) {
+				$options['page_category'][$i++] = $value;
+			}
+		}
 	}
 
 	return $options;
