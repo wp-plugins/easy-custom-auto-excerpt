@@ -65,8 +65,8 @@ Please have a time to understand how this plugin is generating excerpt :
 
 Translation :
 
-1. Bahasa Indonesia : Todi ~ @todiadiyatmo
-2. Spanish : Andrew Kurtis ~ webhostinghub.com
+1. Bahasa Indonesian : Todi ~ @todiadiyatmo
+2. Serbian : Ogi Djuraskovic ~ firstsiteguide.com
 
 
 == Installation ==
@@ -89,6 +89,9 @@ It will used, instead of the automatically generated one.
 4. Read More Button Options.
 
 == Changelog ==
+
+= 2.1.6 =
+* Add Serbian translation (thanks to Ogi Djuraskovic)
 
 = 2.1.5 =
 * Add new advanced excerpt location options
