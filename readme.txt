@@ -35,7 +35,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on [premium version](https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/ "premium version")
+Get the premium version on [premium version](http://tonjoo.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
 
 
 **Plugin Demo**
@@ -89,6 +89,14 @@ It will used, instead of the automatically generated one.
 4. Read More Button Options.
 
 == Changelog ==
+
+= 2.2.0 =
+* Add disable excerpt on RSS Feed option
+* Add button shortcode
+* Add German translation
+* Add French translation
+* Add Spanish translation
+* Fix known bugs
 
 = 2.1.6 =
 * Add Serbian translation (thanks to Ogi Djuraskovic)

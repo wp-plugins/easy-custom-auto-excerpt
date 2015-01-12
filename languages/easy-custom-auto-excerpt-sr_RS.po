@@ -1,31 +1,31 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy Custom Auto Excerpt\n"
-"POT-Creation-Date: 2014-12-16 12:35+0700\n"
-"PO-Revision-Date: 2014-12-18 12:27+0100\n"
+"POT-Creation-Date: 2015-01-12 17:03+0700\n"
+"PO-Revision-Date: 2015-01-12 17:14+0700\n"
 "Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
 "Language-Team: Tonjoo <todiadiyatmo@gmail.com>\n"
 "Language: Indonesia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../options-page-location.php:76 ../options-page-readmore.php:22
+#: ../options-page-location.php:76 ../options-page-readmore.php:21
 #: ../options-page-general.php:53 ../options-page-general.php:75
-#: ../options-page-general.php:97 ../options-page-general.php:119
-#: ../options-page-general.php:131 ../options-page-general.php:144
-#: ../options-page-general.php:188
+#: ../options-page-general.php:97 ../options-page-general.php:130
+#: ../options-page-general.php:142 ../options-page-general.php:155
+#: ../options-page-general.php:199
 msgid "No"
 msgstr "Ne"
 
-#: ../options-page-location.php:80 ../options-page-readmore.php:26
+#: ../options-page-location.php:80 ../options-page-readmore.php:25
 #: ../options-page-general.php:57 ../options-page-general.php:79
-#: ../options-page-general.php:101 ../options-page-general.php:123
-#: ../options-page-general.php:135
+#: ../options-page-general.php:101 ../options-page-general.php:134
+#: ../options-page-general.php:146
 msgid "Yes"
 msgstr "Da"
 
@@ -196,53 +196,53 @@ msgstr "Sačuvaj opcije"
 msgid "Save your changes to apply the options"
 msgstr "Sačuvajte svoje promene da biste primenili opcije"
 
-#: ../options-page-readmore.php:7
+#: ../options-page-readmore.php:6
 msgid "Left (default)"
 msgstr "Levo (podrazumevano)"
 
-#: ../options-page-readmore.php:11 ../options-page-general.php:160
-#: ../options-page-general.php:241
+#: ../options-page-readmore.php:10 ../options-page-general.php:171
+#: ../options-page-general.php:252
 msgid "Center"
 msgstr "U sredini"
 
-#: ../options-page-readmore.php:15 ../options-page-general.php:152
-#: ../options-page-general.php:237 ../options-page-general.php:296
+#: ../options-page-readmore.php:14 ../options-page-general.php:163
+#: ../options-page-general.php:248 ../options-page-general.php:307
 msgid "Right"
 msgstr "Desno"
 
-#: ../options-page-readmore.php:33
+#: ../options-page-readmore.php:32
 msgid "Normal"
 msgstr "Normalan"
 
-#: ../options-page-readmore.php:37
+#: ../options-page-readmore.php:36
 msgid "Always Show"
 msgstr "Uvek prikaži"
 
-#: ../options-page-readmore.php:41
+#: ../options-page-readmore.php:40
 msgid "Always Hide"
 msgstr "Uvek sakrij"
 
-#: ../options-page-readmore.php:47
+#: ../options-page-readmore.php:46
 msgid "Read more text"
 msgstr "Tekst ‘Pročitajte više’"
 
-#: ../options-page-readmore.php:50
+#: ../options-page-readmore.php:49
 msgid "If you do not want to display it, fill with \"-\" (without quote)"
 msgstr "Ako ne želite da ga prikazujete, napišite \"-\" (bez navodnika)"
 
-#: ../options-page-readmore.php:54
+#: ../options-page-readmore.php:53
 msgid "Text before link"
 msgstr "Tekst pre linka"
 
-#: ../options-page-readmore.php:57
+#: ../options-page-readmore.php:56
 msgid "Text before read more link"
 msgstr "Tekst pre linka ‘Pročitajte više’"
 
-#: ../options-page-readmore.php:63
+#: ../options-page-readmore.php:62
 msgid "Read more align"
 msgstr "Poravnaj ‘Pročitajte više’"
 
-#: ../options-page-readmore.php:70
+#: ../options-page-readmore.php:69
 msgid ""
 "Normal mode = show readmore button, only if content length is bigger than "
 "excerpt size"
@@ -250,11 +250,11 @@ msgstr ""
 "Normalan režim = prikaži taster ‘Pročitajte više’ samo ako je dužina "
 "sadržaja veća od veličine odlomka"
 
-#: ../options-page-readmore.php:71
+#: ../options-page-readmore.php:70
 msgid "Display option"
 msgstr "Opcija prikazivanja"
 
-#: ../options-page-readmore.php:85
+#: ../options-page-readmore.php:84
 #, php-format
 msgid ""
 "Purchase the %1$s Premium Edition %2$s to enable all button font and the "
@@ -263,27 +263,43 @@ msgstr ""
 "Kupite  %1$s Premium izdanje %2$s da biste aktivirali sve fontove tastera i "
 "premium dizajn tastera"
 
-#: ../options-page-readmore.php:87
+#: ../options-page-readmore.php:86
 msgid "The black and white button skins are free :)"
 msgstr "Crni i beli tasteri su besplatni :)"
 
-#: ../options-page-readmore.php:142
+#: ../options-page-readmore.php:141
 msgid "Button Font"
 msgstr "Font tastera"
 
-#: ../options-page-readmore.php:156
+#: ../options-page-readmore.php:155
 msgid "Button Font Size"
 msgstr "Veličina fonta tastera"
 
-#: ../options-page-readmore.php:240
+#: ../options-page-readmore.php:230
+msgid "Button Skin"
+msgstr "Button Skin"
+
+#: ../options-page-readmore.php:239
+msgid "Button Shortcode"
+msgstr "Button Shortcode"
+
+#: ../options-page-readmore.php:242
+msgid "You can manually add the button by put this shortcode to your post"
+msgstr "Možete ručno dodati dugme koje stavi ovo shortcode na vaš post"
+
+#: ../options-page-readmore.php:244
+msgid "Required \"strip shortcode options\" = No"
+msgstr "Potrebna  \"opcije strip shortcode \" = Ne"
+
+#: ../options-page-readmore.php:248
 msgid "Read More Live Preview"
 msgstr "‘Pročitajte više’ Pregled uživo"
 
-#: ../options-page-readmore.php:247
+#: ../options-page-readmore.php:255
 msgid "Custom CSS"
 msgstr "Prilagođeni CSS"
 
-#: ../options-page-readmore.php:251
+#: ../options-page-readmore.php:259
 msgid "Some css attribute need to use <code>!important</code> value to affect"
 msgstr ""
 "Neki css atribut mora da koristi vrednost <code>!važno</code> da bi imao "
@@ -345,68 +361,76 @@ msgid "Strip empty HTML tags"
 msgstr "Skini prazne HTML oznake"
 
 #: ../options-page-general.php:107
+msgid "Disable any excerpt on RSS feed"
+msgstr "Disable \"izvod\" na RSS Feed"
+
+#: ../options-page-general.php:108
+msgid "Disable on RSS Feed"
+msgstr "Disable \"izvod\" na RSS Feed"
+
+#: ../options-page-general.php:118
 msgid "Use this method only if there are any problem with the excerpt"
 msgstr "Koristite ovaj metod samo ako imate neki problem sa odlomkom"
 
-#: ../options-page-general.php:108
+#: ../options-page-general.php:119
 msgid "Special method"
 msgstr "Poseban metod"
 
-#: ../options-page-general.php:139
+#: ../options-page-general.php:150
 msgid "Content Options"
 msgstr "Opcije sadržaja"
 
-#: ../options-page-general.php:148 ../options-page-general.php:233
-#: ../options-page-general.php:314
+#: ../options-page-general.php:159 ../options-page-general.php:244
+#: ../options-page-general.php:325
 msgid "Left"
 msgstr "Levo"
 
-#: ../options-page-general.php:156
+#: ../options-page-general.php:167
 msgid "Justify"
 msgstr "Poravnaj"
 
-#: ../options-page-general.php:166
+#: ../options-page-general.php:177
 msgid "The plugin will try to align the text on the excerpt page"
 msgstr "Plugin će pokušati da poravna tekst na stranici odlomka"
 
-#: ../options-page-general.php:167
+#: ../options-page-general.php:178
 msgid "Text align"
 msgstr "Poravnaj tekst"
 
-#: ../options-page-general.php:173
+#: ../options-page-general.php:184
 msgid "Extra HTML markup"
 msgstr "Dodatne HTML oznake"
 
-#: ../options-page-general.php:176
+#: ../options-page-general.php:187
 msgid "Extra HTML markup to save. Use \"|\" (without quote) between markup"
 msgstr ""
 "Dodatne HTML oznake za čuvanje. Koristite \"|\" (bez navodnika) između oznaka"
 
-#: ../options-page-general.php:183
+#: ../options-page-general.php:194
 msgid "Display Image Options"
 msgstr "Prikaži opcije slika"
 
-#: ../options-page-general.php:192
+#: ../options-page-general.php:203
 msgid "Show All Images"
 msgstr "Prikaži sve slike"
 
-#: ../options-page-general.php:196
+#: ../options-page-general.php:207
 msgid "Show only First Image"
 msgstr "Prikaži samo prvu sliku"
 
-#: ../options-page-general.php:200
+#: ../options-page-general.php:211
 msgid "Use Featured Image"
 msgstr "Koristi uobličenu sliku"
 
-#: ../options-page-general.php:207
+#: ../options-page-general.php:218
 msgid "Content image"
 msgstr "Slika sadržaja"
 
-#: ../options-page-general.php:210
+#: ../options-page-general.php:221
 msgid "Display Image in excerpt"
 msgstr "Prikaži sliku u odlomku"
 
-#: ../options-page-general.php:219
+#: ../options-page-general.php:230
 #, php-format
 msgid ""
 "Purchase the %1$s Premium Edition %2$s to enable all display image options "
@@ -415,7 +439,7 @@ msgstr ""
 "Kupite %1$s Premium izdanje %2$s da biste aktivirali sve opcije prikazivanja "
 "slike koje slede"
 
-#: ../options-page-general.php:223
+#: ../options-page-general.php:234
 msgid ""
 "Image options below is only work for Content Image: Show Only First Image "
 "and Use Featured Image"
@@ -423,43 +447,43 @@ msgstr ""
 "Navedene opcije slike rade samo za sliku sadržaja: Prikaži samo prvu sliku i "
 "Koristi uobličenu sliku "
 
-#: ../options-page-general.php:229
+#: ../options-page-general.php:240
 msgid "None"
 msgstr "Nijedan"
 
-#: ../options-page-general.php:245
+#: ../options-page-general.php:256
 msgid "Float Left"
 msgstr "Pluta levo"
 
-#: ../options-page-general.php:249
+#: ../options-page-general.php:260
 msgid "Float Right"
 msgstr "Pluta desno"
 
-#: ../options-page-general.php:256
+#: ../options-page-general.php:267
 msgid "Image position"
 msgstr "Pozicija slike"
 
-#: ../options-page-general.php:259
+#: ../options-page-general.php:270
 msgid "Image position option"
 msgstr "Opcija pozicije slike"
 
-#: ../options-page-general.php:267
+#: ../options-page-general.php:278
 msgid "Image width"
 msgstr "Širina slike"
 
-#: ../options-page-general.php:285
+#: ../options-page-general.php:296
 msgid "Image margin"
 msgstr "Margina slike"
 
-#: ../options-page-general.php:287
+#: ../options-page-general.php:298
 msgid "Top"
 msgstr "Vrh"
 
-#: ../options-page-general.php:305
+#: ../options-page-general.php:316
 msgid "Bottom"
 msgstr "Dno"
 
-#: ../easy-custom-auto-excerpt.php:259
+#: ../easy-custom-auto-excerpt.php:279
 #, php-format
 msgid ""
 "Get 40+ read more button style, %1$s Get Easy Custom Auto Excerpt Premium ! "

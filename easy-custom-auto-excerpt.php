@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.1.6
+Version: 2.2.0
 Author: tonjoo
 Author URI: http://www.tonjoo.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.1.6');
+define("ECAE_VERSION", '2.2.0');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -43,6 +43,29 @@ function tonjoo_ecae_donate($links)
     }
 
     return $links;
+}
+
+
+/**
+ * ecae button shortcode
+ */
+add_shortcode('ecae_button', 'ecae_button_shortcode');
+function ecae_button_shortcode()
+{
+    $options = get_option('tonjoo_ecae_options');    
+    $options = tonjoo_ecae_load_default($options);
+
+    $button_skin = explode('-PREMIUM', $options['button_skin']);
+    $trim_readmore_before = trim($options['read_more_text_before']);
+
+    $read_more_text_before = empty($trim_readmore_before) ? $options['read_more_text_before'] : $options['read_more_text_before']."&nbsp;&nbsp;";
+    
+    $link = get_permalink();
+    $readmore_link = " <a class='ecae-link' href='$link'><span>{$options['read_more']}</span></a>";
+    $readmore = "<p class='ecae-button {$button_skin[0]}' style='text-align:{$options['read_more_align']};' >$read_more_text_before $readmore_link</p>";
+
+    if(is_single()) return "";
+    else return $readmore;
 }
 
 
@@ -98,9 +121,6 @@ add_action('wp_enqueue_scripts', 'ecae_wp_enqueue_scripts', 100);
 
 function ecae_wp_enqueue_scripts()
 {
-    //ambil options dari db
-    global $options;
-
     $options = get_option('tonjoo_ecae_options');    
     $options = tonjoo_ecae_load_default($options);
 
@@ -347,10 +367,12 @@ add_filter('the_content', 'tonjoo_ecae_execute', 10);
 
 function tonjoo_ecae_execute($content, $width = 400)
 {
-    global $options;
     global $content_pure;
 
-    if($options['special_method'] == 'yes')
+    $options = get_option('tonjoo_ecae_options');
+    $options = tonjoo_ecae_load_default($options);
+
+    if(isset($options['special_method']) && $options['special_method'] == 'yes')
     {
         global $is_main_query_ecae;
     
@@ -360,16 +382,25 @@ function tonjoo_ecae_execute($content, $width = 400)
 
     $content_pure = $content;
 
-    //if not post type FRS
+    //if post type is FRS
     if('pjc_slideshow' == get_post_type())
     {
         return $content;
 
         exit;
     }
+
+    // if RSS FEED
+    if(is_feed() && $options['disable_on_feed'] == 'yes')
+    {
+        return $content;
+        
+        exit;   
+    }
     
     $width   = $options['width'];
-    $justify = $options['justify'];    
+    $justify = $options['justify']; 
+
 
     /**
      * no limit number if 1st-paragraph mode
@@ -631,7 +662,9 @@ class advExcLoc
 function tonjoo_ecae_excerpt($content, $width, $justify)
 {
     global $post;
-    global $options;
+
+    $options = get_option('tonjoo_ecae_options');    
+    $options = tonjoo_ecae_load_default($options);
 
     $postmeta = get_post_meta($post->ID, 'ecae_meta', true);
 
@@ -1014,16 +1047,23 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     
     /**
      * custom css
-     */    
-    $style = "<style type='text/css'>";
-    $style.= $options["custom_css"];
+     */
+    $style = "";
+    $trimmed_custom_css = str_replace(' ', '', $options["custom_css"]);
+
+    if($trimmed_custom_css != '')
+    {
+        $style.= "<style type='text/css'>";
+        $style.= $options["custom_css"];
+        $style.= "</style>";
+    }
 
     if(function_exists('is_ecae_premium_exist') && isset($options["button_font_size"]))
     {
+        $style.= "<style type='text/css'>";
         $style.= '.ecae-button { font-size: '.$options["button_font_size"].'px !important; }';
+        $style.= "</style>";
     }
-    
-    $style.= "</style>";
 
     // remove empty html tags
     if($options["strip_empty_tags"] == 'yes')
@@ -1176,6 +1216,7 @@ function strip_empty_tags ($str, $repto = NULL)
         $str
     );
 }
+
 
 require_once(plugin_dir_path(__FILE__) . 'tonjoo-library.php');
 require_once(plugin_dir_path(__FILE__) . 'default.php');

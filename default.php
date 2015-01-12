@@ -66,6 +66,10 @@ function tonjoo_ecae_load_default(&$options){
 	if(!isset($options['strip_empty_tags'])){
 		$options['strip_empty_tags']='yes';		
 	}
+
+	if(!isset($options['disable_on_feed'])){
+		$options['disable_on_feed']='yes';
+	}
 	
 	if(!isset($options['special_method'])){
 		$options['special_method']='no';
@@ -216,9 +220,7 @@ function tonjoo_ecae_load_default(&$options){
 
 	/**
 	 * Page Excerpt
-	 */
-	$page_post_type = unserialize($options['page_post_type']);
-	
+	 */	
 	if(!isset($options['advanced_page_main'])){
 		$options['advanced_page_main']="disable";
 	}
@@ -256,7 +258,7 @@ function tonjoo_ecae_load_default(&$options){
 			}
 		}
 	}
-	if(!isset($options['page_category'])){
+	if(!isset($options['page_category']) || empty($options['page_category'])){
 		$options['page_category']=array();
 	}
 	else

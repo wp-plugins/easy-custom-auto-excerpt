@@ -1,5 +1,4 @@
 <?php
-// global $options;
 
 $readmore_align_options = array(
 	'0' => array(
@@ -228,7 +227,7 @@ else
 $option_select = array(
                 "name"=>"tonjoo_ecae_options[button_skin]",
                 "description" => "",
-                "label" => "Button Skin",
+                "label" => __("Button Skin",TONJOO_ECAE),
                 "value" => $button_skin_val,
                 "select_array" => $button_skin,
                 "id"=>"tonjoo-ecae-button_skin"
@@ -236,6 +235,15 @@ $option_select = array(
 
 tj_print_select_option($option_select);
 ?>
+
+<tr><td colspan=3><h3 class="meta-subtitle"><?php _e('Button Shortcode',TONJOO_ECAE) ?></h3></td></tr>
+<tr valign="top">
+	<th colspan=3>
+		<?php _e('You can manually add the button by put this shortcode to your post',TONJOO_ECAE) ?>: <code>[ecae_button]</code>
+		<br /><br />
+		<i><?php _e('Required "strip shortcode options" = No',TONJOO_ECAE) ?></i>
+	</th>
+</tr>
 
 <tr><td colspan=3><h3 class="meta-subtitle"><?php _e('Read More Live Preview',TONJOO_ECAE) ?></h3></td></tr>
 <tr>

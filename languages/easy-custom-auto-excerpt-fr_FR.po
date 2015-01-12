@@ -1,17 +1,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy Custom Auto Excerpt\n"
-"POT-Creation-Date: 2015-01-12 17:15+0700\n"
-"PO-Revision-Date: 2015-01-12 17:17+0700\n"
+"POT-Creation-Date: 2015-01-12 16:57+0700\n"
+"PO-Revision-Date: 2015-01-12 17:03+0700\n"
 "Last-Translator: Todi Adiyatmo Wijoyo <todiadiyatmo@tonjoo.com>\n"
 "Language-Team: Tonjoo <todiadiyatmo@gmail.com>\n"
-"Language: Indonesia\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../options-page-location.php:76 ../options-page-readmore.php:21
@@ -20,68 +21,68 @@ msgstr ""
 #: ../options-page-general.php:142 ../options-page-general.php:155
 #: ../options-page-general.php:199
 msgid "No"
-msgstr "Tidak"
+msgstr "Non"
 
 #: ../options-page-location.php:80 ../options-page-readmore.php:25
 #: ../options-page-general.php:57 ../options-page-general.php:79
 #: ../options-page-general.php:101 ../options-page-general.php:134
 #: ../options-page-general.php:146
 msgid "Yes"
-msgstr "Ya"
+msgstr "Oui"
 
 #: ../options-page-location.php:87
 msgid "Disable"
-msgstr "Dimatikan"
+msgstr "Désactiver"
 
 #: ../options-page-location.php:91
 msgid "All Content"
-msgstr "Semua Konten"
+msgstr "Tout le contenu"
 
 #: ../options-page-location.php:95
 msgid "Selected Post type and Categories"
-msgstr "Post type dan Categories yang dipilih"
+msgstr "Type de publication et catégories sélectionnés"
 
 #: ../options-page-location.php:103 ../options-page-location.php:404
 msgid "Search excerpt"
-msgstr "Excerpt Pencarian"
+msgstr "Recherche d'extrait"
 
 #: ../options-page-location.php:111 ../options-page-location.php:299
 msgid "Blog page excerpt"
-msgstr "Excerpt di halaman blog"
+msgstr "Extrait d'une page de blog"
 
 #: ../options-page-location.php:119 ../options-page-location.php:334
 msgid "Front page excerpt"
-msgstr "Excerpt Halaman Depan"
+msgstr "Extrait de la page d'accueil"
 
 #: ../options-page-location.php:127 ../options-page-location.php:369
 msgid "Archive excerpt"
-msgstr "Excerpt Arsip"
+msgstr "Extrait d'archive"
 
 #: ../options-page-location.php:150
 msgid "Basic"
-msgstr "Pengaturan Dasar"
+msgstr "De base"
 
 #: ../options-page-location.php:151
 msgid "Advanced"
-msgstr "Pengaturan Lanjutan"
+msgstr "Avancée"
 
 #: ../options-page-location.php:170
 msgid "Basic Settings"
-msgstr "Pengaturan Dasar"
+msgstr "Réglages de base"
 
 #: ../options-page-location.php:183 ../options-page-location.php:481
 msgid "Excerpt in page"
-msgstr "Excerpt di laman"
+msgstr "Extrait dans la page"
 
 #: ../options-page-location.php:293
 msgid "Blog Page Excerpt"
-msgstr "Excerpt di Halaman Blog"
+msgstr "Extrait d'Une Page De Blog"
 
 #: ../options-page-location.php:308 ../options-page-location.php:343
 #: ../options-page-location.php:378 ../options-page-location.php:413
 #: ../options-page-location.php:475 ../options-page-general.php:43
 msgid "Excerpt size"
-msgstr "Ukuran Excerpt"
+msgstr "Taille de l'extrait"
 
 #: ../options-page-location.php:310 ../options-page-location.php:345
 #: ../options-page-location.php:380 ../options-page-location.php:415
@@ -89,77 +90,78 @@ msgstr "Ukuran Excerpt"
 msgid ""
 "If greater than 0, the general excerpt size and method will be overridden"
 msgstr ""
-"Jika lebih besar dari 0, maka metode dan ukuran excerpt akan di ambil alih"
+"Si supérieur à 0, la taille générale de l'extrait et la méthode seront "
+"remplacés "
 
 #: ../options-page-location.php:314 ../options-page-location.php:349
 #: ../options-page-location.php:384 ../options-page-location.php:419
 msgid "Post type"
-msgstr "Post type"
+msgstr "Type de publication"
 
 #: ../options-page-location.php:321 ../options-page-location.php:356
 #: ../options-page-location.php:391 ../options-page-location.php:426
 msgid "Categories"
-msgstr "Kategori"
+msgstr "Catégories"
 
 #: ../options-page-location.php:328
 msgid "Front Page Excerpt"
-msgstr "Excerpt Halaman Depan"
+msgstr "Extrait De La Page d'Accueil"
 
 #: ../options-page-location.php:363
 msgid "Archive Excerpt"
-msgstr "Excerpt Arsip"
+msgstr "Extrait d'Archive"
 
 #: ../options-page-location.php:398
 msgid "Search Excerpt"
-msgstr "Excerpt Pencarian"
+msgstr "Recherche d'Extrait"
 
 #: ../options-page-location.php:434
 msgid "Page Excerpt"
-msgstr "Excerpt di laman"
+msgstr "Extrait De Page"
 
 #: ../options-page-location.php:451
 msgid "Page excerpt"
-msgstr "Excerpt di laman"
+msgstr "Extrait de page"
 
 #: ../options-page-location.php:505 ../options-page-location.php:547
 msgid "Page"
-msgstr "Laman"
+msgstr "Page"
 
 #: ../options-page-location.php:535 ../options-page-location.php:585
 msgid "New Page Excerpt"
-msgstr "Membuat Excerpt Baru di Laman"
+msgstr "Extrait De Nouvelle Page"
 
 #: ../options-page-location.php:536 ../options-page-location.php:586
 msgid "Remove"
-msgstr "Hapus"
+msgstr "Supprimer"
 
 #: ../options-page.php:22
 msgid "Easy Custom Auto Excerpt Options Page"
-msgstr "Halaman Opsi Tonjoo Easy Custom Auto Excerpt"
+msgstr "Facile Personalisé Auto Extrait Options Page"
 
 #: ../options-page.php:103
 msgid "Easy Custom Auto Excerpt Options"
-msgstr "Halaman Opsi Tonjoo Easy Custom Auto Excerpt"
+msgstr "Facile Personalisé Auto Extrait Options"
 
 #: ../options-page.php:106
 msgid "Easy Custom Auto Excerpt by"
-msgstr "Easy Custom Auto Excerpt oleh"
+msgstr "Facile Personalisé Auto Extrait par"
 
 #: ../options-page.php:108
 msgid "Plugin Page"
-msgstr "Halaman Plugin"
+msgstr "Page Plugin"
 
 #: ../options-page.php:109
 msgid "Please Rate :)"
-msgstr "Berikan Rating :)"
+msgstr "Noter s'Il Vous Plaît :)"
 
 #: ../options-page.php:110
 msgid "Comment"
-msgstr "Komentar"
+msgstr "Commenter"
 
 #: ../options-page.php:111
 msgid "Bug Report"
-msgstr "Laporkan Bug"
+msgstr "Rapport de Bug"
 
 #: ../options-page.php:112
 msgid "FAQ"
@@ -167,49 +169,49 @@ msgstr "FAQ"
 
 #: ../options-page.php:118
 msgid "Settings saved."
-msgstr "Setting telah disimpan"
+msgstr "Réglages enregistrés"
 
 #: ../options-page.php:133
 msgid "General Options"
-msgstr "Opsi Umum"
+msgstr "Options Générales"
 
 #: ../options-page.php:134
 msgid "Excerpt Location"
-msgstr "Lokasi Excerpt"
+msgstr "Extrait d'Emplacement"
 
 #: ../options-page.php:135 ../options-page.php:216
 msgid "Read More Button"
-msgstr "Tombol Read More"
+msgstr "Bouton Read More"
 
 #: ../options-page.php:186
 msgid "General Excerpt Options"
-msgstr "Opsi Umum Excerpt"
+msgstr "Options d'Extraits Généraux"
 
 #: ../options-page.php:201
 msgid "Excerpt Location Options"
-msgstr "Opsi Lokasi Excerpt"
+msgstr "Options d'Extraits d'Emplacement"
 
 #: ../options-page.php:232 ../options-page.php:237
 msgid "Save Options"
-msgstr "Simpan Opsi"
+msgstr "Options d'Enregistrement"
 
 #: ../options-page.php:234
 msgid "Save your changes to apply the options"
-msgstr "Simpan pengubahan anda untuk menerapkan opsi"
+msgstr "Sauvegardez vos changements pour appliquer les options"
 
 #: ../options-page-readmore.php:6
 msgid "Left (default)"
-msgstr "Kiri (default)"
+msgstr "Gauche (default)"
 
 #: ../options-page-readmore.php:10 ../options-page-general.php:171
 #: ../options-page-general.php:252
 msgid "Center"
-msgstr "Tengah"
+msgstr "Centre"
 
 #: ../options-page-readmore.php:14 ../options-page-general.php:163
 #: ../options-page-general.php:248 ../options-page-general.php:307
 msgid "Right"
-msgstr "Kanan"
+msgstr "Droite"
 
 #: ../options-page-readmore.php:32
 msgid "Normal"
@@ -217,45 +219,44 @@ msgstr "Normal"
 
 #: ../options-page-readmore.php:36
 msgid "Always Show"
-msgstr "Selalu Ditampilkan"
+msgstr "Toujours Montrer"
 
 #: ../options-page-readmore.php:40
 msgid "Always Hide"
-msgstr "Selalu Disembunyikan"
+msgstr "Toujours Cacher"
 
 #: ../options-page-readmore.php:46
 msgid "Read more text"
-msgstr "Text Read More"
+msgstr "Lire la suite"
 
 #: ../options-page-readmore.php:49
 msgid "If you do not want to display it, fill with \"-\" (without quote)"
 msgstr ""
-"Text Read More.Jika tidak ingin ada text read more, isi dengan \"-\" (tanpa "
-"petik)"
+"Si vous ne voulez pas l'afficher, remplissez avec  \"- \" (sans guillemets)"
 
 #: ../options-page-readmore.php:53
 msgid "Text before link"
-msgstr "Text sebelum tautan"
+msgstr "Texte avant le lien"
 
 #: ../options-page-readmore.php:56
 msgid "Text before read more link"
-msgstr "Text sebelum link read more"
+msgstr "Texte avant le lien lire la suite"
 
 #: ../options-page-readmore.php:62
 msgid "Read more align"
-msgstr "Opsi rata teks Read More"
+msgstr "Aligner lire la suite"
 
 #: ../options-page-readmore.php:69
 msgid ""
 "Normal mode = show readmore button, only if content length is bigger than "
 "excerpt size"
 msgstr ""
-"Mode normal = menampilkan tombol readmore hanya jika panjang konten lebih "
-"besar dari ukuran excerpt"
+"Mode normal = afficher le boutton lire la suite seulement si la longueur du "
+"contenu est supérieur à la taille de l'extrait"
 
 #: ../options-page-readmore.php:70
 msgid "Display option"
-msgstr "Opsi tampilan"
+msgstr "Afficher l'option"
 
 #: ../options-page-readmore.php:84
 #, php-format
@@ -263,175 +264,176 @@ msgid ""
 "Purchase the %1$s Premium Edition %2$s to enable all button font and the "
 "premium button skins"
 msgstr ""
-"Silahkan membeli %1$s Edisi Premium %2$s untuk mengaktifkan semua opsi font "
-"dan tema tombol premium"
+"Acheter %1$s Premium Edition %2$s pour rendre toutes les polices et les "
+"couvertures de boutons premium possible"
 
 #: ../options-page-readmore.php:86
 msgid "The black and white button skins are free :)"
-msgstr "Tema tombol 'black' dan 'white' adalah gratis untuk anda :)"
+msgstr "Les boutons noir et blanc sont gratuits :)"
 
 #: ../options-page-readmore.php:141
 msgid "Button Font"
-msgstr "Jenis Font Tombol"
+msgstr "Police Pour Bouton"
 
 #: ../options-page-readmore.php:155
 msgid "Button Font Size"
-msgstr "Ukuran Font Tombol"
+msgstr "Taille De Police Du Bouton"
 
 #: ../options-page-readmore.php:230
 msgid "Button Skin"
-msgstr "Jenis Tema Tombol"
+msgstr "Bouton d'affichage Type"
 
 #: ../options-page-readmore.php:239
 msgid "Button Shortcode"
-msgstr "Jenis Font Tombol"
+msgstr "Police Pour Bouton"
 
 #: ../options-page-readmore.php:242
 msgid "You can manually add the button by put this shortcode to your post"
 msgstr ""
-"Kamu dapat menambahkan tombol secara manual dengan cara meletakkan shortcode "
-"ini ke dalam post"
+"Vous pouvez ajouter manuellement le bouton par mettre ce shortcode à votre "
+"poste"
 
 #: ../options-page-readmore.php:244
 msgid "Required \"strip shortcode options\" = No"
-msgstr "Membutuhkan \" Opsi Hilangkan shortcode pada Excerpt\" = Tidak"
+msgstr "Exiger \"options de shortcode strip\" = Non"
 
 #: ../options-page-readmore.php:248
 msgid "Read More Live Preview"
-msgstr "Menampilkan secara langsung tombol \"Read More\""
+msgstr "Avant-Première En Direct Pour Lire La Suite"
 
 #: ../options-page-readmore.php:255
 msgid "Custom CSS"
-msgstr "CSS Kustom"
+msgstr "CSS Personalisé"
 
 #: ../options-page-readmore.php:259
 msgid "Some css attribute need to use <code>!important</code> value to affect"
 msgstr ""
-"Beberapa attribut css membutuhkan tambahan <code>!important</code> untuk "
-"dapat diaktifkan"
+"Certaines caractéristiques CSS doivent utiliser la valeur <code>!important</"
+"code> pour affecter"
 
 #: ../options-page-general.php:9
 msgid "Paragraph"
-msgstr "Paragraf"
+msgstr "Paragraphe"
 
 #: ../options-page-general.php:13
 msgid "Character"
-msgstr "Karakter Huruf"
+msgstr "Caractère"
 
 #: ../options-page-general.php:17
 msgid "Show First Paragraph"
-msgstr "Perlihatkan paragraf pertama"
+msgstr "Afficher Le Premier Paragraphe"
 
 #: ../options-page-general.php:21
 msgid "Show 1st - 2nd Paragraph"
-msgstr "Menampilkan paragraf pertama dan kedua"
+msgstr "Afficher Paragraphes 1-2"
 
 #: ../options-page-general.php:25
 msgid "Show 1st - 3rd Paragraph"
-msgstr "Menampilkan paragraf pertama sampai ketiga"
+msgstr "Afficher Paragraphes 1-3"
 
 #: ../options-page-general.php:31
 msgid ""
 "Paragraph method will cut per paragraph. Character method will cut per word"
 msgstr ""
-"Metode paragraf akan memotong per paragraf. Metode karakter akan memotong "
-"per kata"
+"La méthode de paragraphe sera coupé par paragraphe. La méthode de caractère "
+"sera coupé par mot"
 
 #: ../options-page-general.php:32
 msgid "Excerpt method"
-msgstr "Metode Excerpt"
+msgstr "Méthode d'extrait"
 
 #: ../options-page-general.php:45
 msgid "Number of character preserved"
-msgstr "Panjang Excerpt, kata tidak akan dipotong"
+msgstr "Nombre de caractère préservé"
 
 #: ../options-page-general.php:63
 msgid "If you select 'yes' any shortcode will be ommited from the excerpt"
-msgstr "Jika pilih 'ya' maka shortcode akan dibuang dari excerpt"
+msgstr "Si vous sélectionnez «oui» tout Shortcode sera omit de l'extrait"
 
 #: ../options-page-general.php:64
 msgid "Strip shortcode"
-msgstr "Hilangkan shortcode pada Excerpt"
+msgstr "Retirer le Shortcode"
 
 #: ../options-page-general.php:85
 msgid ""
 "If you select 'yes' any empty HTML tags will be ommited from the excerpt"
-msgstr "Jika pilih 'ya' maka setiap tag HTML kosong akan dibuang dari excerpt"
+msgstr ""
+"Si vous sélectionnez «oui» toutes les tag HTML vides seront omis de l'extrait"
 
 #: ../options-page-general.php:86
 msgid "Strip empty HTML tags"
-msgstr "Menghapus tag HTML yang kosong"
+msgstr "Retirer tag HTML vide"
 
 #: ../options-page-general.php:107
 msgid "Disable any excerpt on RSS feed"
-msgstr "Mematikan setiap fungsi excerpt di RSS feed"
+msgstr "Désactivez tout extrait sur flux RSS"
 
 #: ../options-page-general.php:108
 msgid "Disable on RSS Feed"
-msgstr "Dimatikan di RSS Feed"
+msgstr "Désactiver dans le flux RSS"
 
 #: ../options-page-general.php:118
 msgid "Use this method only if there are any problem with the excerpt"
-msgstr "Gunakan metode ini hanya jika ada problem dengan plugin excerpt ini"
+msgstr "Utilisez cette méthode seulement s'il y a un problème avec l'extrait"
 
 #: ../options-page-general.php:119
 msgid "Special method"
-msgstr "Metode spesial"
+msgstr "Méthode spéciale"
 
 #: ../options-page-general.php:150
 msgid "Content Options"
-msgstr "Opsi Konten"
+msgstr "Options De Contenu "
 
 #: ../options-page-general.php:159 ../options-page-general.php:244
 #: ../options-page-general.php:325
 msgid "Left"
-msgstr "Kiri"
+msgstr "Gauche"
 
 #: ../options-page-general.php:167
 msgid "Justify"
-msgstr "Rata"
+msgstr "Justifier"
 
 #: ../options-page-general.php:177
 msgid "The plugin will try to align the text on the excerpt page"
-msgstr "Plugin ini akan mencoba untuk meratakan text pada excerpt"
+msgstr "Le plugin va essayer d'alligner le text sur la page d'extrait"
 
 #: ../options-page-general.php:178
 msgid "Text align"
-msgstr "Rata Text"
+msgstr "Alligner le text"
 
 #: ../options-page-general.php:184
 msgid "Extra HTML markup"
-msgstr "Tambahan markup HTML"
+msgstr "Markup HTML supplémentaire"
 
 #: ../options-page-general.php:187
 msgid "Extra HTML markup to save. Use \"|\" (without quote) between markup"
 msgstr ""
-"Tambahan HTML markup yang akan diselamatkan. Gunakan \"|\" (tanpa tanda "
-"petik) diantara markup"
+"Pour sauvegarder un markup HTML supplémentaire. Utilisez \"|\" (sans "
+"guillemets) entre chaque markup"
 
 #: ../options-page-general.php:194
 msgid "Display Image Options"
-msgstr "Opsi Penampilan Gambar"
+msgstr "Afficher Options d'Image"
 
 #: ../options-page-general.php:203
 msgid "Show All Images"
-msgstr "Perlihatkan semua gambar"
+msgstr "Afficher Toutes Les Images"
 
 #: ../options-page-general.php:207
 msgid "Show only First Image"
-msgstr "Perlihatkan gambar pertama"
+msgstr "Afficher seulement la Première Image"
 
 #: ../options-page-general.php:211
 msgid "Use Featured Image"
-msgstr "Gunakan Featured Image"
+msgstr "Utilisé Featured Image"
 
 #: ../options-page-general.php:218
 msgid "Content image"
-msgstr "Konten gambar"
+msgstr "Image contenu"
 
 #: ../options-page-general.php:221
 msgid "Display Image in excerpt"
-msgstr "Perlihatkan Gambar Pada Excerpt"
+msgstr "Afficher l'Image dans l'extrait"
 
 #: ../options-page-general.php:230
 #, php-format
@@ -439,52 +441,52 @@ msgid ""
 "Purchase the %1$s Premium Edition %2$s to enable all display image options "
 "below"
 msgstr ""
-"Silahkan membeli %1$s Edisi Premium %2$s untuk mengaktifkan semua opsi "
-"gambar di bawah ini"
+"Acheter %1$s Premium Edition %2$s pour rendre possible toutes les options "
+"d'image affichées ci-dessous"
 
 #: ../options-page-general.php:234
 msgid ""
 "Image options below is only work for Content Image: Show Only First Image "
 "and Use Featured Image"
 msgstr ""
-"Opsi gambar dibawah ini hanya bekerja untuk pilihan konten gambar: "
-"\"Perlihatkan gambar pertama\" dan \"Gunakan Featured Image\""
+"Les options d'images ci-dessous fonctionnent seulement pour l'Image de "
+"Contenu: Afficher Seulement La Première Image et Utilisé Featured Image"
 
 #: ../options-page-general.php:240
 msgid "None"
-msgstr "Tidak Ada"
+msgstr "Aucun"
 
 #: ../options-page-general.php:256
 msgid "Float Left"
-msgstr "Float ke kiri"
+msgstr "Disposition À Gauche"
 
 #: ../options-page-general.php:260
 msgid "Float Right"
-msgstr "Float ke Kanan"
+msgstr "Disposition À Droite"
 
 #: ../options-page-general.php:267
 msgid "Image position"
-msgstr "Posisi gambar"
+msgstr "Position de l'image"
 
 #: ../options-page-general.php:270
 msgid "Image position option"
-msgstr "Opsi posisi gambar"
+msgstr "Option de position d'image"
 
 #: ../options-page-general.php:278
 msgid "Image width"
-msgstr "Lebar gambar"
+msgstr "Largeur de l'image"
 
 #: ../options-page-general.php:296
 msgid "Image margin"
-msgstr "Margin gambar"
+msgstr "Marge de l'image"
 
 #: ../options-page-general.php:298
 msgid "Top"
-msgstr "Atas"
+msgstr "Haut"
 
 #: ../options-page-general.php:316
 msgid "Bottom"
-msgstr "Bawah"
+msgstr "Bas"
 
 #: ../easy-custom-auto-excerpt.php:279
 #, php-format
@@ -492,8 +494,9 @@ msgid ""
 "Get 40+ read more button style, %1$s Get Easy Custom Auto Excerpt Premium ! "
 "%2$s Do not bug me again %3$s Not Now %4$s"
 msgstr ""
-"Dapatkan 40+ tema tombol Read More, %1$s Dapatkan Easy Custom Auto Excerpt "
-"Premium ! %2$s Jangan ganggu saya lagi %3$s Tidak Sekarang %4$s"
+"Recevez plus de 40 styles de boutton lisez la suite, %1$s Recevez Facile "
+"Personnalisé Auto Extrait Premium ! %2$s Ne me demandez plus %3$s Pas "
+"Maintenant %4$s"
 
 #~ msgid "Post page excerpt"
 #~ msgstr "Excerpt halaman blog"

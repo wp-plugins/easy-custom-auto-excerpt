@@ -58,7 +58,7 @@ $yes_no_options = array(
 		)
 	);
 
-$image_select = array(
+$yes_no_select = array(
 	"name"=>"tonjoo_ecae_options[strip_shortcode]",
 	"description" => __("If you select 'yes' any shortcode will be ommited from the excerpt",TONJOO_ECAE),
 	"label" => __("Strip shortcode",TONJOO_ECAE),
@@ -66,7 +66,7 @@ $image_select = array(
 	"select_array" => $yes_no_options,
 	);
 
-echo tj_print_select_option($image_select);
+echo tj_print_select_option($yes_no_select);
 
 
 $yes_no_options = array(
@@ -80,7 +80,7 @@ $yes_no_options = array(
 		)
 	);
 
-$image_select = array(
+$yes_no_select = array(
 	"name"=>"tonjoo_ecae_options[strip_empty_tags]",
 	"description" => __("If you select 'yes' any empty HTML tags will be ommited from the excerpt",TONJOO_ECAE),
 	"label" => __("Strip empty HTML tags",TONJOO_ECAE),
@@ -88,7 +88,7 @@ $image_select = array(
 	"select_array" => $yes_no_options,
 	);
 
-echo tj_print_select_option($image_select);
+echo tj_print_select_option($yes_no_select);
 
 
 $yes_no_options = array(
@@ -102,7 +102,18 @@ $yes_no_options = array(
 		)
 	);
 
-$image_select = array(
+$yes_no_select = array(
+	"name"=>"tonjoo_ecae_options[disable_on_feed]",
+	"description" => __("Disable any excerpt on RSS feed",TONJOO_ECAE),
+	"label" => __("Disable on RSS Feed",TONJOO_ECAE),
+	"value" => $options['disable_on_feed'],
+	"select_array" => $yes_no_options,
+	);
+
+echo tj_print_select_option($yes_no_select);
+
+
+$yes_no_select = array(
 	"name"=>"tonjoo_ecae_options[special_method]",
 	"description" => __("Use this method only if there are any problem with the excerpt",TONJOO_ECAE),
 	"label" => __("Special method",TONJOO_ECAE),
@@ -110,7 +121,7 @@ $image_select = array(
 	"select_array" => $yes_no_options,
 	);
 
-echo tj_print_select_option($image_select);
+echo tj_print_select_option($yes_no_select);
 
 
 $yes_no_options = array(
