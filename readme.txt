@@ -67,6 +67,9 @@ Translation :
 
 1. Bahasa Indonesian : Todi ~ @todiadiyatmo
 2. Serbian : Ogi Djuraskovic ~ firstsiteguide.com
+3. German
+4. French
+5. Spanish
 
 
 == Installation ==
