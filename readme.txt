@@ -35,7 +35,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on [premium version](http://tonjoo.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
+Get the premium version on [premium version](http://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium "premium version")
 
 
 **Plugin Demo**
@@ -44,9 +44,9 @@ You can try the plugin on this url: http://coba.tonjoo.com/ecae/
 * username: ecae
 * password: 123456
 
-*if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoo.com/thread-category/easy-custom-auto-excerpt/)
+*if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
 
-Find more detail on our official [plugin page](https://tonjoo.com/addons/easy-custom-auto-excerpt "visit plugin site")
+Find more detail on our official [plugin page](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit plugin site")
 
 Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :)
 
