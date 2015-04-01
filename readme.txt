@@ -41,7 +41,7 @@ Get the premium version on [premium version](https://tonjoostudio.com/addons/eas
 **Plugin Demo**
 You can try the plugin on this url: http://coba.tonjoostudio.com
 
-* username: ecae
+* username: coba
 * password: 123456
 
 *if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
