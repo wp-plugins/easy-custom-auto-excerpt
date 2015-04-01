@@ -1,16 +1,16 @@
 <?php
 /*
 Plugin Name: Easy Custom Auto Excerpt
-Plugin URI: http://www.tonjoo.com/easy-custom-auto-excerpt/
+Plugin URI: https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.2.0
+Version: 2.2.5
 Author: tonjoo
-Author URI: http://www.tonjoo.com/
+Author URI: https://www.tonjoostudio.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.2.0');
+define("ECAE_VERSION", '2.2.5');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -33,12 +33,12 @@ add_filter("plugin_action_links_$plugin", 'tonjoo_ecae_donate');
 
 function tonjoo_ecae_donate($links)
 {
-    $donate_link = '<a href="http://tonjoo.com/donate/" target="_blank" >Donate</a>';    
+    $donate_link = '<a href="https://www.tonjoostudio.com/donate/" target="_blank" >Donate</a>';    
     array_push($links, $donate_link);
 
     if(! function_exists('is_ecae_premium_exist'))
     {
-        $premium_link = '<a href="http://tonjoo.com/addons/easy-custom-auto-excerpt-premium/" target="_blank" >Upgrade to premium</a>';
+        $premium_link = '<a href="https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/" target="_blank" >Upgrade to premium</a>';
         array_push($links, $premium_link);
     }
 
@@ -108,8 +108,8 @@ function ecae_admin_enqueue_scripts()
         wp_enqueue_style('select2-css',plugin_dir_url( __FILE__ )."assets/select2/select2.css",array(),ECAE_VERSION);
 
         // admin script and stylel
-        wp_enqueue_script('ecae-admin-js',plugin_dir_url( __FILE__ )."assets/script.js",array(),ECAE_VERSION);
-        wp_enqueue_style('ecae-admin-css',plugin_dir_url( __FILE__ )."assets/style.css",array(),ECAE_VERSION);
+        wp_enqueue_script('ecae-admin-js',plugin_dir_url( __FILE__ )."assets/admin-script.js",array(),ECAE_VERSION);
+        wp_enqueue_style('ecae-admin-css',plugin_dir_url( __FILE__ )."assets/admin-style.css",array(),ECAE_VERSION);
     }
 }
 
@@ -127,6 +127,7 @@ function ecae_wp_enqueue_scripts()
     /**
      * Font
      */
+    if($options['button_font'] != ''):
     echo "<style type='text/css'>";
 
     switch ($options['button_font']) 
@@ -162,11 +163,12 @@ function ecae_wp_enqueue_scripts()
             echo "@import url(http://fonts.googleapis.com/css?family=Bevan);"; //Bevan
             break;
         default:
-            echo "@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
+            echo ""; //Inherit fonts
     }
 
     echo "p.ecae-button { font-family: '".$options['button_font']."', Helvetica, Arial, sans-serif; }";    
     echo "</style>";
+    endif;
 
 
     /**
@@ -277,7 +279,7 @@ function ecae_premium_notice()
         echo '<div class="updated"><p>';
 
         printf(__('Get 40+ read more button style, %1$s Get Easy Custom Auto Excerpt Premium ! %2$s Do not bug me again %3$s Not Now %4$s',TONJOO_ECAE), 
-            '<a href="https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/" target="_blank">', 
+            '<a href="https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/" target="_blank">', 
             '</a><span style="float:right;"><a href="?ecae_premium_nag_ignore=forever" style="color:#a00;">', 
             '</a> <a href="?ecae_premium_nag_ignore=later" class="button button-primary" style="margin:-5px -5px 0 5px;vertical-align:baseline;">',
             '</a></span>');
@@ -332,17 +334,6 @@ function ecae_premium_nag_ignore()
 }
 
 /**
- * activate hook
- */
-// register_activation_hook( __FILE__, 'ecae_activate' );
-// function ecae_activate() 
-// {
-//     global $current_user;
-//     $user_id = $current_user->ID;
-//     update_user_meta($user_id, 'ecae_premium_ignore_notice', 'always show');
-// }
-
-/**
  * Main Query Check
  */
 add_action( 'loop_end', 'tonjoo_ecae_loop_end' );
@@ -358,6 +349,7 @@ function tonjoo_ecae_loop_end( $query )
     }
 }
 
+
 /**
  * Do Filter after this 
  * add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
@@ -369,20 +361,7 @@ function tonjoo_ecae_execute($content, $width = 400)
 {
     global $content_pure;
 
-    $options = get_option('tonjoo_ecae_options');
-    $options = tonjoo_ecae_load_default($options);
-
-    if(isset($options['special_method']) && $options['special_method'] == 'yes')
-    {
-        global $is_main_query_ecae;
-    
-        if(!$is_main_query_ecae) 
-            return $content;
-    }
-
-    $content_pure = $content;
-
-    //if post type is FRS
+    // if post type is FRS
     if('pjc_slideshow' == get_post_type())
     {
         return $content;
@@ -397,10 +376,22 @@ function tonjoo_ecae_execute($content, $width = 400)
         
         exit;   
     }
+
+    $options = get_option('tonjoo_ecae_options');
+    $options = tonjoo_ecae_load_default($options);
+
+    if(isset($options['special_method']) && $options['special_method'] == 'yes')
+    {
+        global $is_main_query_ecae;
+    
+        if(!$is_main_query_ecae) 
+            return $content;
+    }
+
+    $content_pure = $content;
     
     $width   = $options['width'];
     $justify = $options['justify']; 
-
 
     /**
      * no limit number if 1st-paragraph mode
@@ -551,6 +542,7 @@ function tonjoo_ecae_execute($content, $width = 400)
     return $content;
 }
 
+
 /**
  * Class advanced excerpt location
  */
@@ -678,11 +670,11 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     $total_width = 0;
     $pos = strpos($content, '<!--more-->');
     $array_replace_list = array();
-    
-    //if read more
+
+    // if read more
     if ($pos) 
     {
-        //check shortcode optons
+        // check shortcode optons
         if ($options['strip_shortcode'] == 'yes') {
             $content = strip_shortcodes($content);
         }
@@ -691,7 +683,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     } 
     elseif ($post->post_excerpt != '') 
     {
-        //check shortcode optons
+        // check shortcode optons
         if ($options['strip_shortcode'] == 'yes') {
             $content = strip_shortcodes($content);
         }
@@ -936,6 +928,11 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                 }
             }
         }
+
+        // remove empty html tags
+        if($options["strip_empty_tags"] == 'yes') {
+            $content = strip_empty_tags($content);
+        }
  
         //delete remaining image
         $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
@@ -965,6 +962,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
      */
     $link = get_permalink();
     $readmore = "";
+    $is_readmore = false;
 
     //remove last div is image position left / right
     if($options['image_position'] == 'left' || $options['image_position'] == 'right' && strpos($content, 'ecae-table-cell'))
@@ -988,6 +986,8 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         // button_display_option
         if(! strpos($options['excerpt_method'],'-paragraph'))
         {
+            if(strpos($content, '<!-- READ MORE TEXT -->')) $is_readmore = true;
+
             if($options['button_display_option'] == 'always_show')
             {
                 $content = str_replace('<!-- READ MORE TEXT -->', '', $content);
@@ -996,16 +996,14 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             else if($options['button_display_option'] == 'always_hide')
             {
                 $content = str_replace('<!-- READ MORE TEXT -->', '', $content);
+
+                $is_readmore = false;
             }
             else
             {
                 $content = str_replace('<!-- READ MORE TEXT -->', $readmore, $content);
             }
         }
-    }
-    
-    if ($justify != "no") {
-        $content = "<div class='ecae' style='text-align:$justify'>" . $content . "</div>";
     }
     
     /**
@@ -1025,6 +1023,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         if($options['button_display_option'] == 'always_show')
         {
             $content = $content . $readmore;
+            $is_readmore = true;
         }
         else if($options['button_display_option'] == 'always_hide')
         {
@@ -1035,9 +1034,14 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             if($len_content < $len_content_pure)
             {
                 $content = $content . $readmore;
+                $is_readmore = true;
             }    
         }
     }
+
+    // wrap with a container
+    $justify = $justify != 'no' ? $justify : 'inherit';
+    $content = "<div class='ecae' style='text-align:$justify'>" . $content . "</div>";
 
     //add last div is image position left / right
     if($options['image_position'] == 'left' || $options['image_position'] == 'right')
@@ -1048,28 +1052,37 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     /**
      * custom css
      */
-    $style = "";
+    $style = "<style type='text/css'>";
     $trimmed_custom_css = str_replace(' ', '', $options["custom_css"]);
 
     if($trimmed_custom_css != '')
     {
-        $style.= "<style type='text/css'>";
         $style.= $options["custom_css"];
-        $style.= "</style>";
     }
 
     if(function_exists('is_ecae_premium_exist') && isset($options["button_font_size"]))
     {
-        $style.= "<style type='text/css'>";
         $style.= '.ecae-button { font-size: '.$options["button_font_size"].'px !important; }';
-        $style.= "</style>";
+    }
+    
+    if($is_readmore && $options['readmore_inline'] == 'yes')
+    {
+        $style.= ".ecae p:nth-last-of-type(2) {
+            display: inline !important;
+            padding-right: 10px;
+        }
+
+        .ecae-button {
+            display: inline-block !important;
+        }";
     }
 
+    $style.= "</style>";
+
     // remove empty html tags
-    if($options["strip_empty_tags"] == 'yes')
-    {
+    if($options["strip_empty_tags"] == 'yes') {
         $content = strip_empty_tags($content);
-    }    
+    }
     
     return "<!-- Generated by Easy Custom Auto Excerpt -->$style $content<!-- Generated by Easy Custom Auto Excerpt -->";
 }
@@ -1196,18 +1209,17 @@ function ecae_convert_caption($content)
     return $content;
 }
 
-function strip_empty_tags ($str, $repto = NULL)
+function strip_empty_tags($str, $repto = NULL)
 {
     //** Return if string not given or empty.
-    if (!is_string ($str)
-        || trim ($str) == '')
-            return $str;
+    if (!is_string ($str) || trim ($str) == '')
+        return $str;
 
     //** Recursive empty HTML tags.
     return preg_replace (
 
         //** Pattern written by Junaid Atari.
-        '/<([^<\/>]*)>([\s]*?|(?R))<\/\1>/imsU',
+        '/<([^<\/>]*)>([\s|&nbsp;]*?|(?R))<\/\1>/imsU',
 
         //** Replace with nothing if string empty.
         !is_string ($repto) ? '' : $repto,
@@ -1216,7 +1228,6 @@ function strip_empty_tags ($str, $repto = NULL)
         $str
     );
 }
-
 
 require_once(plugin_dir_path(__FILE__) . 'tonjoo-library.php');
 require_once(plugin_dir_path(__FILE__) . 'default.php');

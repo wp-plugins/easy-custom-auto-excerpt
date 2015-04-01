@@ -22,6 +22,11 @@
 	direction: ltr;
 }
 
+.ecae-button,
+.ecae-button a,
+.ecae-button a span {
+	white-space:nowrap;
+}
 
 /* Responsive media screen */
 @media screen and (max-width : 768px) {

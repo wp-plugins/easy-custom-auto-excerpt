@@ -56,6 +56,14 @@ $readmore_text_before_options = array(
 	'description'=>__('Text before read more link',TONJOO_ECAE)
 	);
 
+$readmore_inline = array(
+	"name"=>"tonjoo_ecae_options[readmore_inline]",
+	"description" => __("If you select 'yes', the readmore button will inline with the last paragraph",TONJOO_ECAE),
+	"label" => __("Inline Button",TONJOO_ECAE),
+	"value" => $options['readmore_inline'],
+	"select_array" => $yes_no_options,
+	);
+
 $readmore_align_select = array(
 	"name"=>"tonjoo_ecae_options[read_more_align]",
 	"description" => '',
@@ -75,65 +83,64 @@ $readmore_display = array(
 tj_print_select_option($readmore_display);
 tj_print_text_option($text_options);
 tj_print_text_option($readmore_text_before_options);
+tj_print_select_option($readmore_inline);
 tj_print_select_option($readmore_align_select);
 
 // premium anouncement
 if(! function_exists('is_ecae_premium_exist'))
 {			
 	echo "<tr><td colspan=3><h3 class='meta-subtitle'>";
-	printf(__('Purchase the %1$s Premium Edition %2$s to enable all button font and the premium button skins',TONJOO_ECAE),"<a href='https://tonjoo.com/addons/easy-custom-auto-excerpt-premium' target='_blank'>","</a>");
+	printf(__('Purchase the %1$s Premium Edition %2$s to enable all button font and the premium button skins',TONJOO_ECAE),"<a href='https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt-premium' target='_blank'>","</a>");
 	echo "</h3></td></tr>";
 	echo "<tr><th colspan=3><i>".__('The black and white button skins are free :)',TONJOO_ECAE)."</i></th></tr>";
 }
 
 $button_font_array = array(
 	'0' => array(
+		'value' =>	'',
+		'label' =>  'Use Content Font'
+		),
+	'1' => array(
 		'value' =>	'Open Sans',
 		'label' =>  'Open Sans'
 		),
-	'1' => array(
+	'2' => array(
 		'value' =>	'Lobster',
 		'label' =>  'Lobster'
 		),
-	'2' => array(
+	'3' => array(
 		'value' =>	'Lobster Two',
 		'label' =>  'Lobster Two'
 		),
-	'3' => array(
+	'4' => array(
 		'value' =>	'Ubuntu',
 		'label' =>  'Ubuntu'
 		),
-	'4' => array(
+	'5' => array(
 		'value' =>	'Ubuntu Mono',
 		'label' =>  'Ubuntu Mono'
 		),
-	'5' => array(
+	'6' => array(
 		'value' =>	'Titillium Web',
 		'label' =>  'Titillium Web'
 		),
-	'6' => array(
+	'7' => array(
 		'value' =>	'Grand Hotel',
 		'label' =>  'Grand Hotel'
 		),
-	'7' => array(
+	'8' => array(
 		'value' =>	'Pacifico',
 		'label' =>  'Pacifico'
 		),
-	'8' => array(
+	'9' => array(
 		'value' =>	'Crafty Girls',
 		'label' =>  'Crafty Girls'
 		),
-	'9' => array(
+	'10' => array(
 		'value' =>	'Bevan',
 		'label' =>  'Bevan'
 		)
 );
-
-if(! function_exists('is_ecae_premium_exist')) {
-	for ($i=0; $i <= 9; $i++) { 
-		$button_font_array[$i]['value'] = 'Open Sans';
-	}
-}
 
 $button_font = array(
 	"name"=>"tonjoo_ecae_options[button_font]",

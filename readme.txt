@@ -35,11 +35,11 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on [premium version](http://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium "premium version")
+Get the premium version on [premium version](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
 
 
 **Plugin Demo**
-You can try the plugin on this url: http://coba.tonjoo.com/ecae/
+You can try the plugin on this url: http://coba.tonjoostudio.com
 
 * username: ecae
 * password: 123456
@@ -48,7 +48,7 @@ You can try the plugin on this url: http://coba.tonjoo.com/ecae/
 
 Find more detail on our official [plugin page](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit plugin site")
 
-Please support this plugin by [donate](http://www.tonjoo.com/donate/ "donate") :)
+Please support this plugin by [donate](https://www.tonjoostudio.com/donate/ "donate") :)
 
 **Usage Instruction**
 
@@ -92,6 +92,12 @@ It will used, instead of the automatically generated one.
 4. Read More Button Options.
 
 == Changelog ==
+
+= 2.2.5 =
+* Add an ability to make the button inline with the content
+* Add an ability to make the button font same as content font
+* Add plugin updater
+* Fix known bugs
 
 = 2.2.0 =
 * Add disable excerpt on RSS Feed option

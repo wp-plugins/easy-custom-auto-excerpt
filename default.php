@@ -5,7 +5,10 @@ function tonjoo_ecae_load_default(&$options){
 		$options['width']=500;		
 	}
 	if(!isset($options['excerpt_method'])){
-		$options['excerpt_method']='paragraph';		
+		$options['excerpt_method']='paragraph';
+	}
+	if(strpos($options['excerpt_method'],'-paragraph') && !function_exists('is_ecae_premium_exist')){
+		$options['excerpt_method']='paragraph';
 	}
 	if(!isset($options['show_image'])){
 		$options['show_image']='yes';		
@@ -90,6 +93,10 @@ function tonjoo_ecae_load_default(&$options){
 		$options['read_more_text_before']='';		
 	}
 
+	if(!isset($options['readmore_inline'])){
+		$options['readmore_inline']='no';		
+	}
+
 	if(!isset($options['read_more_align'])){
 		$options['read_more_align']='left';		
 	}
@@ -111,7 +118,7 @@ function tonjoo_ecae_load_default(&$options){
 	}
 
 	if(!isset($options['button_font'])){
-		$options['button_font']="Open Sans";
+		$options['button_font']="";
 	}
 
 	if(!isset($options['button_font_size'])){
@@ -274,6 +281,13 @@ function tonjoo_ecae_load_default(&$options){
 				$options['page_category'][$i++] = $value;
 			}
 		}
+	}
+
+	/**
+	 * License Code
+	 */	
+	if(!isset($options['license_key'])){
+		$options['license_key']="";
 	}
 
 	return $options;

@@ -40,7 +40,7 @@ function tonjoo_ecae_options_do_page()
 	}
 
 	/**
-	 * save options
+	 * Save options
 	 */
 	if($_POST)
 	{
@@ -51,7 +51,7 @@ function tonjoo_ecae_options_do_page()
 		$excerpt_in_page_dump = '';
 		if(is_array($excerpt_in_page))
 		{
-			foreach ($excerpt_in_page as $key => $value) 
+			foreach ($excerpt_in_page as $key => $value)
 			{
 				$excerpt_in_page_dump .= $value.'|';
 			}
@@ -79,6 +79,16 @@ function tonjoo_ecae_options_do_page()
 		$_POST['tonjoo_ecae_options']['page_post_type'] = isset($_POST['page_post_type']) ? serialize($_POST['page_post_type']) : '';
 		$_POST['tonjoo_ecae_options']['page_category'] = isset($_POST['page_category']) ? serialize($_POST['page_category']) : '';
 
+
+		/**
+		 * Tonjoo License
+		 */
+		if(function_exists('is_ecae_premium_exist'))
+		{
+			$PluginLicense = new TonjooPluginLicenseECAE($_POST['tonjoo_ecae_options']['license_key']);
+			$_POST = $PluginLicense->license_on_save($_POST);
+		}
+
 		/**
 		 * Update options
 		 */
@@ -104,12 +114,12 @@ function tonjoo_ecae_options_do_page()
 
 	<br>
 	<?php _e("Easy Custom Auto Excerpt by",TONJOO_ECAE) ?> 
-	<a href='http://tonjoo.com' target="_blank">tonjoo</a> ~ 
-	<a href='http://tonjoo.com/addons/easy-custom-auto-excerpt/' target="_blank"><?php _e("Plugin Page",TONJOO_ECAE) ?></a> | 
+	<a href='https://tonjoostudio.com' target="_blank">Tonjoo Studio</a> ~ 
+	<a href='https://tonjoostudio.com/addons/easy-custom-auto-excerpt/' target="_blank"><?php _e("Plugin Page",TONJOO_ECAE) ?></a> | 
 	<a href='http://wordpress.org/support/view/plugin-reviews/easy-custom-auto-excerpt?filter=5' target="_blank"><?php _e("Please Rate :)",TONJOO_ECAE) ?></a> |
 	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/' target="_blank"><?php _e("Comment",TONJOO_ECAE) ?></a> | 
-	<a href='http://forum.tonjoo.com' target="_blank"><?php _e("Bug Report",TONJOO_ECAE) ?></a> |
-	<a href='http://tonjoo.com/addons/easy-custom-auto-excerpt/#faq' target="_blank"><?php _e("FAQ",TONJOO_ECAE) ?></a>
+	<a href='https://forum.tonjoostudio.com' target="_blank"><?php _e("Bug Report",TONJOO_ECAE) ?></a> |
+	<a href='https://tonjoostudio.com/addons/easy-custom-auto-excerpt/#faq' target="_blank"><?php _e("FAQ",TONJOO_ECAE) ?></a>
 	<br>
 	<br>
 
@@ -133,6 +143,10 @@ function tonjoo_ecae_options_do_page()
 			<a class="nav-tab" id='opt-general-tab' href='#opt-general'><?php _e('General Options',TONJOO_ECAE) ?></a>
 			<a class="nav-tab" id='opt-location-tab' href='#opt-location'><?php _e('Excerpt Location',TONJOO_ECAE) ?></a>
 			<a class="nav-tab" id='opt-readmore-tab' href='#opt-readmore'><?php _e('Read More Button',TONJOO_ECAE) ?></a>
+			
+			<?php if(class_exists('TonjooPluginLicenseECAE')): ?>
+			<a class="nav-tab" id='opt-license-tab' href='#opt-license'><?php _e('License',TONJOO_ECAE) ?></a>
+			<?php endif ?>
 		</h2>
 
 		<div class="metabox-holder columns-2" style="margin-right: 300px;">
@@ -194,7 +208,7 @@ function tonjoo_ecae_options_do_page()
 		</div>
 
 
-		<!-- GENERAL OPTIONS -->
+		<!-- LOCATION OPTIONS -->
 		<div id='opt-location' class="postbox-container group" style="width: 100%;min-width: 463px;float: left; ">
 		<div class="meta-box-sortables ui-sortable">
 		<div id="adminform" class="postbox">
@@ -209,7 +223,7 @@ function tonjoo_ecae_options_do_page()
 		</div>
 
 
-		<!-- GENERAL OPTIONS -->
+		<!-- READMORE OPTIONS -->
 		<div id='opt-readmore' class="postbox-container group" style="width: 100%;min-width: 463px;float: left; ">
 		<div class="meta-box-sortables ui-sortable">
 		<div id="adminform" class="postbox">
@@ -222,6 +236,22 @@ function tonjoo_ecae_options_do_page()
 		</div>			
 		</div>			
 		</div>
+
+		<?php if(class_exists('TonjooPluginLicenseECAE')): ?>
+		<!-- GENERAL OPTIONS -->
+		<div id='opt-license' class="postbox-container group" style="width: 100%;min-width: 463px;float: left; ">
+		<div class="meta-box-sortables ui-sortable">
+		<div id="adminform" class="postbox">
+		<h3 class="hndle"><span><?php _e('License',TONJOO_ECAE) ?></span></h3>
+		<div class="inside" style="z-index:1;">
+		<table class="form-table">
+			<?php require_once( plugin_dir_path( __FILE__ ) . 'options-license.php'); ?>
+		</table>
+		</div>			
+		</div>			
+		</div>			
+		</div>
+		<?php endif ?>
 
 
 		<!-- SIDEBAR -->
@@ -241,7 +271,7 @@ function tonjoo_ecae_options_do_page()
 
 			
 			<!-- ADS -->
-			<div class="postbox" style="display:none;">			
+			<div class="postbox">			
 				<script type="text/javascript">
 					/**
 					 * Setiap dicopy-paste, yang find dan dirubah adalah
@@ -251,12 +281,12 @@ function tonjoo_ecae_options_do_page()
 
 					jQuery(function(){					
 						var pluginName = "ecae";
-						var url = 'http://tonjoo.com/about/?promo=get&plugin=' + pluginName;
+						var url = 'https://tonjoostudio.com/jsonp/?promo=get&plugin=' + pluginName;
 						var promoFirst = new Array();
 						var promoSecond = new Array();
 
 						<?php if(function_exists('is_ecae_premium_exist')): ?>
-						var url = 'http://tonjoo.com/about/?promo=get&plugin=' + pluginName + '&premium=true';
+						var url = 'https://tonjoostudio.com/jsonp/?promo=get&plugin=' + pluginName + '&premium=true';
 						<?php endif ?>
 
 						// strpos function
@@ -340,13 +370,13 @@ function tonjoo_ecae_options_do_page()
 				<!-- <h3 class="hndle"><span>This may interest you</span></h3> -->
 				<div class="inside" style="margin: 23px 10px 6px 10px;">
 					<div id="promo_1" style="text-align: center;padding-bottom:17px;">
-						<a href="http://tonjoo.com" target="_blank">
-							<img src="<?php echo plugins_url(HSCOMMENT_DIR_NAME."/assets/loading-big.gif") ?>" width="100%" alt="WordPress Security - A Pocket Guide">
+						<a href="https://tonjoostudio.com" target="_blank">
+							<img src="<?php echo plugins_url(HSCOMMENT_DIR_NAME."/assets/loading-big.gif") ?>" width="100%" alt="Tonjoo Studio">
 						</a>
 					</div>
 					<div id="promo_2" style="text-align: center;">
-						<a href="http://tonjoo.com" target="_blank">
-							<img src="<?php echo plugins_url(HSCOMMENT_DIR_NAME."/assets/loading-big.gif") ?>" width="100%" alt="WordPress Security - A Pocket Guide">
+						<a href="https://tonjoostudio.com" target="_blank">
+							<img src="<?php echo plugins_url(HSCOMMENT_DIR_NAME."/assets/loading-big.gif") ?>" width="100%" alt="Tonjoo Studio">
 						</a>
 					</div>
 				</div>
@@ -358,8 +388,7 @@ function tonjoo_ecae_options_do_page()
 		</div>
 	</form>
 </div>
+
 <?php
 
-
 }
-

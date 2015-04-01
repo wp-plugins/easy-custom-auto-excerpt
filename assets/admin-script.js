@@ -1,5 +1,6 @@
 jQuery(document).ready(function($){
-	
+
+
     /**
      * Tabs
      */
@@ -15,9 +16,15 @@ jQuery(document).ready(function($){
 
         /* Hide all group on start */
         group.hide();
-
-        /* Find if a selected tab is saved in localStorage */
-        if ( typeof(localStorage) != 'undefined' ) {
+        
+        if(window.location.hash) 
+        {
+            /* Find if a hash link selected */
+            active_tab = window.location.hash;
+        }        
+        else if(typeof(localStorage) != 'undefined') 
+        {
+            /* Find if a selected tab is saved in localStorage */
             active_tab = localStorage.getItem('active_tab');
         }
 
@@ -51,6 +58,22 @@ jQuery(document).ready(function($){
             $(selected).fadeIn();
         });
     }
+    // activate navbar tab via button
+    $('.navbar-button').click(function(){
+        $('.nav-tab-wrapper a').trigger('click');
+
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 1);
+    });
+    // disable hash jump
+    if (window.location.hash) {
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 1);
+    }   
+
+
 
     /**
 	 * Ace editor
@@ -114,7 +137,7 @@ jQuery(document).ready(function($){
         if(ecae_premium_enable == false)
         {
             alert('Please purchase the premium edition to enable this feature');
-            $("select[name='tonjoo_ecae_options[button_font]']").val('Open Sans');
+            $("select[name='tonjoo_ecae_options[button_font]']").val('');
         }
         else
         {

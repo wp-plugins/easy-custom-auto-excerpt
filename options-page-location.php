@@ -242,7 +242,7 @@ function category_excerpt($name,$options,$valueonly = false,$selected = false)
  */
 function post_type_excerpt($name,$options,$valueonly = false,$selected = false)
 {
-	$args = array('public' => true); 
+	$args = array('public' => false); 
 	$post_types = get_post_types($args,'objects');
 
 	// unset unexpected post type
@@ -285,7 +285,7 @@ function post_type_excerpt($name,$options,$valueonly = false,$selected = false)
 $anouncement = '';
 // FREE EDITION
 // if(! function_exists('is_ecae_premium_exist')) {			
-// 	$anouncement = "- Purchase the <a href='https://tonjoo.com/addons/easy-custom-auto-excerpt-premium/' target='_blank'>Premium Edition</a> to enable below options</h3></td></tr>";
+// 	$anouncement = "- Purchase the <a href='https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/' target='_blank'>Premium Edition</a> to enable below options</h3></td></tr>";
 // }
 ?>
 
