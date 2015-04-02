@@ -83,7 +83,7 @@ function tonjoo_ecae_options_do_page()
 		/**
 		 * Tonjoo License
 		 */
-		if(function_exists('is_ecae_premium_exist'))
+		if(class_exists('TonjooPluginLicenseECAE'))
 		{
 			$PluginLicense = new TonjooPluginLicenseECAE($_POST['tonjoo_ecae_options']['license_key']);
 			$_POST = $PluginLicense->license_on_save($_POST);

@@ -48,6 +48,8 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 
 Find more detail on our official [plugin page](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit plugin site")
 
+Please support this plugin by [donate](https://www.tonjoostudio.com/donate/ "donate") :)
+
 **Usage Instruction**
 
 1. Install the plugin.
@@ -90,6 +92,9 @@ It will used, instead of the automatically generated one.
 4. Read More Button Options.
 
 == Changelog ==
+
+= 2.2.6 =
+* Fix plugin updater
 
 = 2.2.5 =
 * Add an ability to make the button inline with the content
