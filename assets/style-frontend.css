@@ -16,6 +16,11 @@
 	vertical-align:top;
 }
 
+.ecae-image .wp-caption {
+	width: inherit !important;
+	padding: 0px !important;
+}
+
 .ecae-table-right .ecae-table-cell {
 	display:table-cell;
 	vertical-align:top;

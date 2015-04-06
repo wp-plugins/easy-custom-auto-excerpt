@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.2.6
+Version: 2.2.7
 Author: tonjoo
 Author URI: https://www.tonjoostudio.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.2.6');
+define("ECAE_VERSION", '2.2.7');
 define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
@@ -698,10 +698,11 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
     else
     {        
         // Do caption shortcode
-        $content = ecae_convert_caption($content);
+        $content = ecae_convert_caption($content,$options);
         
+        $caption_image_replace   = new eace_content_regex("|$", "/<div[^>]*class=\"[^\"]*wp-caption[^\"]*\".*>(.*)<img[^>]+\>(.*)<\/div>/",$options,true);        
         $figure_replace          = new eace_content_regex("|:", "/<figure.*?\>([^`]*?)<\/figure>/",$options,true);
-        $hyperlink_image_replace = new eace_content_regex("|#", "/<a[^>]*>(\n|\s)*(<img[^>]+>)(\n|\s)*<\/a>/",$options,true);
+        $hyperlink_image_replace = new eace_content_regex("|#", "/<a[^>]*>(\n|\s)*(<img[^>]+>)(\n|\s)*<\/a>/",$options,true);                
         $image_replace           = new eace_content_regex("|(", "/<img[^>]+\>/",$options,true );
         
         //biggest -> lowest the change code
@@ -738,7 +739,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         $array_replace_list['ol']='=$';
         $array_replace_list['strong']='=(';
         $array_replace_list['blockquote']='=^';
-   
+
         foreach ($extra_markup as $markup) 
         {
             $counter = 0;
@@ -778,13 +779,17 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
             if ($option_image == 'first-image')
                 $number = 1;
             
+            $caption_image_replace->replace($content, $width, $number);            
             $figure_replace->replace($content, $width, $number);            
             $hyperlink_image_replace->replace($content, $width, $number);            
             $image_replace->replace($content, $width, $number);
+
+// echo $content;
         }
         else
         {
             //remove image , this is also done for featured-image option
+            $caption_image_replace->remove($content);
             $figure_replace->remove($content);
             $hyperlink_image_replace->remove($content);
             $image_replace->remove($content);
@@ -799,7 +804,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         foreach ($html_replace as $replace) {
              $replace->replace($content, $width,false,$total_width);
         }  
-       
+    
         $shortcode_replace->replace($content, $width,false,$total_width);
         
         //use wp kses to fix broken element problem
@@ -848,7 +853,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                 break;
             
             default:
-                $img_position = "text-align:right;";
+                $img_position = "text-align:left;";
                 break;
         }
 
@@ -858,30 +863,32 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
         {
             $img_added_css.= "width:{$options['image_width']}px;";
         }
-        
+ 
         $img_added_css.= "padding:{$options['image_padding_top']}px {$options['image_padding_right']}px {$options['image_padding_bottom']}px {$options['image_padding_left']}px;";
                 
         if ($option_image == 'yes')
-        {
+        {       
+            $caption_image_replace->restore($content,false,true);     
             $figure_replace->restore($content,false,true);
             $hyperlink_image_replace->restore($content,false,true);
-            $image_replace->restore($content,false,true);            
+            $image_replace->restore($content,false,true);                        
         } 
         elseif ($option_image == 'first-image') 
         {
-            //catch all of hyperlink and image on the content => '|#'  and '|('' 
-            preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#|\|\:[0-9]*\|\:/', $content, $result, PREG_PATTERN_ORDER);
+            //catch all of hyperlink and image on the content => '|#'  and '|(' and '|$' 
+            preg_match_all('/\|\([0-9]*\|\(|\|\#[0-9]*\|\#|\|\$[0-9]*\|\$|\|\:[0-9]*\|\:/', $content, $result, PREG_PATTERN_ORDER);
 
             if (isset($result[0])) 
             {
                 $remaining = array_slice($result[0], 0, 1);
-                
+
                 if(isset($remaining[0]))
                 {
                     //delete remaining image
                     $content = preg_replace('/\|\:[0-9]*\|\:/', '', $content);
                     $content = preg_replace('/\|\([0-9]*\|\C/', '', $content);
                     $content = preg_replace('/\|\#[0-9]*\|\#/', '', $content);
+                    $content = preg_replace('/\|\$[0-9]*\|\$/', '', $content);
 
                     
                     if($options['image_position'] == 'left')
@@ -897,6 +904,7 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                         $content = "<div class='ecae-image' style='$img_added_css'>" . $remaining[0] . "</div>" . $content;
                     }
 
+                    $caption_image_replace->restore($content,1,true);
                     $figure_replace->restore($content, 1,true);
                     $hyperlink_image_replace->restore($content, 1,true);
                     $image_replace->restore($content, 1,true);
@@ -928,6 +936,9 @@ function tonjoo_ecae_excerpt($content, $width, $justify)
                 }
             }
         }
+
+
+
 
         // remove empty html tags
         if($options["strip_empty_tags"] == 'yes') {
@@ -1192,7 +1203,7 @@ class eace_content_regex
     }
 }
 
-function ecae_convert_caption($content)
+function ecae_convert_caption($content,$options)
 {
     $results[0] = array();
 
@@ -1200,10 +1211,26 @@ function ecae_convert_caption($content)
 
     preg_match_all($pattern, $content, $results);
 
+    $img_num = 0;
+
     foreach ($results[0] as $result) 
     {
+        $img_num++;
+
         $caption = do_shortcode($result);
-        $content = str_replace($result,$caption, $content);
+
+        if($options['show_image'] == 'first-image' && $img_num == 1)
+        {
+            $content = str_replace($result,$caption,$content);
+        }
+        else if($options['show_image'] == 'yes')
+        {
+            $content = str_replace($result,$caption,$content);            
+        }
+        else
+        {
+            $content = str_replace($result,'',$content);
+        }
     }   
 
     return $content;

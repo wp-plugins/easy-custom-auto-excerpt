@@ -287,7 +287,7 @@ echo tj_print_select_option($image_select);
 	<th>&nbsp;</th>
 	<td>
 		<input type="radio" name="tonjoo_ecae_options[image_width_type]" value="manual" <?php if($options['image_width_type'] == 'manual') echo 'checked' ?> >
-		<input type="number" name="tonjoo_ecae_options[image_width]" value="<?php echo $options['image_width'] ?>" style="float: right;width: 175px;margin-top: -5px;">
+		<input type="number" name="tonjoo_ecae_options[image_width]" value="<?php echo $options['image_width'] ?>" style="width: 175px;margin-top: -5px;">
 	</td>
 	<td>&nbsp;</td>
 </tr>
