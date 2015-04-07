@@ -35,7 +35,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version: [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
+Get the premium version: [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/ "premium version")
 
 
 **Plugin Demo**
