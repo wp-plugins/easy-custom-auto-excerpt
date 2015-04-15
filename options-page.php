@@ -42,7 +42,7 @@ function tonjoo_ecae_options_do_page()
 	/**
 	 * Save options
 	 */
-	if($_POST)
+	if($_POST && isset($_POST['tonjoo_ecae_options']))
 	{
 		/**
 		 * Excerpt in page
@@ -133,7 +133,7 @@ function tonjoo_ecae_options_do_page()
 		<?php settings_fields('tonjoo_options'); ?>
 		<?php 
 
-		$options = get_option('tonjoo_ecae_options'); 
+		$options = get_option('tonjoo_ecae_options');
 
 		tonjoo_ecae_load_default($options);
 
