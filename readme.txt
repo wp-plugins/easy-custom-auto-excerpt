@@ -46,7 +46,8 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 
 *if you have any questions, comment, customization request or suggestion please contact us via our [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
 
-Find more detail on our official plugin page: [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt/ "visit Tonjoo plugin website")
+Find more detail on our official plugin page: [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "visit Tonjoo plugin website")
+
 Or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com "visit Tonjoo Studio")
 
 We can also modify your WordPress plugins according to your needs. Visit us: [Tonjoo WordPress Developer](https://tonjoo.com "Visit Tonjoo Dev Website")
