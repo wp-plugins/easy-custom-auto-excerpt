@@ -44,7 +44,7 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 * username: coba
 * password: 123456
 
-#Screencast
+**Screencast**
 Screencast: https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/
 
 *if you have any questions, comment, customization request or suggestion please contact us via our [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
