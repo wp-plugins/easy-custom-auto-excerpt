@@ -115,7 +115,7 @@ function tonjoo_ecae_options_do_page()
 	<br>
 	<?php _e("Easy Custom Auto Excerpt by",TONJOO_ECAE) ?> 
 	<a href='https://tonjoostudio.com' target="_blank">Tonjoo Studio</a> ~ 
-	<a href='https://tonjoostudio.com/addons/easy-custom-auto-excerpt/' target="_blank"><?php _e("Plugin Page",TONJOO_ECAE) ?></a> | 
+	<a href='https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=upgrade&utm_medium=link&utm_campaign=ecae' target="_blank"><?php _e("Plugin Page",TONJOO_ECAE) ?></a> | 
 	<a href='http://wordpress.org/support/view/plugin-reviews/easy-custom-auto-excerpt?filter=5' target="_blank"><?php _e("Please Rate :)",TONJOO_ECAE) ?></a> |
 	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/' target="_blank"><?php _e("Comment",TONJOO_ECAE) ?></a> | 
 	<a href='https://forum.tonjoostudio.com' target="_blank"><?php _e("Bug Report",TONJOO_ECAE) ?></a> |
@@ -271,6 +271,11 @@ function tonjoo_ecae_options_do_page()
 
 			
 			<!-- ADS -->
+			<?php
+				$license = isset($options['license_status']) ? unserialize($options['license_status']) : false;	
+				if(!$license || !$license['status'] || !function_exists('is_ecae_premium_exist')):
+			?>
+
 			<div class="postbox">			
 				<script type="text/javascript">
 					/**
@@ -381,6 +386,9 @@ function tonjoo_ecae_options_do_page()
 					</div>
 				</div>
 			</div>
+
+			<?php endif; ?>
+
 		</div>
 		</div>
 		</div>	

@@ -118,6 +118,8 @@
 		<?php 
 			_e('Register your license code here to get all benefit of Easy Custom Auto Excerpt. ',TONJOO_ECAE);
 			echo '<div style="height:10px;"></div>';
+			_e('<b>Remove Ads</b> by register your license code. ',TONJOO_ECAE);
+			echo '<div style="height:10px;"></div>';
 			_e('Find your license code at ',TONJOO_ECAE);
 		?>		
 		<a href="https://tonjoostudio.com/manage/plugin" target="_blank">https://tonjoostudio.com/manage/plugin</a>

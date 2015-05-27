@@ -2,7 +2,7 @@
 Contributors: Todi.Adiatmo, haristonjoo, Alzea
 Tags: excerpt, home, search, archive, automatic, auto, justify
 Requires at least: 3.0.3
-Tested up to: 4.2
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version: [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "premium version")
+Get the premium version: [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
 
 
 **Plugin Demo**
@@ -44,13 +44,9 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 * username: coba
 * password: 123456
 
-**Screencast :**
- https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/
-
 *if you have any questions, comment, customization request or suggestion please contact us via our [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
 
-Find more detail on our official plugin page: [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "visit Tonjoo plugin website")
-
+Find more detail on our official plugin page: [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit Tonjoo plugin website")
 Or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com "visit Tonjoo Studio")
 
 We can also modify your WordPress plugins according to your needs. Visit us: [Tonjoo WordPress Developer](https://tonjoo.com "Visit Tonjoo Dev Website")

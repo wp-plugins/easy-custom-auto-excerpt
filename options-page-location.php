@@ -132,8 +132,8 @@ $archive_select = array(
 /**
  * Excerpt in page
  */
-$page_on_front = get_option( 'page_on_front' );
-$page_for_posts = get_option( 'page_for_posts' );
+$page_on_front = get_option('page_on_front');
+$page_for_posts = get_option('page_for_posts');
 
 $args = array(
     'selected' 	=> explode('|', $options['excerpt_in_page']),
