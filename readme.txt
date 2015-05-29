@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Auto Excerpt for your post on home, search and archive. Customize Read More button and thumbnail image. Easy to configure and have a lot of options.
 == Description ==
 
-Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :)
+Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :) 
 
 
 
@@ -35,7 +35,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version: [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
+Get the premium version on [premium version](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
 
 
 **Plugin Demo**
@@ -44,12 +44,11 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 * username: coba
 * password: 123456
 
-*if you have any questions, comment, customization request or suggestion please contact us via our [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
+*if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
 
-Find more detail on our official plugin page: [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit Tonjoo plugin website")
-Or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com "visit Tonjoo Studio")
+Find more detail on our official [plugin page](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit plugin site")
 
-We can also modify your WordPress plugins according to your needs. Visit us: [Tonjoo WordPress Developer](https://tonjoo.com "Visit Tonjoo Dev Website")
+Please support this plugin by [donate](https://www.tonjoostudio.com/donate/ "donate") :)
 
 **Usage Instruction**
 
@@ -85,9 +84,6 @@ The auto excerpt cannot properly cut on some element, if its broke. Please use r
 **What happen if i wrote an excerpt for the post ? **
 It will used, instead of the automatically generated one.
 
-
-Visit our support forum : [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
-
 == Screenshots ==
 
 1. Easy Custom Auto Excerpt on action.
@@ -96,6 +92,18 @@ Visit our support forum : [Tonjoo Forum](https://forum.tonjoostudio.com/thread-c
 4. Read More Button Options.
 
 == Changelog ==
+
+= 2.3.0 =
+* Fixing google font http/https protocol
+* Fix known bugs
+
+= 2.2.9 =
+* Hide ads when premium key is registered
+* Fix known bugs
+
+= 2.2.8 =
+* Fixing issue with WPML 
+* Fix known bugs
 
 = 2.2.7 =
 * Fixing compatibility to image caption
@@ -186,14 +194,14 @@ Visit our support forum : [Tonjoo Forum](https://forum.tonjoostudio.com/thread-c
 * Add readmore option
 
 = 1.0.7 =
-* Add spanish translation , thanks to Andrew Kurtis ~ webhostinghub.com
+* Add spanish translation , thanks to Andrew Kurtis ~ webhostinghub.com 
 * Better excerpt cropping algorithm
 
 = 1.0.6 =
 * Minor bug fix
 
 = 1.0.5 =
-* Add options to disable readmore.
+* Add options to disable readmore. 
 
 = 1.0.4 =
 * Fix remove / add image in excerpt option

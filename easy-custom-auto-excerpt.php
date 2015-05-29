@@ -3,15 +3,16 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.2.9
+Version: 2.3.0
 Author: tonjoo
 Author URI: https://www.tonjoostudio.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.2.9');
-define('ECAE_DIR_NAME', str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
+define("ECAE_VERSION", '2.3.0');
+define("ECAE_DIR_NAME", str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
+define("ECAE_HTTP_PROTO", is_ssl() ? "https://" : "http://");
 
 require_once( plugin_dir_path( __FILE__ ) . 'ajax.php');
 
@@ -133,34 +134,34 @@ function ecae_wp_enqueue_scripts()
     switch ($options['button_font']) 
     {
         case "Open Sans":
-            echo "@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
             break;
         case "Lobster":
-            echo "@import url(http://fonts.googleapis.com/css?family=Lobster);"; //Lobster
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Lobster);"; //Lobster
             break;
         case "Lobster Two":
-            echo "@import url(http://fonts.googleapis.com/css?family=Lobster+Two:400,400italic,700,700italic);"; //Lobster Two
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Lobster+Two:400,400italic,700,700italic);"; //Lobster Two
             break;
         case "Ubuntu":
-            echo "@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);"; //Ubuntu
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);"; //Ubuntu
             break;
         case "Ubuntu Mono":
-            echo "@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);"; //Ubuntu Mono
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);"; //Ubuntu Mono
             break;
         case "Titillium Web":
-            echo "@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,700,300italic,400italic,700italic);"; //Titillium Web
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Titillium+Web:400,300,700,300italic,400italic,700italic);"; //Titillium Web
             break;
         case "Grand Hotel":
-            echo "@import url(http://fonts.googleapis.com/css?family=Grand+Hotel);"; //Grand Hotel
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Grand+Hotel);"; //Grand Hotel
             break;
         case "Pacifico":
-            echo "@import url(http://fonts.googleapis.com/css?family=Pacifico);"; //Pacifico
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Pacifico);"; //Pacifico
             break;
         case "Crafty Girls":
-            echo "@import url(http://fonts.googleapis.com/css?family=Crafty+Girls);"; //Crafty Girls
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Crafty+Girls);"; //Crafty Girls
             break;
         case "Bevan":
-            echo "@import url(http://fonts.googleapis.com/css?family=Bevan);"; //Bevan
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Bevan);"; //Bevan
             break;
         default:
             echo ""; //Inherit fonts

@@ -15,37 +15,37 @@ function ecae_preview_button() {
     switch ($_POST['button_font']) 
     {
         case "Open Sans":
-            echo "@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
             break;
         case "Lobster":
-            echo "@import url(http://fonts.googleapis.com/css?family=Lobster);"; //Lobster
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Lobster);"; //Lobster
             break;
         case "Lobster Two":
-            echo "@import url(http://fonts.googleapis.com/css?family=Lobster+Two:400,400italic,700,700italic);"; //Lobster Two
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Lobster+Two:400,400italic,700,700italic);"; //Lobster Two
             break;
         case "Ubuntu":
-            echo "@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);"; //Ubuntu
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);"; //Ubuntu
             break;
         case "Ubuntu Mono":
-            echo "@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);"; //Ubuntu Mono
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);"; //Ubuntu Mono
             break;
         case "Titillium Web":
-            echo "@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,700,300italic,400italic,700italic);"; //Titillium Web
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Titillium+Web:400,300,700,300italic,400italic,700italic);"; //Titillium Web
             break;
         case "Grand Hotel":
-            echo "@import url(http://fonts.googleapis.com/css?family=Grand+Hotel);"; //Grand Hotel
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Grand+Hotel);"; //Grand Hotel
             break;
         case "Pacifico":
-            echo "@import url(http://fonts.googleapis.com/css?family=Pacifico);"; //Pacifico
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Pacifico);"; //Pacifico
             break;
         case "Crafty Girls":
-            echo "@import url(http://fonts.googleapis.com/css?family=Crafty+Girls);"; //Crafty Girls
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Crafty+Girls);"; //Crafty Girls
             break;
         case "Bevan":
-            echo "@import url(http://fonts.googleapis.com/css?family=Bevan);"; //Bevan
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Bevan);"; //Bevan
             break;
         default:
-            echo "@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
+            echo "@import url(".ECAE_HTTP_PROTO."fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);"; //Open Sans
     }
 
     echo "p.ecae-button { font-family: '".$_POST['button_font']."', Helvetica, Arial, sans-serif; }";    
