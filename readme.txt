@@ -71,6 +71,9 @@ Translation :
 4. French
 5. Spanish
 
+== Screencast ==
+
+https://www.youtube.com/watch?v=ZZaXfrB4-68
 
 == Installation ==
 
