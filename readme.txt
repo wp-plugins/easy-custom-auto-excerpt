@@ -12,9 +12,13 @@ Auto Excerpt for your post on home, search and archive. Customize Read More butt
 
 Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :) 
 
-
-
 The free version is come with everything you need to auto excerpt your content.
+
+
+**Screencast**
+
+https://www.youtube.com/watch?v=ZZaXfrB4-68
+
 
 **Features :**
 
@@ -71,9 +75,6 @@ Translation :
 4. French
 5. Spanish
 
-**Screencast**
-
-https://www.youtube.com/watch?v=ZZaXfrB4-68
 
 == Installation ==
 
