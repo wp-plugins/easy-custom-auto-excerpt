@@ -52,7 +52,7 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 
 Find more detail on our official plugin page : [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "visit plugin site")
 
-or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com/)
+or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com/ "Tonjoo" rel="friend")
 
 We can also modify your WordPress plugins according to your needs. Visit us : [Tonjoo WordPress Developer](https://tonjoo.com/)
 
