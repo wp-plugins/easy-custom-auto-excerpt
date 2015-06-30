@@ -39,7 +39,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on [premium version](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wordpress&utm_medium=link&utm_campaign=ecae%20wordpress "premium version")
+Get the premium version on [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "Easy Custom Auto Excerpt Premium")
 
 
 **Plugin Demo**
@@ -48,11 +48,13 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 * username: coba
 * password: 123456
 
-*if you have any questions,comment,customization request or suggestion please contact us via our [support forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
+*if you have any questions,comment,customization request or suggestion please contact us via our [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
 
-Find more detail on our official [plugin page](https://tonjoostudio.com/addons/easy-custom-auto-excerpt "visit plugin site")
+Find more detail on our official plugin page : [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "visit plugin site")
 
-Please support this plugin by [donate](https://www.tonjoostudio.com/donate/ "donate") :)
+or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com/)
+
+We can also modify your WordPress plugins according to your needs. Visit us : [Tonjoo WordPress Developer](https://tonjoo.com/)
 
 **Usage Instruction**
 
