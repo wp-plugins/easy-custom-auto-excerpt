@@ -40,7 +40,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" alt="Easy Custom Auto Excerpt Premium" rel="friend">Easy Custom Auto Excerpt Premium</a>
+Get the premium version on <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" title="Easy Custom Auto Excerpt Premium" rel="friend">Easy Custom Auto Excerpt Premium</a>
 
 
 **Plugin Demo**
@@ -49,13 +49,13 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 * username: coba
 * password: 123456
 
-*if you have any questions,comment,customization request or suggestion please contact us via our <a href="https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/" alt="Tonjoo Forum" rel="friend">Tonjoo Forum</a>
+*if you have any questions,comment,customization request or suggestion please contact us via our <a href="https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/" title="Tonjoo Forum" rel="friend">Tonjoo Forum</a>
 
-Find more detail on our official plugin page : <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" alt="visit plugin site" rel="friend">Easy Custom Auto Excerpt</a>
+Find more detail on our official plugin page : <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" title="visit plugin site" rel="friend">Easy Custom Auto Excerpt</a>
 
-Or you can find our best plugins at <a href="https://tonjoostudio.com/" alt="Tonjoo Studio" rel="friend">Tonjoo Studio</a>
+Or you can find our best plugins at <a href="https://tonjoostudio.com/" title="Tonjoo Studio" rel="friend">Tonjoo Studio</a>
 
-We can also modify your WordPress plugins according to your needs. Visit us : <a href="https://tonjoo.com/" alt="Tonjoo WordPress Developer" rel="friend">Tonjoo WordPress Developer</a>
+We can also modify your WordPress plugins according to your needs. Visit us : <a href="https://tonjoo.com/" title="Tonjoo WordPress Developer" rel="friend">Tonjoo WordPress Developer</a>
 
 **Usage Instruction**
 
