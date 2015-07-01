@@ -8,6 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Auto Excerpt for your post on home, search and archive. Customize Read More button and thumbnail image. Easy to configure and have a lot of options.
+
 == Description ==
 
 Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :) 
@@ -39,7 +40,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on [Easy Custom Auto Excerpt Premium](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "Easy Custom Auto Excerpt Premium")
+Get the premium version on <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" alt="Easy Custom Auto Excerpt Premium" rel="friend">Easy Custom Auto Excerpt Premium</a>
 
 
 **Plugin Demo**
@@ -48,13 +49,13 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 * username: coba
 * password: 123456
 
-*if you have any questions,comment,customization request or suggestion please contact us via our [Tonjoo Forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/)
+*if you have any questions,comment,customization request or suggestion please contact us via our <a href="https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/" alt="Tonjoo Forum" rel="friend">Tonjoo Forum</a>
 
-Find more detail on our official plugin page : [Easy Custom Auto Excerpt ](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "visit plugin site")
+Find more detail on our official plugin page : <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" alt="visit plugin site" rel="friend">Easy Custom Auto Excerpt</a>
 
-or you can find our best plugins at [Tonjoo Studio](https://tonjoostudio.com/ "Tonjoo")
+Or you can find our best plugins at <a href="https://tonjoostudio.com/" alt="Tonjoo Studio" rel="friend">Tonjoo Studio</a>
 
-We can also modify your WordPress plugins according to your needs. Visit us : [Tonjoo WordPress Developer](https://tonjoo.com/)
+We can also modify your WordPress plugins according to your needs. Visit us : <a href="https://tonjoo.com/" alt="Tonjoo WordPress Developer" rel="friend">Tonjoo WordPress Developer</a>
 
 **Usage Instruction**
 
