@@ -362,6 +362,9 @@ function tonjoo_ecae_execute($content, $width = 400)
 {
     global $content_pure;
 
+    $options = get_option('tonjoo_ecae_options');
+    $options = tonjoo_ecae_load_default($options);
+
     // if post type is FRS
     if('pjc_slideshow' == get_post_type())
     {
@@ -377,9 +380,6 @@ function tonjoo_ecae_execute($content, $width = 400)
         
         exit;   
     }
-
-    $options = get_option('tonjoo_ecae_options');
-    $options = tonjoo_ecae_load_default($options);
 
     if(isset($options['special_method']) && $options['special_method'] == 'yes')
     {

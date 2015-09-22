@@ -16,6 +16,9 @@ Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed 
 The free version is come with everything you need to auto excerpt your content.
 
 
+> [Demo](http://coba.tonjoostudio.com/ "Live demos of Easy Custom Auto Excerpt") | [Premium version](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae "Get the premium version") | [Documentation](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae#manual "Easy Custom Auto Excerpt Documentation") | [Video tutorials](https://www.youtube.com/watch?v=ZZaXfrB4-68 "ECAE Video tutorials") | [Support forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/ "ECAE Support forum") 
+
+
 **Screencast**
 
 https://www.youtube.com/watch?v=ZZaXfrB4-68
