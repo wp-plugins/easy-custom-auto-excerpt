@@ -3,14 +3,14 @@
 Plugin Name: Easy Custom Auto Excerpt
 Plugin URI: https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt/
 Description: Auto Excerpt for your post on home, front_page, search and archive.
-Version: 2.3.0
+Version: 2.3.1
 Author: tonjoo
 Author URI: https://www.tonjoostudio.com/
 Contributor: Todi Adiyatmo Wijoyo, Haris Ainur Rozak
 */
 
 define("TONJOO_ECAE", 'easy-custom-auto-excerpt');
-define("ECAE_VERSION", '2.3.0');
+define("ECAE_VERSION", '2.3.1');
 define("ECAE_DIR_NAME", str_replace("/easy-custom-auto-excerpt.php", "", plugin_basename(__FILE__)));
 define("ECAE_HTTP_PROTO", is_ssl() ? "https://" : "http://");
 
@@ -34,12 +34,12 @@ add_filter("plugin_action_links_$plugin", 'tonjoo_ecae_donate');
 
 function tonjoo_ecae_donate($links)
 {
-    $donate_link = '<a href="https://www.tonjoostudio.com/donate/" target="_blank" >Donate</a>';    
-    array_push($links, $donate_link);
+    // $donate_link = '<a href="https://www.tonjoostudio.com/donate/" target="_blank" >Donate</a>';    
+    // array_push($links, $donate_link);
 
     if(! function_exists('is_ecae_premium_exist'))
     {
-        $premium_link = '<a href="https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/" target="_blank" >Upgrade to premium</a>';
+        $premium_link = '<a href="http://wpexcerptplugin.com/" target="_blank" >Upgrade to premium</a>';
         array_push($links, $premium_link);
     }
 

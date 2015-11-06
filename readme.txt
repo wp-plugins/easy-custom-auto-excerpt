@@ -1,6 +1,6 @@
 === Easy Custom Auto Excerpt ===
 Contributors: Todi.Adiatmo, haristonjoo, Alzea
-Tags: excerpt, home, search, archive, automatic, auto, justify, post excerpt, advanced excerpt, thumbnail for excerpts, excerpt wordpress limit
+Tags: excerpt, home, search, archive, automatic, auto, justify
 Requires at least: 3.0.3
 Tested up to: 4.3
 Stable tag: trunk
@@ -14,8 +14,6 @@ Auto Excerpt for your post on home, search and archive. Customize Read More butt
 Easy Custom Auto Excerpt is wordpress plugin to cut/excerpt your post displayed on the home , search or archive pages. This plugin also enable you to customize the readmore button text and thumbnail image. Just active the plugin, configure some options and you're good to go :) 
 
 The free version is come with everything you need to auto excerpt your content.
-
-> [Demo](http://coba.tonjoostudio.com/ "Live demos of Easy Custom Auto Excerpt") | [Premium version](http://wpexcerptplugin.com/ "Get the premium version") | [Documentation](https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae#manual "Easy Custom Auto Excerpt Documentation") | [Video tutorials](https://www.youtube.com/watch?v=ZZaXfrB4-68 "ECAE Video tutorials") | [Support forum](https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/ "ECAE Support forum") 
 
 
 **Screencast**
@@ -42,7 +40,7 @@ And if you like our plugin and want to do more customization we offer the premiu
 * 10 Read More font type and custom font size
 * 40 + Read More button themes.
 
-Get the premium version on <a href="http://wpexcerptplugin.com/" title="Easy Custom Auto Excerpt Premium" rel="friend">Easy Custom Auto Excerpt Premium</a>
+Get the premium version on <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" title="Easy Custom Auto Excerpt Premium" rel="friend">Easy Custom Auto Excerpt Premium</a>
 
 
 **Plugin Demo**
@@ -53,7 +51,7 @@ You can try the plugin on this url: http://coba.tonjoostudio.com
 
 *if you have any questions,comment,customization request or suggestion please contact us via our <a href="https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/" title="Tonjoo Forum" rel="friend">Tonjoo Forum</a>
 
-Find more detail on our official plugin page : <a href="http://wpexcerptplugin.com/" title="visit plugin site" rel="friend">Easy Custom Auto Excerpt</a>
+Find more detail on our official plugin page : <a href="https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=wp_org&utm_medium=link&utm_campaign=ecae" title="visit plugin site" rel="friend">Easy Custom Auto Excerpt</a>
 
 Or you can find our best plugins at <a href="https://tonjoostudio.com/" title="Tonjoo Studio" rel="friend">Tonjoo Studio</a>
 
@@ -101,6 +99,9 @@ It will used, instead of the automatically generated one.
 4. Read More Button Options.
 
 == Changelog ==
+
+= 2.3.1 =
+* Updated permalink
 
 = 2.3.0 =
 * Fixing google font http/https protocol

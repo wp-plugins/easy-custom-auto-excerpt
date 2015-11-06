@@ -113,13 +113,19 @@ function tonjoo_ecae_options_do_page()
 	<?php echo "<h2>".__("Easy Custom Auto Excerpt Options",TONJOO_ECAE)."</h2>"; ?>
 
 	<br>
+	
 	<?php _e("Easy Custom Auto Excerpt by",TONJOO_ECAE) ?> 
 	<a href='https://tonjoostudio.com' target="_blank">Tonjoo Studio</a> ~ 
-	<a href='https://tonjoostudio.com/addons/easy-custom-auto-excerpt-premium/?utm_source=upgrade&utm_medium=link&utm_campaign=ecae' target="_blank"><?php _e("Plugin Page",TONJOO_ECAE) ?></a> | 
 	<a href='http://wordpress.org/support/view/plugin-reviews/easy-custom-auto-excerpt?filter=5' target="_blank"><?php _e("Please Rate :)",TONJOO_ECAE) ?></a> |
 	<a href='http://wordpress.org/extend/plugins/easy-custom-auto-excerpt/' target="_blank"><?php _e("Comment",TONJOO_ECAE) ?></a> | 
-	<a href='https://forum.tonjoostudio.com' target="_blank"><?php _e("Bug Report",TONJOO_ECAE) ?></a> |
+	<a href='https://forum.tonjoostudio.com/thread-category/easy-custom-auto-excerpt/' target="_blank"><?php _e("Forum",TONJOO_ECAE) ?></a> |
 	<a href='https://tonjoostudio.com/addons/easy-custom-auto-excerpt/#faq' target="_blank"><?php _e("FAQ",TONJOO_ECAE) ?></a>
+	
+	<?php if(! function_exists('is_ecae_premium_exist')): ?>
+		<span style="width:10px;display:inline-block;"></span>
+		<a class="button btn-upgrade" href='http://wpexcerptplugin.com/' target="_blank">Upgrade To Premium</a>		
+	<?php endif; ?>
+
 	<br>
 	<br>
 
@@ -303,6 +309,8 @@ function tonjoo_ecae_options_do_page()
 
 						jQuery.ajax({url: url, dataType:'jsonp'}).done(function(data){
 							
+							console.log(data);
+
 							if(typeof data =='object')
 							{
 								var fristImg, fristUrl;

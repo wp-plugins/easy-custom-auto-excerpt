@@ -227,7 +227,7 @@ echo tj_print_select_option($image_select);
 if(! function_exists('is_ecae_premium_exist'))
 {
 	echo "<tr><td colspan=3><h3 class='meta-subtitle'>";
-	printf(__('Purchase the %1$s Premium Edition %2$s to enable all display image options below',TONJOO_ECAE),"<a href='https://www.tonjoostudio.com/addons/easy-custom-auto-excerpt-premium' target='_blank'>","</a>");
+	printf(__('Purchase the %1$s Premium Edition %2$s to enable all display image options below',TONJOO_ECAE),"<a href='http://wpexcerptplugin.com/' target='_blank'>","</a>");
 	echo "</h3></td></tr>";
 }
 
